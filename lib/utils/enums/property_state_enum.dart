@@ -1,0 +1,1 @@
+enum PropertyStateEnum { rental, sale }
