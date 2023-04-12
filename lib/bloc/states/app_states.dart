@@ -6,4 +6,7 @@ class AppRefreshUIState extends AppStates {}
 
 class AppSuccessState extends AppStates {}
 
-class AppErrorState extends AppStates {}
+class AppErrorState extends AppStates {
+  AppErrorState(this.msg);
+  String msg;
+}
