@@ -9,6 +9,11 @@ import 'package:property_in_homs/utils/dio_helper.dart';
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
+  TextEditingController addressController = TextEditingController();
+  TextEditingController spaceController = TextEditingController();
+  TextEditingController costController = TextEditingController();
+  TextEditingController roomCountController = TextEditingController();
+  bool withFurniture = false;
 
   String? selectedId;
 
