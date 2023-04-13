@@ -6,15 +6,28 @@ import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/utils/dio_helper.dart';
 import 'package:collection/collection.dart';
 
+import '../../utils/enums/property_state_enum.dart';
+import '../../utils/enums/property_types_enum.dart';
+
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
-
+  TextEditingController addressController = TextEditingController();
+  TextEditingController spaceController = TextEditingController();
+  TextEditingController costController = TextEditingController();
+  TextEditingController roomCountController = TextEditingController();
+  bool withFurniture = false;
+  PropertyStateEnum propertyStateEnum = PropertyStateEnum.rental;
+  bool propertyPostApproval = false;
   String? selectedId;
 
   List<PropertyModel> propertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
   List<PropertyBookingModel> propertyBookingList = [];
+  void fillPage() {}
+  void clearPage() {}
+  void typeChangedEvent() {}
+  void stateChangedEvent() {}
 
   void propertyTypeIdEvent(int index) {
     propertyTypeList.where(
