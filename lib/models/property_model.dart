@@ -9,7 +9,7 @@ class PropertyModel {
       this.withFurniture,
       this.cost,
       this.propertyState,
-      this.propertyType,
+      this.propertyTypeId,
       this.posterUserId,
       this.propertyPostApproval);
 
@@ -20,7 +20,7 @@ class PropertyModel {
   bool withFurniture;
   int cost;
   PropertyStateEnum propertyState;
-  String propertyType;
+  String propertyTypeId;
   String posterUserId;
   bool propertyPostApproval;
 
@@ -32,7 +32,7 @@ class PropertyModel {
         "withFurniture": withFurniture,
         "cost": cost,
         "propertyState": propertyState,
-        "propertyTypeId": propertyType,
+        "propertyTypeId": propertyTypeId,
         "posterUserId": posterUserId,
         "propertyPostApproval": propertyPostApproval,
       };
