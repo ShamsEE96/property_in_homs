@@ -1,1 +1,0 @@
-enum PropertyTypesEnum { house, shop }

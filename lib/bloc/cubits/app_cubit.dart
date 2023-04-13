@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/models/property_booking_model.dart';
 import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/utils/dio_helper.dart';
+import 'package:collection/collection.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -16,6 +16,14 @@ class AppCubit extends Cubit<AppStates> {
   List<PropertyTypeModel> propertyTypeList = [];
   List<PropertyBookingModel> propertyBookingList = [];
 
+  void propertyTypeIdEvent(int index) {
+    propertyTypeList.where(
+      (element) {
+        return element.objectId == propertyList[index].propertyTypeId;
+      },
+    ).firstOrNull;
+  }
+
   Future<void> getProperty() async {
     try {
       DioHelper.initialize();
@@ -26,6 +34,7 @@ class AppCubit extends Cubit<AppStates> {
           propertyList.add(PropertyModel.fromJson(element));
         }
         print(propertyList);
+
         emit(AppSuccessState());
       } else {
         emit(AppErrorState("Error Code ${res.statusCode}"));
