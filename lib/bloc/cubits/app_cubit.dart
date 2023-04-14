@@ -42,8 +42,9 @@ class AppCubit extends Cubit<AppStates> {
     costController.text = "";
     roomCountController.text = "";
     withFurniture = false;
-    propertyPostApproval = PropertyStateEnum.rental as bool;
-    propertyStateEnum = PropertyTypesEnum.house as PropertyStateEnum;
+    propertyPostApproval = false;
+    propertyStateEnum = PropertyStateEnum.rental;
+
     emit(AppRefreshUIState());
   }
 
@@ -54,11 +55,10 @@ class AppCubit extends Cubit<AppStates> {
   // void propretyTypeChangedEvent(PropertyTypesEnum newType) {
   //   propertyTypesEnum
   // }
- 
+
   void propretyStateChangedEvent(PropertyStateEnum newState) {
     propertyStateEnum = newState;
     emit(AppRefreshUIState());
-    
   }
 
   Future<void> getProperty() async {
