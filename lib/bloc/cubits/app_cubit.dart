@@ -22,8 +22,8 @@ class AppCubit extends Cubit<AppStates> {
   TextEditingController propertyTypeController = TextEditingController();
 
   String? selectedPropertyId;
-  String? selectedPropertyTypeId;
-  String? selectedPropertyBookingId;
+  String selectedPropertyTypeId = "";
+  String? selectedPropertyBookingId = "";
 
   List<PropertyModel> propertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
@@ -53,12 +53,8 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void save() {
-    if (selectedId == null) {}
+    if (selectedPropertyId == null) {}
   }
-
-  // void propretyTypeChangedEvent(PropertyTypesEnum newType) {
-  //   propertyTypesEnum
-  // }
 
   void propretyStateChangedEvent(PropertyStateEnum newState) {
     propertyStateEnum = newState;
@@ -113,8 +109,8 @@ class AppCubit extends Cubit<AppStates> {
           withFurniture,
           int.parse(costController.text.trim()),
           propertyStateEnum,
-          "propertyTypeId", //propertyTypeId
-          "rOIkuoPLN2", //posterUserID
+          selectedPropertyTypeId ?? "", //propertyTypeId
+          "rOIkuoPLN2", //posterUserID for this is going to be the admin
           propertyPostApproval,
         ).toJson(),
       );
@@ -142,8 +138,8 @@ class AppCubit extends Cubit<AppStates> {
           withFurniture,
           int.parse(costController.text.trim()),
           propertyStateEnum,
-          "propertyTypeId", //propertyTypeId
-          "rOIkuoPLN2", //posterUserID
+          selectedPropertyTypeId ?? "", //propertyTypeId
+          "rOIkuoPLN2", //posterUserID for this is going to be the admin
           propertyPostApproval,
         ).toJson(),
       );
@@ -225,7 +221,7 @@ class AppCubit extends Cubit<AppStates> {
         "classes/PropertyTypes/$selectedPropertyTypeId",
         data: PropertyTypeModel(
           selectedPropertyTypeId ?? "",
-          addressController.text.trim(),
+          propertyTypeController.text.trim(),
         ).toJson(),
       );
       if (res.statusCode == 200) {
