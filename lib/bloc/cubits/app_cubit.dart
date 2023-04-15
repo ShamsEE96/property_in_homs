@@ -109,7 +109,7 @@ class AppCubit extends Cubit<AppStates> {
           withFurniture,
           int.parse(costController.text.trim()),
           propertyStateEnum,
-          selectedPropertyTypeId ?? "", //propertyTypeId
+          selectedPropertyTypeId, //propertyTypeId
           "rOIkuoPLN2", //posterUserID for this is going to be the admin
           propertyPostApproval,
         ).toJson(),
@@ -138,7 +138,7 @@ class AppCubit extends Cubit<AppStates> {
           withFurniture,
           int.parse(costController.text.trim()),
           propertyStateEnum,
-          selectedPropertyTypeId ?? "", //propertyTypeId
+          selectedPropertyTypeId, //propertyTypeId
           "rOIkuoPLN2", //posterUserID for this is going to be the admin
           propertyPostApproval,
         ).toJson(),
@@ -220,7 +220,7 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.put(
         "classes/PropertyTypes/$selectedPropertyTypeId",
         data: PropertyTypeModel(
-          selectedPropertyTypeId ?? "",
+          selectedPropertyTypeId,
           propertyTypeController.text.trim(),
         ).toJson(),
       );
