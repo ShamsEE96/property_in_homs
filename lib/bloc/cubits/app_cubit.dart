@@ -28,10 +28,42 @@ class AppCubit extends Cubit<AppStates> {
   List<PropertyModel> propertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
   List<PropertyBookingModel> propertyBookingList = [];
-  void fillPage() {}
-  void clearPage() {}
-  void typeChangedEvent() {}
-  void stateChangedEvent() {}
+
+  void fillPage(PropertyModel propertyList) {
+    addressController.text = propertyList.address;
+    spaceController.text = propertyList.space as String;
+    costController.text = propertyList.cost as String;
+    roomCountController.text = propertyList.roomCount as String;
+    withFurniture = propertyList.withFurniture;
+    propertyPostApproval = propertyList.propertyPostApproval;
+    propertyStateEnum = propertyList.propertyState;
+    emit(AppRefreshUIState());
+  }
+
+  void clearPage() {
+    addressController.text = "";
+    spaceController.text = "";
+    costController.text = "";
+    roomCountController.text = "";
+    withFurniture = false;
+    propertyPostApproval = false;
+    propertyStateEnum = PropertyStateEnum.rental;
+
+    emit(AppRefreshUIState());
+  }
+
+  void save() {
+    if (selectedId == null) {}
+  }
+
+  // void propretyTypeChangedEvent(PropertyTypesEnum newType) {
+  //   propertyTypesEnum
+  // }
+
+  void propretyStateChangedEvent(PropertyStateEnum newState) {
+    propertyStateEnum = newState;
+    emit(AppRefreshUIState());
+  }
 
   void addPropertyTypeIdEvent(int index) {
     propertyTypeList.where(
