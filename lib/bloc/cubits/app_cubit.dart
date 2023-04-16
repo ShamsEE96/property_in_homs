@@ -19,17 +19,18 @@ class AppCubit extends Cubit<AppStates> {
   PropertyStateEnum propertyStateEnum = PropertyStateEnum.rental;
   bool propertyPostApproval = false;
 
-  TextEditingController propertyTypeController = TextEditingController();
+  TextEditingController propertyTypeNameController = TextEditingController();
 
   String? selectedPropertyId;
-  String selectedPropertyTypeId = "";
+  String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
+  String? currentUserId = "";
 
   List<PropertyModel> propertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
   List<PropertyBookingModel> propertyBookingList = [];
 
-  void fillPage(PropertyModel propertyList) {
+  void fillPropertyDetailsPage(PropertyModel propertyList) {
     addressController.text = propertyList.address;
     spaceController.text = propertyList.space as String;
     costController.text = propertyList.cost as String;
@@ -40,7 +41,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppRefreshUIState());
   }
 
-  void clearPage() {
+  void clearPropertyDetailsPage() {
     addressController.text = "";
     spaceController.text = "";
     costController.text = "";
@@ -52,8 +53,42 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppRefreshUIState());
   }
 
-  void save() {
-    if (selectedPropertyId == null) {}
+  Future<void> saveProperty() async {
+    if (selectedPropertyId == null) {
+      await postProperty();
+    } else {
+      await updateProperty();
+    }
+  }
+
+  void fillPropertyTypeDetailsPage(PropertyTypeModel propertyTypeList) {
+    selectedPropertyTypeId = propertyTypeList.objectId;
+    propertyTypeNameController.text = propertyTypeList.propertyTypeName;
+
+    emit(AppRefreshUIState());
+  }
+
+  void clearPropertyTypeDetailsPage() {
+    selectedPropertyTypeId = "";
+    propertyTypeNameController.text = "";
+
+    emit(AppRefreshUIState());
+  }
+
+  Future<void> savePropertyType() async {
+    if (selectedPropertyTypeId == 'newTypeId') {
+      await postPropertyType();
+    } else {
+      await updatePropertyType();
+    }
+  }
+
+  Future<void> savePropertyBooking() async {
+    if (selectedPropertyBookingId == null) {
+      await postPropertyBooking();
+    } else {
+      await updatePropertyBooking();
+    }
   }
 
   void propretyStateChangedEvent(PropertyStateEnum newState) {
@@ -61,12 +96,28 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppRefreshUIState());
   }
 
-  void addPropertyTypeIdEvent(int index) {
-    propertyTypeList.where(
-      (element) {
-        return element.objectId == propertyList[index].propertyTypeId;
-      },
-    ).firstOrNull;
+  String? changePropertyTypeIdToNameEvent(String id) {
+    PropertyTypeModel temp =
+        propertyTypeList.firstWhere((element) => element.objectId == id);
+    return temp.propertyTypeName;
+
+    // propertyTypeList.firstWhere(
+    //   (element) {
+    //     return element.objectId == propertyList[index].propertyTypeId;
+    //   },
+    // ).firstOrNull;
+  }
+
+  String? changePropertyTypeNameToIdEvent(String name) {
+    PropertyTypeModel temp = propertyTypeList
+        .firstWhere((element) => element.propertyTypeName == name);
+    return temp.objectId;
+
+    // propertyTypeList.firstWhere(
+    //   (element) {
+    //     return element.objectId == propertyList[index].propertyTypeId;
+    //   },
+    // ).firstOrNull;
   }
 
   void addBookedPropertyIdEvent(int index) {
@@ -77,6 +128,8 @@ class AppCubit extends Cubit<AppStates> {
     ).firstOrNull;
   }
 
+/////////////////////////////////////API Functions{GET, POST, PUT, DELETE}////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////for PropertyModel////////////////////////////////////////////////////////////////////////
   Future<void> getProperty() async {
     try {
       DioHelper.initialize();
@@ -102,16 +155,17 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.post(
         "classes/Property",
         data: PropertyModel(
-          "",
-          addressController.text.trim(),
-          int.parse(roomCountController.text.trim()),
-          int.parse(spaceController.text.trim()),
-          withFurniture,
-          int.parse(costController.text.trim()),
-          propertyStateEnum,
-          selectedPropertyTypeId, //propertyTypeId
-          "rOIkuoPLN2", //posterUserID for this is going to be the admin
-          propertyPostApproval,
+          objectId: "",
+          address: addressController.text.trim(),
+          roomCount: int.parse(roomCountController.text.trim()),
+          space: int.parse(spaceController.text.trim()),
+          withFurniture: withFurniture,
+          cost: int.parse(costController.text.trim()),
+          propertyState: propertyStateEnum,
+          propertyTypeId: selectedPropertyTypeId ?? "", //propertyTypeId
+          posterUserId:
+              "rOIkuoPLN2", //posterUserID for this is going to be the admin
+          propertyPostApproval: propertyPostApproval,
         ).toJson(),
       );
       if (res.statusCode == 201) {
@@ -131,16 +185,17 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.put(
         "classes/Property/$selectedPropertyId",
         data: PropertyModel(
-          selectedPropertyId ?? "",
-          addressController.text.trim(),
-          int.parse(roomCountController.text.trim()),
-          int.parse(spaceController.text.trim()),
-          withFurniture,
-          int.parse(costController.text.trim()),
-          propertyStateEnum,
-          selectedPropertyTypeId, //propertyTypeId
-          "rOIkuoPLN2", //posterUserID for this is going to be the admin
-          propertyPostApproval,
+          objectId: selectedPropertyId ?? "",
+          address: addressController.text.trim(),
+          roomCount: int.parse(roomCountController.text.trim()),
+          space: int.parse(spaceController.text.trim()),
+          withFurniture: withFurniture,
+          cost: int.parse(costController.text.trim()),
+          propertyState: propertyStateEnum,
+          propertyTypeId: selectedPropertyTypeId ?? "", //propertyTypeId
+          posterUserId:
+              "rOIkuoPLN2", //posterUserID for this is going to be the admin
+          propertyPostApproval: propertyPostApproval,
         ).toJson(),
       );
       if (res.statusCode == 200) {
@@ -173,6 +228,7 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorState(e.toString()));
     }
   }
+/////////////////////////////////////for PropertyTypeModel////////////////////////////////////////////////////////////////////////
 
   Future<void> getPropertyTypes() async {
     try {
@@ -200,7 +256,7 @@ class AppCubit extends Cubit<AppStates> {
         "classes/PropertyTypes",
         data: PropertyTypeModel(
           "",
-          propertyTypeController.text.trim(),
+          propertyTypeNameController.text.trim(),
         ).toJson(),
       );
       if (res.statusCode == 201) {
@@ -220,8 +276,8 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.put(
         "classes/PropertyTypes/$selectedPropertyTypeId",
         data: PropertyTypeModel(
-          selectedPropertyTypeId,
-          propertyTypeController.text.trim(),
+          selectedPropertyTypeId ?? "",
+          propertyTypeNameController.text.trim(),
         ).toJson(),
       );
       if (res.statusCode == 200) {
@@ -254,6 +310,8 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorState(e.toString()));
     }
   }
+
+/////////////////////////////////////for PropertyBookingModel////////////////////////////////////////////////////////////////////////
 
   Future<void> getPropertyBooking() async {
     try {
