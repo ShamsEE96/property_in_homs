@@ -17,55 +17,66 @@ class ViewPage extends StatelessWidget {
             title: const Text("View Page"),
           ),
           body: SingleChildScrollView(
-            child: (Column(
-              children: [
-                TextFormField(
-                  // controller: ,
-                  readOnly: true,
-                  enabled: true,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                TextFormField(
-                  // controller: ,
-                  readOnly: true,
-                  enabled: true,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                TextFormField(
-                  // controller: ,
-                  readOnly: true,
-                  enabled: true,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: DropdownButton(
-                    isExpanded: true,
-                    value: appCubit.propertyStateEnum.index,
-                    items: [
-                      DropdownMenuItem(
-                        value: PropertyStateEnum.rental.index,
-                        child: Text(PropertyStateEnum.rental.name),
-                      ),
-                      DropdownMenuItem(
-                        value: PropertyStateEnum.sale.index,
-                        child: Text(PropertyStateEnum.sale.name),
-                      ),
-                    ],
-                    onChanged: (int? value) {
-                      appCubit.propretyStateChangedEvent(
-                          value as PropertyStateEnum);
-                    },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: (Column(
+                children: [
+                  TextFormField(
+                    controller: appCubit.addressController,
+                    decoration: const InputDecoration(
+                      label: Text("Address:"),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      hintText: "Hint here",
+                    ),
+                    readOnly: true,
+                    enabled: true,
                   ),
-                ),
-              ],
-            )),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  TextFormField(
+                    controller: appCubit.roomCountController,
+                    decoration: const InputDecoration(
+                      label: Text("Room Count:"),
+                      border: OutlineInputBorder(),
+                    ),
+                    readOnly: true,
+                    enabled: true,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  TextFormField(
+                    controller: appCubit.spaceController,
+                    decoration: const InputDecoration(
+                      label: Text("Space:"),
+                      border: OutlineInputBorder(),
+                    ),
+                    readOnly: true,
+                    enabled: true,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  TextFormField(
+                    controller: appCubit.costController,
+                    decoration: const InputDecoration(
+                      label: Text("Cost:"),
+                      border: OutlineInputBorder(),
+                    ),
+                    readOnly: true,
+                    enabled: true,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                ],
+              )),
+            ),
           ),
         );
       },

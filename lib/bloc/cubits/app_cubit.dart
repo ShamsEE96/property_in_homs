@@ -18,6 +18,8 @@ class AppCubit extends Cubit<AppStates> {
   TextEditingController roomCountController = TextEditingController();
   bool withFurniture = false;
   PropertyStateEnum propertyStateEnum = PropertyStateEnum.rental;
+  PropertyStateEnum typeStateEnum = PropertyStateEnum.rental;
+
   bool propertyPostApproval = false;
   String? selectedId;
 
@@ -55,9 +57,10 @@ class AppCubit extends Cubit<AppStates> {
   // void propretyTypeChangedEvent(PropertyTypesEnum newType) {
   //   propertyTypesEnum
   // }
-
   void propretyStateChangedEvent(PropertyStateEnum newState) {
-    propertyStateEnum = newState;
+
+      propertyStateEnum = newState;
+   
     emit(AppRefreshUIState());
   }
 
