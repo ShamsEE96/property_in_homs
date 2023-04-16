@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
-import 'package:property_in_homs/utils/enums/property_state_enum.dart';
+import 'package:property_in_homs/bloc/states/app_states.dart';
 
 class ViewPage extends StatelessWidget {
   const ViewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer(
+    return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit appCubit = AppCubit.get(context);
@@ -30,7 +30,6 @@ class ViewPage extends StatelessWidget {
                       enabledBorder: InputBorder.none,
                       errorBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
-                      hintText: "Hint here",
                     ),
                     readOnly: true,
                     enabled: true,
@@ -39,10 +38,16 @@ class ViewPage extends StatelessWidget {
                     height: 8,
                   ),
                   TextFormField(
+                    
                     controller: appCubit.roomCountController,
                     decoration: const InputDecoration(
                       label: Text("Room Count:"),
-                      border: OutlineInputBorder(),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
                     ),
                     readOnly: true,
                     enabled: true,
@@ -54,7 +59,11 @@ class ViewPage extends StatelessWidget {
                     controller: appCubit.spaceController,
                     decoration: const InputDecoration(
                       label: Text("Space:"),
-                      border: OutlineInputBorder(),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
                     ),
                     readOnly: true,
                     enabled: true,
@@ -66,7 +75,11 @@ class ViewPage extends StatelessWidget {
                     controller: appCubit.costController,
                     decoration: const InputDecoration(
                       label: Text("Cost:"),
-                      border: OutlineInputBorder(),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
                     ),
                     readOnly: true,
                     enabled: true,

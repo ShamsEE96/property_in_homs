@@ -17,7 +17,6 @@ class AppCubit extends Cubit<AppStates> {
   bool withFurniture = false;
   TextEditingController costController = TextEditingController();
   PropertyStateEnum propertyStateEnum = PropertyStateEnum.rental;
-  PropertyStateEnum typeStateEnum = PropertyStateEnum.rental;
 
   bool propertyPostApproval = false;
 
@@ -27,6 +26,7 @@ class AppCubit extends Cubit<AppStates> {
   String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
   String? currentUserId = "";
+  late List<bool> selections = List.generate(2, (_) => false);
 
   List<PropertyModel> propertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
@@ -94,9 +94,13 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void propretyStateChangedEvent(PropertyStateEnum newState) {
-
-      propertyStateEnum = newState;
-   
+    propertyStateEnum = newState;
+    if (propertyStateEnum.index == 1) {
+      selections = [true, false];
+    }
+    if (propertyStateEnum.index == 0) {
+      selections = [false, true];
+    }
     emit(AppRefreshUIState());
   }
 

@@ -9,14 +9,6 @@ import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 
 class EditPage extends StatelessWidget {
   EditPage({super.key});
-  final List<bool> _selections = List.generate(2, (_) => false);
-  dynamic asEnumValue(List<dynamic> enumValues, Enum value) {
-    try {
-      return enumValues.indexOf(value);
-    } catch (err) {
-      return null;
-    }
-  }
 
   // int indexOfEnum =
   //     asEnumValue(PropertyStateEnum.values, PropertyStateEnum.sale);
@@ -39,7 +31,7 @@ class EditPage extends StatelessWidget {
                   TextFormField(
                     controller: appCubit.addressController,
                     decoration: const InputDecoration(
-                      label: Text("Address"),
+                      label: Text("Address:"),
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -52,6 +44,7 @@ class EditPage extends StatelessWidget {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     controller: appCubit.roomCountController,
+                    style: TextStyle(fontSize: 20),
                     decoration: const InputDecoration(
                       label: Text("Room Count"),
                       border: OutlineInputBorder(),
@@ -81,7 +74,6 @@ class EditPage extends StatelessWidget {
                     ],
                     controller: appCubit.costController,
                     decoration: const InputDecoration(
-                      
                       label: Text("Cost"),
                       border: OutlineInputBorder(),
                     ),
@@ -90,12 +82,12 @@ class EditPage extends StatelessWidget {
                     height: 8,
                   ),
                   ToggleButtons(
-                    isSelected: _selections,
+                    isSelected: appCubit.selections,
                     onPressed: (newState) {
                       print("the new srate:  $newState");
                       appCubit.propretyStateChangedEvent(newState == 0
-                          ? PropertyStateEnum.rental
-                          : PropertyStateEnum.sale);
+                          ? PropertyStateEnum.sale
+                          : PropertyStateEnum.rental);
                     },
                     color: Colors.black,
                     selectedColor: const Color.fromARGB(255, 255, 255, 255),
@@ -130,16 +122,23 @@ class EditPage extends StatelessWidget {
                       },
                     ),
                   ),
-                  ElevatedButton(
-                      onPressed: () async {
-                        // await appCubit.save();
-                        // if (!context.mounted) return;
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ViewPage()));
-                      },
-                      child: const Text("Save")),
+                  SizedBox(
+                    height: 200,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          // await appCubit.save();
+                          // if (!context.mounted) return;
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ViewPage()));
+                        },
+                        child: const Text("Save")),
+                  ),
                 ],
               ),
             ),
