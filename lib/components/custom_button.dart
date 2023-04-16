@@ -33,7 +33,7 @@ class CustomButton extends StatelessWidget {
                 color: borderColor!,
               )
             : null,
-        backgroundColor: backgroundColor ?? AppColors.mainNavyColor,
+        backgroundColor: backgroundColor ?? AppColors.mainBlueColor,
         shape: const StadiumBorder(),
         fixedSize: Size(
           size.width * 0.9,
@@ -44,7 +44,7 @@ class CustomButton extends StatelessWidget {
         myButtonText,
         style: TextStyle(
           color: myTextColor,
-          fontWeight: FontWeight.bold,
+          // fontWeight: FontWeight.bold,
         ),
       ),
     );
