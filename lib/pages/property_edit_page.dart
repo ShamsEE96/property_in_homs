@@ -30,6 +30,7 @@ class EditPage extends StatelessWidget {
                 children: [
                   TextFormField(
                     controller: appCubit.addressController,
+                    style: TextStyle(fontSize: 20),
                     decoration: const InputDecoration(
                       label: Text("Address:"),
                       border: OutlineInputBorder(),
@@ -59,6 +60,7 @@ class EditPage extends StatelessWidget {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     controller: appCubit.spaceController,
+                    style: TextStyle(fontSize: 20),
                     decoration: const InputDecoration(
                       label: Text("Space"),
                       border: OutlineInputBorder(),
@@ -73,6 +75,7 @@ class EditPage extends StatelessWidget {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     controller: appCubit.costController,
+                    style: const TextStyle(fontSize: 20),
                     decoration: const InputDecoration(
                       label: Text("Cost"),
                       border: OutlineInputBorder(),
@@ -81,48 +84,54 @@ class EditPage extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  ToggleButtons(
-                    isSelected: appCubit.selections,
-                    onPressed: (newState) {
-                      print("the new srate:  $newState");
-                      appCubit.propretyStateChangedEvent(newState == 0
-                          ? PropertyStateEnum.sale
-                          : PropertyStateEnum.rental);
-                    },
-                    color: Colors.black,
-                    selectedColor: const Color.fromARGB(255, 255, 255, 255),
-                    fillColor: Colors.blue,
-                    renderBorder: true,
-                    borderWidth: 1,
-                    borderColor: const Color.fromARGB(181, 31, 29, 29),
-                    borderRadius: BorderRadius.circular(30),
-                    children: const [
-                      Text("   For Sale   "),
-                      Text("  For Rental  "),
-                    ],
+                  const SizedBox(
+                    height: 20,
                   ),
                   SizedBox(
-                    width: double.infinity,
-                    child: DropdownButton(
-                      isExpanded: true,
-                      value: appCubit.propertyStateEnum.index,
-                      items: [
-                        DropdownMenuItem(
-                          value: PropertyStateEnum.rental.index,
-                          child: Text(PropertyStateEnum.rental.name),
-                        ),
-                        DropdownMenuItem(
-                          value: PropertyStateEnum.sale.index,
-                          child: Text(PropertyStateEnum.sale.name),
-                        ),
-                      ],
-                      onChanged: (value) {
-                        appCubit.propretyStateChangedEvent(
-                            PropertyStateEnum.values[value ?? 1]);
+                    height: 60,
+                    child: ToggleButtons(
+                      isSelected: appCubit.selections,
+                      onPressed: (newState) {
+                        print("the new srate:  $newState");
+                        appCubit.propretyStateChangedEvent(newState == 0
+                            ? PropertyStateEnum.sale
+                            : PropertyStateEnum.rental);
                       },
+                      color: Colors.black,
+                      selectedColor: const Color.fromARGB(255, 255, 255, 255),
+                      fillColor: Colors.blue,
+                      renderBorder: true,
+                      borderWidth: 2,
+                      borderColor: const Color.fromARGB(181, 31, 29, 29),
+                      borderRadius: BorderRadius.circular(30),
+                      children: const [
+                        Text("   For Sale   "),
+                        Text("  For Rental  "),
+                      ],
                     ),
                   ),
-                  SizedBox(
+                  // SizedBox(
+                  //   width: double.infinity,
+                  //   child: DropdownButton(
+                  //     isExpanded: true,
+                  //     value: appCubit.propertyStateEnum.index,
+                  //     items: [
+                  //       DropdownMenuItem(
+                  //         value: PropertyStateEnum.rental.index,
+                  //         child: Text(PropertyStateEnum.rental.name),
+                  //       ),
+                  //       DropdownMenuItem(
+                  //         value: PropertyStateEnum.sale.index,
+                  //         child: Text(PropertyStateEnum.sale.name),
+                  //       ),
+                  //     ],
+                  //     onChanged: (value) {
+                  //       appCubit.propretyStateChangedEvent(
+                  //           PropertyStateEnum.values[value ?? 1]);
+                  //     },
+                  //   ),
+                  // ),
+                  const SizedBox(
                     height: 200,
                   ),
                   SizedBox(
