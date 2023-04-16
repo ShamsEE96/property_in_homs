@@ -18,11 +18,13 @@ class ViewPage extends StatelessWidget {
           appBar: AppBar(
             title: const Text("View Page"),
             actions: [
-              IconButton(
-                tooltip: "Edit",
-                onPressed: () {},
-                icon: const Icon(Icons.edit_document),
-              )
+              if (true) ...[
+                IconButton(
+                  tooltip: "Edit",
+                  onPressed: () {},
+                  icon: const Icon(Icons.edit_document),
+                )
+              ]
             ],
           ),
           body: SingleChildScrollView(
@@ -113,6 +115,9 @@ class ViewPage extends StatelessWidget {
                       borderWidth: 2,
                       borderColor: const Color.fromARGB(181, 31, 29, 29),
                       borderRadius: BorderRadius.circular(30),
+                      textStyle: const TextStyle(
+                        fontSize: 25,
+                      ),
                       children: const [
                         Text("   For Sale   "),
                         Text("  For Rental  "),

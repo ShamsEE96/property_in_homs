@@ -30,7 +30,7 @@ class EditPage extends StatelessWidget {
                 children: [
                   TextFormField(
                     controller: appCubit.addressController,
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                     decoration: const InputDecoration(
                       label: Text("Address:"),
                       border: OutlineInputBorder(),
@@ -45,7 +45,7 @@ class EditPage extends StatelessWidget {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     controller: appCubit.roomCountController,
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                     decoration: const InputDecoration(
                       label: Text("Room Count"),
                       border: OutlineInputBorder(),
@@ -60,7 +60,7 @@ class EditPage extends StatelessWidget {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     controller: appCubit.spaceController,
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                     decoration: const InputDecoration(
                       label: Text("Space"),
                       border: OutlineInputBorder(),
@@ -92,7 +92,6 @@ class EditPage extends StatelessWidget {
                     child: ToggleButtons(
                       isSelected: appCubit.selections,
                       onPressed: (newState) {
-                        print("the new srate:  $newState");
                         appCubit.propretyStateChangedEvent(newState == 0
                             ? PropertyStateEnum.sale
                             : PropertyStateEnum.rental);
@@ -104,6 +103,9 @@ class EditPage extends StatelessWidget {
                       borderWidth: 2,
                       borderColor: const Color.fromARGB(181, 31, 29, 29),
                       borderRadius: BorderRadius.circular(30),
+                      textStyle: const TextStyle(
+                        fontSize: 25,
+                      ),
                       children: const [
                         Text("   For Sale   "),
                         Text("  For Rental  "),
