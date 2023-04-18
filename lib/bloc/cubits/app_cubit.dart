@@ -25,12 +25,13 @@ class AppCubit extends Cubit<AppStates> {
   String? selectedPropertyId;
   String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
-  String? currentUserId = "";
+  String? currentUserId = "rOIkuoPLN2";
   late List<bool> selections = List.generate(2, (_) => false);
 
   List<PropertyModel> propertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
   List<PropertyBookingModel> propertyBookingList = [];
+  List<PropertyBookingModel> currentUserPropertyBookingList = [];
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
     addressController.text = propertyList.address;
@@ -78,7 +79,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Future<void> savePropertyType() async {
-    if (selectedPropertyTypeId == 'newTypeId') {
+    if (selectedPropertyTypeId == '') {
       await postPropertyType();
     } else {
       await updatePropertyType();
@@ -108,33 +109,38 @@ class AppCubit extends Cubit<AppStates> {
     PropertyTypeModel temp =
         propertyTypeList.firstWhere((element) => element.objectId == id);
     return temp.propertyTypeName;
-
-    // propertyTypeList.firstWhere(
-    //   (element) {
-    //     return element.objectId == propertyList[index].propertyTypeId;
-    //   },
-    // ).firstOrNull;
   }
 
   String? changePropertyTypeNameToIdEvent(String name) {
     PropertyTypeModel temp = propertyTypeList
         .firstWhere((element) => element.propertyTypeName == name);
     return temp.objectId;
-
-    // propertyTypeList.firstWhere(
-    //   (element) {
-    //     return element.objectId == propertyList[index].propertyTypeId;
-    //   },
-    // ).firstOrNull;
   }
 
-  void addBookedPropertyIdEvent(int index) {
+  findCurrentUserBookedPropertyListEvent() {
+    currentUserPropertyBookingList = propertyBookingList.where(
+      (element) {
+        return element.userId == currentUserId;
+      },
+    ).toList();
+    return currentUserPropertyBookingList;
+  }
+
+  void createCurrentUserBookedPropertyListEvent(int index) {
     propertyBookingList.where(
       (element) {
-        return element.bookedPropertyId == propertyList[index].objectId;
+        return element.userId == currentUserId;
       },
-    ).firstOrNull;
+    );
   }
+
+  // void addBookedPropertyIdEvent(int index) {
+  //   propertyBookingList.where(
+  //     (element) {
+  //       return element.bookedPropertyId == propertyList[index].objectId;
+  //     },
+  //   ).firstOrNull;
+  // }
 
 /////////////////////////////////////API Functions{GET, POST, PUT, DELETE}////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////for PropertyModel////////////////////////////////////////////////////////////////////////
