@@ -1,17 +1,19 @@
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 
 class PropertyModel {
-  PropertyModel(
-      this.objectId,
-      this.address,
-      this.roomCount,
-      this.space,
-      this.withFurniture,
-      this.cost,
-      this.propertyState,
-      this.propertyTypeId,
-      this.posterUserId,
-      this.propertyPostApproval);
+  PropertyModel({
+    required this.objectId,
+    required this.address,
+    required this.roomCount,
+    required this.space,
+    required this.withFurniture,
+    required this.cost,
+    required this.propertyState,
+    this.propertyTypeId = "",
+    required this.posterUserId,
+    required this.propertyPostApproval,
+    this.propertyName,
+  });
 
   String objectId;
   String address;
@@ -22,6 +24,7 @@ class PropertyModel {
   PropertyStateEnum propertyState;
   String propertyTypeId;
   String posterUserId;
+  String? propertyName;
   bool propertyPostApproval;
 
   Map<String, dynamic> toJson() => {
@@ -38,15 +41,15 @@ class PropertyModel {
       };
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) => PropertyModel(
-        json["objectId"] as String,
-        json["address"] as String,
-        json["roomCount"] as int,
-        json["space"] as int,
-        json["withFurniture"] as bool,
-        json["cost"] as int,
-        PropertyStateEnum.values[json["propertyState"] as int],
-        json["propertyTypeId"] as String,
-        json["posterUserId"] as String,
-        json["propertyPostApproval"] as bool,
+        objectId: json["objectId"] as String,
+        address: json["address"] as String,
+        roomCount: json["roomCount"] as int,
+        space: json["space"] as int,
+        withFurniture: json["withFurniture"] as bool,
+        cost: json["cost"] as int,
+        propertyState: PropertyStateEnum.values[json["propertyState"] as int],
+        propertyTypeId: json["propertyTypeId"] as String,
+        posterUserId: json["posterUserId"] as String,
+        propertyPostApproval: json["propertyPostApproval"] as bool,
       );
 }
