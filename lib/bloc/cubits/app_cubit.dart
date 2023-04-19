@@ -410,3 +410,14 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 }
+
+void filterChangedEvent(StateEnum? filter) {
+  filteredGoals.clear();
+  if (filter == null) {
+    filteredGoals.addAll(goals);
+  } else {
+    filteredGoals
+        .addAll(goals.where((element) => element.state == filter).toList());
+  }
+  emit(GoalsRefreshUIState());
+}
