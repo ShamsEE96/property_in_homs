@@ -6,9 +6,10 @@ import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/pages/property_view_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
+import 'package:number_inc_dec/number_inc_dec.dart';
 
 class EditPage extends StatelessWidget {
-  EditPage({super.key});
+  const EditPage({super.key});
 
   // int indexOfEnum =
   //     asEnumValue(PropertyStateEnum.values, PropertyStateEnum.sale);
@@ -39,17 +40,40 @@ class EditPage extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  TextFormField(
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
+                  const Text("Room Count"),
+                  NumberInputWithIncrementDecrement(
                     controller: appCubit.roomCountController,
-                    style: const TextStyle(fontSize: 20),
-                    decoration: const InputDecoration(
-                      label: Text("Room Count"),
-                      border: OutlineInputBorder(),
+                    numberFieldDecoration: const InputDecoration(
+                      border: InputBorder.none,
                     ),
+                    widgetContainerDecoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        border: Border.all(
+                          // color: Colors.amber,
+                          width: 1,
+                        )),
+                    incIconDecoration: const BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                    ),
+                    separateIcons: true,
+                    decIconDecoration: const BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
+                    incIconSize: 28,
+                    decIconSize: 28,
+                    incIcon: Icons.plus_one,
+                    decIcon: Icons.exposure_neg_1,
+                    incIconColor: Colors.white,
+                    decIconColor: Colors.white,
                   ),
                   const SizedBox(
                     height: 8,
@@ -64,6 +88,7 @@ class EditPage extends StatelessWidget {
                     decoration: const InputDecoration(
                       label: Text("Space"),
                       border: OutlineInputBorder(),
+                      hintText: "Only Number (Square Metre)",
                     ),
                   ),
                   const SizedBox(
@@ -79,6 +104,7 @@ class EditPage extends StatelessWidget {
                     decoration: const InputDecoration(
                       label: Text("Cost"),
                       border: OutlineInputBorder(),
+                      hintText: "Only Number",
                     ),
                   ),
                   const SizedBox(
