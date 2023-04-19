@@ -14,11 +14,10 @@ class _CategorysState extends State<Categorys> {
     return Container(
       height: 50,
       width: double.infinity,
-      color: AppColors.mainWhiteColor,
       child: ListView(scrollDirection: Axis.horizontal, children: [
         Icon(
           Icons.location_city,
-          color: AppColors.mainNavyColor,
+          color: AppColors.mainWhiteColor,
         ),
         CategoryButton("sale"),
         CategoryButton("Rental"),
@@ -35,7 +34,7 @@ Widget CategoryButton(String? text) {
     height: 50.0,
     decoration: BoxDecoration(
       border: Border.all(
-        color: AppColors.mainBlueColor,
+        color: AppColors.mainWhiteColor,
       ),
       borderRadius: BorderRadius.all(Radius.circular(20)),
     ),
@@ -46,7 +45,7 @@ Widget CategoryButton(String? text) {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "$text",
+            "$Text ",
           ),
         ],
       ),

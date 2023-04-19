@@ -4,9 +4,11 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 import 'package:flutter/material.dart';
+import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 import 'package:property_in_homs/widgets/category.dart';
 import 'package:property_in_homs/widgets/propertys.dart';
+
 import 'package:property_in_homs/widgets/search.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,24 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0.0,
         backgroundColor: AppColors.seconderyBlueColor,
         toolbarHeight: 50.0,
-        title: const Text("     حقل تجارب -_-"),
+        title: const Text("TEST Zone"),
       ),
       backgroundColor: AppColors.seconderyBlueColor,
-      body:PageView(
-        
-          children: [
-           Center( search(),) 
-            SizedBox(
-              height: 10.0,
-            ),
-            Categorys(),
-            SizedBox(
-              height: 20.0,
-            ),
-            propertys()
-          ],
-        ),
-      ),
+      body: propertys(),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 1.0,
         backgroundColor: AppColors.mainBlueColor,
