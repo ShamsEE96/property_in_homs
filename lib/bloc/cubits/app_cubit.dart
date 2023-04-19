@@ -34,9 +34,9 @@ class AppCubit extends Cubit<AppStates> {
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
     addressController.text = propertyList.address;
-    spaceController.text = propertyList.space as String;
-    costController.text = propertyList.cost as String;
-    roomCountController.text = propertyList.roomCount as String;
+    spaceController.text = propertyList.space.toString();
+    costController.text = propertyList.cost.toString();
+    roomCountController.text = propertyList.roomCount.toString();
     withFurniture = propertyList.withFurniture;
     propertyPostApproval = propertyList.propertyPostApproval;
     propertyStateEnum = propertyList.propertyState;
@@ -63,10 +63,22 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
+  void propertyTypeChangedEvent(String? accountId) {
+    selectedPropertyTypeId = accountId;
+    emit(
+      AppRefreshUIState(),
+    );
+  }
+
   void fillPropertyTypeDetailsPage(PropertyTypeModel propertyTypeList) {
     selectedPropertyTypeId = propertyTypeList.objectId;
     propertyTypeNameController.text = propertyTypeList.propertyTypeName;
 
+    emit(AppRefreshUIState());
+  }
+
+  void withFurnitureChangedEvent(newValue) {
+    withFurniture = newValue;
     emit(AppRefreshUIState());
   }
 

@@ -4,7 +4,6 @@ import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
-import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 
 class ViewPage extends StatelessWidget {
   const ViewPage({super.key});
@@ -158,7 +157,7 @@ class ViewPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const EditPage()));
+                                  builder: (context) => EditPage()));
                         },
                         child: const Text("Save")),
                   ),
