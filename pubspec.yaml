@@ -38,6 +38,9 @@ dependencies:
   flutter_bloc: ^8.1.2
   shared_preferences: ^2.1.0
   dio: ^5.1.1
+  number_inc_dec: ^0.8.0
+
+
 
 dev_dependencies:
   flutter_test:
