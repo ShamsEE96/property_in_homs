@@ -16,7 +16,24 @@ class PropertyBookedPage extends StatelessWidget {
           appBar: AppBar(
             title: const Text("My Booked Property List"),
           ),
-          body: ListView.builder(itemBuilder: (context, index) => ListTile()),
+          body: ListView.builder(
+            itemCount: appCubit.currentUserPropertyBookingList.length,
+            itemBuilder: (context, index) => ListTile(
+              title: Text(appCubit
+                  .currentUserPropertyBookingList[index].bookedPropertyId),
+              subtitle:
+                  Text(appCubit.currentUserPropertyBookingList[index].userId),
+              onLongPress: () {
+                appCubit.readyPropertyList.firstWhere((element) =>
+                    element.objectId ==
+                    appCubit.currentUserPropertyBookingList[index]
+                        .bookedPropertyId);
+                // Navigator.push(context, MaterialPageRoute(builder: (context) {
+
+                // },));
+              },
+            ),
+          ),
         );
       },
     );

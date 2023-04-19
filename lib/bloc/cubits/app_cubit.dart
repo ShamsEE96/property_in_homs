@@ -4,6 +4,10 @@ import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/models/property_booking_model.dart';
 import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
+import 'package:property_in_homs/pages/admin_home_page.dart';
+import 'package:property_in_homs/pages/admin_property_approval_page.dart';
+import 'package:property_in_homs/pages/admin_property_type_edit_page.dart';
+import 'package:property_in_homs/pages/admin_property_type_home_page.dart';
 import 'package:property_in_homs/utils/dio_helper.dart';
 import 'package:collection/collection.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
@@ -11,6 +15,7 @@ import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
+
   TextEditingController addressController = TextEditingController();
   TextEditingController roomCountController = TextEditingController();
   TextEditingController spaceController = TextEditingController();
@@ -29,15 +34,16 @@ class AppCubit extends Cubit<AppStates> {
   late List<bool> selections = List.generate(2, (_) => false);
 
   List<PropertyModel> propertyList = [];
+  List<PropertyModel> readyPropertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
   List<PropertyBookingModel> propertyBookingList = [];
   List<PropertyBookingModel> currentUserPropertyBookingList = [];
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
     addressController.text = propertyList.address;
-    spaceController.text = propertyList.space as String;
-    costController.text = propertyList.cost as String;
-    roomCountController.text = propertyList.roomCount as String;
+    spaceController.text = propertyList.space.toString();
+    costController.text = propertyList.cost.toString();
+    roomCountController.text = propertyList.roomCount.toString();
     withFurniture = propertyList.withFurniture;
     propertyPostApproval = propertyList.propertyPostApproval;
     propertyStateEnum = propertyList.propertyState;
@@ -117,7 +123,7 @@ class AppCubit extends Cubit<AppStates> {
     return temp.objectId;
   }
 
-  findCurrentUserBookedPropertyListEvent() {
+  findAndCreateCurrentUserBookedPropertyListEvent() {
     currentUserPropertyBookingList = propertyBookingList.where(
       (element) {
         return element.userId == currentUserId;
@@ -126,10 +132,21 @@ class AppCubit extends Cubit<AppStates> {
     return currentUserPropertyBookingList;
   }
 
-  void createCurrentUserBookedPropertyListEvent(int index) {
-    propertyBookingList.where(
+  // replacePropertyTypeIdtoNameinPropertyListEvent(PropertyModel item) {
+  //   var type = propertyList.where(
+  //     (element) {
+  //       return element.propertyTypeId ==
+  //           propertyTypeList[index].propertyTypeName;
+  //     },
+  //   ).toList();
+  //   return readyPropertyList;
+  // }
+
+  navigateFromBookedPropertyListToSelectedPropertyViewPageEvent(int index) {
+    var res = currentUserPropertyBookingList.where(
       (element) {
-        return element.userId == currentUserId;
+        return element.bookedPropertyId ==
+            propertyTypeList[index].propertyTypeName;
       },
     );
   }
@@ -141,6 +158,20 @@ class AppCubit extends Cubit<AppStates> {
   //     },
   //   ).firstOrNull;
   // }
+/////////////////////////////////////Bottom Navigation Bar////////////////////////////////////////////////////////////////////////
+
+  List bottomNavBarPages = [
+    AdminHomePage(),
+    AdminPropertyTypeHomePage(),
+    AdminPropertyTypeEditPage(),
+    AdminPropertyApprovalPage(),
+  ];
+  int navigationBarCurrentIndex = 0;
+
+  void changeBottomNavBar(int index) {
+    navigationBarCurrentIndex = index;
+    emit(AppRefreshUIState());
+  }
 
 /////////////////////////////////////API Functions{GET, POST, PUT, DELETE}////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////for PropertyModel////////////////////////////////////////////////////////////////////////
@@ -153,7 +184,7 @@ class AppCubit extends Cubit<AppStates> {
         for (var element in res.data["results"]) {
           propertyList.add(PropertyModel.fromJson(element));
         }
-        // print(propertyList);
+        print(propertyList);
         emit(AppSuccessState());
       } else {
         emit(AppErrorState("Error Code ${res.statusCode}"));
@@ -253,7 +284,7 @@ class AppCubit extends Cubit<AppStates> {
         for (var element in res.data["results"]) {
           propertyTypeList.add(PropertyTypeModel.fromJson(element));
         }
-        // print(propertyTypeList);
+        print(propertyTypeList);
         emit(AppSuccessState());
       } else {
         emit(AppErrorState("Error Code ${res.statusCode}"));

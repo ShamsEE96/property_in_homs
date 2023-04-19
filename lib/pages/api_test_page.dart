@@ -4,6 +4,7 @@ import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/pages/admin_property_type_edit_page.dart';
 import 'package:property_in_homs/pages/admin_property_type_home_page.dart';
+import 'package:property_in_homs/pages/property_booked_page.dart';
 
 class ApiTestPage extends StatelessWidget {
   const ApiTestPage({super.key});
@@ -45,6 +46,10 @@ class ApiTestPage extends StatelessWidget {
                     child: const Text('Get Property Booked List'),
                   ),
                   ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('TEST'),
+                  ),
+                  ElevatedButton(
                     onPressed: () {
                       appCubit.getPropertyTypes();
                       Navigator.push(
@@ -55,6 +60,18 @@ class ApiTestPage extends StatelessWidget {
                           ));
                     },
                     child: const Text('View Property Types'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      appCubit
+                          .findAndCreateCurrentUserBookedPropertyListEvent();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PropertyBookedPage(),
+                          ));
+                    },
+                    child: const Text('View My Property Booked List'),
                   )
                 ],
               ),
