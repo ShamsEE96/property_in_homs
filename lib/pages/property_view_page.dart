@@ -18,7 +18,7 @@ class PropertyViewPage extends StatelessWidget {
           appBar: AppBar(
             title: const Text("View Page"),
             actions: [
-              if (appCubit.currentUserId != "rOIkuoPLN2") ...[
+              if (appCubit.currentUserId == "rOIkuoPLN2") ...[
                 IconButton(
                   tooltip: "Edit",
                   onPressed: () {
@@ -186,7 +186,7 @@ class PropertyViewPage extends StatelessWidget {
                           // if (!context.mounted) return;
                           Navigator.pop(context);
                         },
-                        child: const Text("Save")),
+                        child: const Text("add to Book List")),
                   ),
                 ],
               ),

@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person),
-                  label: "profil",
+                  label: "profile",
                 )
               ],
             ),

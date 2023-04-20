@@ -10,12 +10,10 @@ import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 import 'package:collection/collection.dart';
 
-
 class PropertyEditPage extends StatelessWidget {
-   PropertyEditPage({super.key});
+  PropertyEditPage({super.key});
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -50,20 +48,6 @@ class PropertyEditPage extends StatelessWidget {
                     ),
                     const SizedBox(
                       height: 8,
-                    ),
-                    TextFormField(
-                      controller: appCubit.roomCountController,
-                      style: const TextStyle(fontSize: 20),
-                      decoration: const InputDecoration(
-                        label: Text("Address:"),
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (currentText) {
-                        if (currentText == null) {
-                          return "This field is required!";
-                        }
-                        return null;
-                      },
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,7 +166,6 @@ class PropertyEditPage extends StatelessWidget {
                         return null;
                       },
                     ),
-
                     const SizedBox(
                       height: 8,
                     ),
@@ -244,16 +227,16 @@ class PropertyEditPage extends StatelessWidget {
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: () async {
-                          await appCubit.saveProperty();
+                        onPressed: () {
+                          appCubit.saveProperty();
                           if (!context.mounted) return;
                           if (formKey.currentState!.validate()) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const PropertyViewPage()));
+                                    builder: (context) =>
+                                        const PropertyViewPage()));
                           }
-
                         },
                         child: const Text("Save"),
                       ),
