@@ -123,6 +123,21 @@ class ViewPage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CheckboxListTile(
+                    title: const Text(
+                      "With Furniture?",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    activeColor: AppColors.darkNavyColor,
+                    value: appCubit.withFurniture,
+                    onChanged: (newValue) {
+                      return;
+                    },
+                    controlAffinity: ListTileControlAffinity.leading,
+                  ),
                   SizedBox(
                     height: 60,
                     child: ToggleButtons(

@@ -64,8 +64,8 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  void propertyTypeChangedEvent(String? accountId) {
-    selectedPropertyTypeId = accountId;
+  void propertyTypeChangedEvent(String? objectId) {
+    selectedPropertyTypeId = objectId;
     emit(
       AppRefreshUIState(),
     );

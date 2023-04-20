@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/property_view_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
@@ -48,12 +49,27 @@ class EditPage extends StatelessWidget {
                     const SizedBox(
                       height: 8,
                     ),
+                    TextFormField(
+                      controller: appCubit.roomCountController,
+                      style: const TextStyle(fontSize: 20),
+                      decoration: const InputDecoration(
+                        label: Text("Address:"),
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (currentText) {
+                        if (currentText == null) {
+                          return "This field is required!";
+                        }
+                        return null;
+                      },
+                    ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
                           "Room Count",
                           textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 15),
                         ),
                       ],
                     ),
@@ -101,8 +117,10 @@ class EditPage extends StatelessWidget {
                       height: 8,
                     ),
                     CheckboxListTile(
-                      title: const Text("With Furniture?"),
-                      
+                      title: const Text(
+                        "With Furniture?",
+                        style: TextStyle(fontSize: 20),
+                      ),
                       value: appCubit.withFurniture,
                       onChanged: (newValue) {
                         appCubit.withFurnitureChangedEvent(newValue);
@@ -167,6 +185,32 @@ class EditPage extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 60,
+                      width: double.infinity,
+                      child: DropdownButton(
+                        isExpanded: true,
+                        value: appCubit.propertyTypeList
+                            .where((element) =>
+                                element.objectId == appCubit.propertyTypeList)
+                            .firstOrNull,
+                        items: [
+                          const DropdownMenuItem(
+                            value: null,
+                            child: Text("not selected yet!"),
+                          ),
+                          for (PropertyTypeModel type
+                              in appCubit.propertyTypeList)
+                            DropdownMenuItem(
+                              value: type,
+                              child: Text(type.propertyTypeName),
+                            ),
+                        ],
+                        onChanged: (value) {
+                          appCubit.propertyTypeChangedEvent(value?.objectId);
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 60,
                       child: ToggleButtons(
                         isSelected: appCubit.selections,
                         onPressed: (newState) {
@@ -190,42 +234,16 @@ class EditPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // SizedBox(
-                    //   width: double.infinity,
-                    //   child: DropdownButton(
-                    //     isExpanded: true,
-                    //     value: appCubit.propertyTypeList
-                    //         .where((element) =>
-                    //             element.objectId ==
-                    //             appCubit.propertyList[index])
-                    //         .firstOrNull,
-                    //     items: [
-                    //       const DropdownMenuItem(
-                    //         value: null,
-                    //         child: Text("not selected yet!"),
-                    //       ),
-                    //       for (PropertyTypeModel type
-                    //           in appCubit.propertyTypeList)
-                    //         DropdownMenuItem(
-                    //           value: type,
-                    //           child: Text(type.propertyTypeName),
-                    //         ),
-                    //     ],
-                    //     onChanged: (value) {
-                    //       appCubit.propertyTypeChangedEvent(value?.objectId);
-                    //     },
-                    //   ),
-                    // ),
                     const SizedBox(
-                      height: 200,
+                      height: 130,
                     ),
                     SizedBox(
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () async {
-                          // await appCubit.save();
-                          // if (!context.mounted) return;
+                          await appCubit.saveProperty();
+                          if (!context.mounted) return;
                           if (formKey.currentState!.validate()) {
                             Navigator.push(
                                 context,
