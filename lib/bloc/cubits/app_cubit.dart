@@ -7,6 +7,7 @@ import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/utils/dio_helper.dart';
 import 'package:collection/collection.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
+import 'package:property_in_homs/widgets/propertys.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -32,12 +33,13 @@ class AppCubit extends Cubit<AppStates> {
   List<PropertyTypeModel> propertyTypeList = [];
   List<PropertyBookingModel> propertyBookingList = [];
   List<PropertyBookingModel> currentUserPropertyBookingList = [];
+  List<PropertyModel> filteredProperty = [];
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
     addressController.text = propertyList.address;
-    spaceController.text = propertyList.space as String;
-    costController.text = propertyList.cost as String;
-    roomCountController.text = propertyList.roomCount as String;
+    spaceController.text = propertyList.space.toString();
+    costController.text = propertyList.cost.toString();
+    roomCountController.text = propertyList.roomCount.toString();
     withFurniture = propertyList.withFurniture;
     propertyPostApproval = propertyList.propertyPostApproval;
     propertyStateEnum = propertyList.propertyState;
@@ -132,6 +134,18 @@ class AppCubit extends Cubit<AppStates> {
         return element.userId == currentUserId;
       },
     );
+  }
+
+  void filterChangedEvent(PropertyStateEnum? filter) {
+    filteredProperty.clear();
+    if (filter == null) {
+      filteredProperty.addAll(propertyList);
+    } else {
+      filteredProperty.addAll(propertyList
+          .where((element) => element.propertyState == filter)
+          .toList());
+    }
+    emit(AppRefreshUIState());
   }
 
   // void addBookedPropertyIdEvent(int index) {

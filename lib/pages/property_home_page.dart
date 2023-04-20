@@ -9,8 +9,6 @@ import 'package:property_in_homs/utils/colors.dart';
 import 'package:property_in_homs/widgets/category.dart';
 import 'package:property_in_homs/widgets/propertys.dart';
 
-import 'package:property_in_homs/widgets/search.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -26,10 +24,25 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0.0,
         backgroundColor: AppColors.seconderyBlueColor,
         toolbarHeight: 50.0,
-        title: const Text("TEST Zone"),
+        title: const Text("  Test Zone "),
       ),
       backgroundColor: AppColors.seconderyBlueColor,
-      body: propertys(),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Categorys(),
+              SizedBox(
+                height: 20.0,
+              ),
+              propertys()
+            ],
+          ),
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 1.0,
         backgroundColor: AppColors.mainBlueColor,
