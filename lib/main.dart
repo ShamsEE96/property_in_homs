@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/bloc/states/auth_states.dart';
 import 'package:property_in_homs/pages/admin_home_page.dart';
 import 'package:property_in_homs/pages/api_test_page.dart';
 import 'package:property_in_homs/pages/login_page.dart';
@@ -24,7 +25,7 @@ Future<void> main() async {
     BlocProvider(
       create: (context) => AuthCubit(sp)..loadTokenFromSP(),
     )
-  ], child: MyApp()));
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -35,10 +36,16 @@ class MyApp extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        return MaterialApp(
-          title: "Property in Homs",
-          home: HomeScreen(),
-          debugShowCheckedModeBanner: false,
+        return BlocConsumer<AuthCubit, AuthStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            AuthCubit authCubit = AuthCubit.get(context);
+            return MaterialApp(
+              title: "Property in Homs",
+              home: authCubit.token != "" ? const HomeScreen() : RegisterPage(),
+              debugShowCheckedModeBanner: false,
+            );
+          },
         );
       },
     );
