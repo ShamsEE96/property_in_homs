@@ -15,6 +15,7 @@ class AuthCubit extends Cubit<AuthStates> {
 
   TextEditingController registerUsernameController = TextEditingController();
   TextEditingController registerEmailController = TextEditingController();
+  TextEditingController registerMobileNoController = TextEditingController();
   TextEditingController registerPasswordController = TextEditingController();
   TextEditingController registerPassowrdConfirmation = TextEditingController();
 
@@ -22,7 +23,6 @@ class AuthCubit extends Cubit<AuthStates> {
   Future<void> saveTokenInSP(String t) async {
     await sp.setString("token", t);
     loadTokenFromSP();
-    emit(AuthRefreshUIState());
   }
   // Loading Token from Shared Prefrences
 
@@ -30,27 +30,31 @@ class AuthCubit extends Cubit<AuthStates> {
     String t = sp.getString('token') ?? "";
     DioHelper.initialize(token: t);
     token = t;
+    emit(AuthRefreshUIState());
   }
 
-  Future<void> register() async {
+  Future<bool> register() async {
     try {
       var regData = {
         'username': registerUsernameController.text.trim(),
         'email': registerEmailController.text.trim(),
+        'mobileNo': registerMobileNoController.text,
         'password': registerPasswordController.text,
-        'password confirmation': registerPassowrdConfirmation.text,
+        // 'password confirmation': registerPassowrdConfirmation.text,
       };
       var res = await DioHelper.dio!.post('users', data: regData);
       if (res.statusCode == 201) {
-        saveTokenInSP(res.data['sToken'] as String);
+        saveTokenInSP(res.data['sessionToken'] as String);
         emit(AuthSuccessState());
+        return true;
       }
     } catch (e) {
       emit(AuthErrorState());
     }
+    return false;
   }
 
-  Future<void> login() async {
+  Future<bool> login() async {
     try {
       var logData = {
         'username': loginUsernameController.text.trim(),
@@ -58,12 +62,14 @@ class AuthCubit extends Cubit<AuthStates> {
       };
       var res = await DioHelper.dio!.get('login', queryParameters: logData);
       if (res.statusCode == 200) {
-        saveTokenInSP(res.data['sToken' as String]);
+        saveTokenInSP(res.data['sessionToken' as String]);
         emit(AuthSuccessState());
+        return true;
       }
     } catch (e) {
       emit(AuthErrorState());
     }
+    return false;
   }
 
   Future<void> logout() async {

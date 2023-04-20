@@ -4,6 +4,7 @@ import 'package:property_in_homs/bloc/states/auth_states.dart';
 import 'package:property_in_homs/components/custom_button.dart';
 import 'package:property_in_homs/components/custom_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:property_in_homs/pages/property_home_page.dart';
 import 'package:property_in_homs/pages/register_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 
@@ -75,7 +76,16 @@ class LoginPage extends StatelessWidget {
                     backgroundColor: AppColors.darkNavyColor,
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        await authCubit.login();
+                        if (await authCubit.login()) {
+                          if (!context.mounted) return;
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomeScreen(),
+                            ),
+                            (route) => false,
+                          );
+                        }
                       }
                     }),
                 const SizedBox(height: 20),
