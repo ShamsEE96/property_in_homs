@@ -4,10 +4,9 @@ import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
-import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 
-class ViewPage extends StatelessWidget {
-  const ViewPage({super.key});
+class PropertyViewPage extends StatelessWidget {
+  const PropertyViewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +18,34 @@ class ViewPage extends StatelessWidget {
           appBar: AppBar(
             title: const Text("View Page"),
             actions: [
-              if (true) ...[
+              if (appCubit.currentUserId == "rOIkuoPLN2") ...[
                 IconButton(
                   tooltip: "Edit",
-                  onPressed: () {},
+                  onPressed: () {
+                    // appCubit.fillPropertyDetailsPage(context);
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const PropertyEditPage(),
+                    //     ));
+                  },
                   icon: const Icon(Icons.edit_document),
                 )
-              ]
+              ],
+              IconButton(
+                tooltip: "Delete",
+                onPressed: () {
+                  appCubit.deleteProperty(appCubit.selectedPropertyId!);
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.delete),
+              )
             ],
           ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: (Column(
+              child: Column(
                 children: [
                   TextFormField(
                     controller: appCubit.addressController,
@@ -124,6 +138,21 @@ class ViewPage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CheckboxListTile(
+                    title: const Text(
+                      "With Furniture?",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    activeColor: AppColors.darkNavyColor,
+                    value: appCubit.withFurniture,
+                    onChanged: (newValue) {
+                      return;
+                    },
+                    controlAffinity: ListTileControlAffinity.leading,
+                  ),
                   SizedBox(
                     height: 60,
                     child: ToggleButtons(
@@ -152,18 +181,15 @@ class ViewPage extends StatelessWidget {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                        onPressed: () async {
+                        onPressed: () {
                           // await appCubit.save();
                           // if (!context.mounted) return;
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const EditPage()));
+                          Navigator.pop(context);
                         },
-                        child: const Text("Save")),
+                        child: const Text("add to Book List")),
                   ),
                 ],
-              )),
+              ),
             ),
           ),
         );
