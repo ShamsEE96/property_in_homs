@@ -8,8 +8,8 @@ import 'package:property_in_homs/utils/colors.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 
-class EditPage extends StatelessWidget {
-  const EditPage({super.key});
+class PropertyEditPage extends StatelessWidget {
+  const PropertyEditPage({super.key});
 
   // int indexOfEnum =
   //     asEnumValue(PropertyStateEnum.values, PropertyStateEnum.sale);
@@ -22,7 +22,7 @@ class EditPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text("Edit Page"),
-            titleTextStyle: TextStyle(color: AppColors.darkNavyColor),
+            // titleTextStyle: TextStyle(color: AppColors.darkNavyColor),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -166,13 +166,14 @@ class EditPage extends StatelessWidget {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                        onPressed: () async {
-                          // await appCubit.save();
+                        onPressed: () {
+                          appCubit.saveProperty();
                           // if (!context.mounted) return;
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ViewPage()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             const PropertyViewPage()));
                         },
                         child: const Text("Save")),
                   ),

@@ -4,13 +4,21 @@ import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/models/property_booking_model.dart';
 import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
+import 'package:property_in_homs/pages/admin_home_page.dart';
+import 'package:property_in_homs/pages/admin_property_approval_page.dart';
+import 'package:property_in_homs/pages/admin_property_type_edit_page.dart';
+import 'package:property_in_homs/pages/admin_property_type_home_page.dart';
+import 'package:property_in_homs/pages/property_booked_page.dart';
+import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:property_in_homs/utils/dio_helper.dart';
 import 'package:collection/collection.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
+import 'package:property_in_homs/widgets/propertys.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
+
   TextEditingController addressController = TextEditingController();
   TextEditingController roomCountController = TextEditingController();
   TextEditingController spaceController = TextEditingController();
@@ -26,18 +34,20 @@ class AppCubit extends Cubit<AppStates> {
   String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
   String? currentUserId = "rOIkuoPLN2";
+  late PropertyModel currentPropertyItem;
   late List<bool> selections = List.generate(2, (_) => false);
 
   List<PropertyModel> propertyList = [];
+  // List<PropertyModel> readyPropertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
   List<PropertyBookingModel> propertyBookingList = [];
   List<PropertyBookingModel> currentUserPropertyBookingList = [];
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
     addressController.text = propertyList.address;
-    spaceController.text = propertyList.space as String;
-    costController.text = propertyList.cost as String;
-    roomCountController.text = propertyList.roomCount as String;
+    spaceController.text = propertyList.space.toString();
+    costController.text = propertyList.cost.toString();
+    roomCountController.text = propertyList.roomCount.toString();
     withFurniture = propertyList.withFurniture;
     propertyPostApproval = propertyList.propertyPostApproval;
     propertyStateEnum = propertyList.propertyState;
@@ -117,7 +127,7 @@ class AppCubit extends Cubit<AppStates> {
     return temp.objectId;
   }
 
-  findCurrentUserBookedPropertyListEvent() {
+  findAndCreateCurrentUserBookedPropertyListEvent() {
     currentUserPropertyBookingList = propertyBookingList.where(
       (element) {
         return element.userId == currentUserId;
@@ -126,10 +136,20 @@ class AppCubit extends Cubit<AppStates> {
     return currentUserPropertyBookingList;
   }
 
-  void createCurrentUserBookedPropertyListEvent(int index) {
-    propertyBookingList.where(
+  replacePropertyTypeIdtoNameEvent(PropertyModel item) {
+    var type = propertyTypeList.where(
       (element) {
-        return element.userId == currentUserId;
+        return element.objectId == currentPropertyItem.propertyTypeId;
+      },
+    );
+    return type;
+  }
+
+  navigateFromBookedPropertyListToSelectedPropertyViewPageEvent(int index) {
+    var res = currentUserPropertyBookingList.where(
+      (element) {
+        return element.bookedPropertyId ==
+            propertyTypeList[index].propertyTypeName;
       },
     );
   }
@@ -141,6 +161,20 @@ class AppCubit extends Cubit<AppStates> {
   //     },
   //   ).firstOrNull;
   // }
+/////////////////////////////////////Bottom Navigation Bar////////////////////////////////////////////////////////////////////////
+
+  List bottomNavBarPages = [
+    const PropertyListWidget(),
+    const PropertyBookedPage(),
+    const PropertyEditPage(),
+    const AdminHomePage(),
+  ];
+  int navigationBarCurrentIndex = 0;
+
+  void changeBottomNavBar(int index) {
+    navigationBarCurrentIndex = index;
+    emit(AppRefreshUIState());
+  }
 
 /////////////////////////////////////API Functions{GET, POST, PUT, DELETE}////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////for PropertyModel////////////////////////////////////////////////////////////////////////
@@ -153,7 +187,7 @@ class AppCubit extends Cubit<AppStates> {
         for (var element in res.data["results"]) {
           propertyList.add(PropertyModel.fromJson(element));
         }
-        // print(propertyList);
+        print(propertyList);
         emit(AppSuccessState());
       } else {
         emit(AppErrorState("Error Code ${res.statusCode}"));
@@ -253,7 +287,7 @@ class AppCubit extends Cubit<AppStates> {
         for (var element in res.data["results"]) {
           propertyTypeList.add(PropertyTypeModel.fromJson(element));
         }
-        // print(propertyTypeList);
+        print(propertyTypeList);
         emit(AppSuccessState());
       } else {
         emit(AppErrorState("Error Code ${res.statusCode}"));
@@ -269,8 +303,8 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.post(
         "classes/PropertyTypes",
         data: PropertyTypeModel(
-          "",
-          propertyTypeNameController.text.trim(),
+          objectId: "",
+          propertyTypeName: propertyTypeNameController.text.trim(),
         ).toJson(),
       );
       if (res.statusCode == 201) {
@@ -290,8 +324,8 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.put(
         "classes/PropertyTypes/$selectedPropertyTypeId",
         data: PropertyTypeModel(
-          selectedPropertyTypeId ?? "",
-          propertyTypeNameController.text.trim(),
+          objectId: selectedPropertyTypeId ?? "",
+          propertyTypeName: propertyTypeNameController.text.trim(),
         ).toJson(),
       );
       if (res.statusCode == 200) {
@@ -352,9 +386,9 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.post(
         "classes/PropertyBooking",
         data: PropertyBookingModel(
-          "",
-          "rOIkuoPLN2",
-          "bookedPropertyId",
+          objectId: "",
+          userId: "rOIkuoPLN2",
+          bookedPropertyId: "bookedPropertyId",
         ).toJson(),
       );
       if (res.statusCode == 201) {
@@ -374,9 +408,9 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.put(
         "classes/PropertyBooking/$selectedPropertyTypeId",
         data: PropertyBookingModel(
-          selectedPropertyBookingId ?? "",
-          "rOIkuoPLN2",
-          "bookedPropertyId",
+          objectId: selectedPropertyBookingId ?? "",
+          userId: "rOIkuoPLN2",
+          bookedPropertyId: "bookedPropertyId",
         ).toJson(),
       );
       if (res.statusCode == 200) {
