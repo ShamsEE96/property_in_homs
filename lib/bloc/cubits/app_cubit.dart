@@ -132,13 +132,6 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void propretyTypeChangedEvent(PropertyStateEnum newState) {
-    propertyStateEnum = newState;
-    if (propertyStateEnum.index == 1) {
-      selections = [true, false];
-    }
-    if (propertyStateEnum.index == 0) {
-      selections = [false, true];
-    }
     emit(AppRefreshUIState());
   }
 
