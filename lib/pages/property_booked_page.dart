@@ -24,13 +24,16 @@ class PropertyBookedPage extends StatelessWidget {
               subtitle:
                   Text(appCubit.currentUserPropertyBookingList[index].userId),
               onLongPress: () {
-                appCubit.readyPropertyList.firstWhere((element) =>
-                    element.objectId ==
-                    appCubit.currentUserPropertyBookingList[index]
-                        .bookedPropertyId);
-                // Navigator.push(context, MaterialPageRoute(builder: (context) {
-
-                // },));
+                // appCubit.readyPropertyList.firstWhere((element) =>
+                //     element.objectId ==
+                //     appCubit.currentUserPropertyBookingList[index]
+                //         .bookedPropertyId);
+                // appCubit.fillPropertyDetailsPage(propertyList)
+                //   Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) {},
+                //       ));
               },
             ),
           ),

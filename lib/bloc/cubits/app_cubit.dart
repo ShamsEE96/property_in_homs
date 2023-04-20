@@ -8,9 +8,12 @@ import 'package:property_in_homs/pages/admin_home_page.dart';
 import 'package:property_in_homs/pages/admin_property_approval_page.dart';
 import 'package:property_in_homs/pages/admin_property_type_edit_page.dart';
 import 'package:property_in_homs/pages/admin_property_type_home_page.dart';
+import 'package:property_in_homs/pages/property_booked_page.dart';
+import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:property_in_homs/utils/dio_helper.dart';
 import 'package:collection/collection.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
+import 'package:property_in_homs/widgets/propertys.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -31,10 +34,11 @@ class AppCubit extends Cubit<AppStates> {
   String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
   String? currentUserId = "rOIkuoPLN2";
+  late PropertyModel currentPropertyItem;
   late List<bool> selections = List.generate(2, (_) => false);
 
   List<PropertyModel> propertyList = [];
-  List<PropertyModel> readyPropertyList = [];
+  // List<PropertyModel> readyPropertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
   List<PropertyBookingModel> propertyBookingList = [];
   List<PropertyBookingModel> currentUserPropertyBookingList = [];
@@ -132,15 +136,14 @@ class AppCubit extends Cubit<AppStates> {
     return currentUserPropertyBookingList;
   }
 
-  // replacePropertyTypeIdtoNameinPropertyListEvent(PropertyModel item) {
-  //   var type = propertyList.where(
-  //     (element) {
-  //       return element.propertyTypeId ==
-  //           propertyTypeList[index].propertyTypeName;
-  //     },
-  //   ).toList();
-  //   return readyPropertyList;
-  // }
+  replacePropertyTypeIdtoNameEvent(PropertyModel item) {
+    var type = propertyTypeList.where(
+      (element) {
+        return element.objectId == currentPropertyItem.propertyTypeId;
+      },
+    );
+    return type;
+  }
 
   navigateFromBookedPropertyListToSelectedPropertyViewPageEvent(int index) {
     var res = currentUserPropertyBookingList.where(
@@ -161,10 +164,10 @@ class AppCubit extends Cubit<AppStates> {
 /////////////////////////////////////Bottom Navigation Bar////////////////////////////////////////////////////////////////////////
 
   List bottomNavBarPages = [
-    AdminHomePage(),
-    AdminPropertyTypeHomePage(),
-    AdminPropertyTypeEditPage(),
-    AdminPropertyApprovalPage(),
+    const PropertyListWidget(),
+    const PropertyBookedPage(),
+    const PropertyEditPage(),
+    const AdminHomePage(),
   ];
   int navigationBarCurrentIndex = 0;
 
@@ -300,8 +303,8 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.post(
         "classes/PropertyTypes",
         data: PropertyTypeModel(
-          "",
-          propertyTypeNameController.text.trim(),
+          objectId: "",
+          propertyTypeName: propertyTypeNameController.text.trim(),
         ).toJson(),
       );
       if (res.statusCode == 201) {
@@ -321,8 +324,8 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.put(
         "classes/PropertyTypes/$selectedPropertyTypeId",
         data: PropertyTypeModel(
-          selectedPropertyTypeId ?? "",
-          propertyTypeNameController.text.trim(),
+          objectId: selectedPropertyTypeId ?? "",
+          propertyTypeName: propertyTypeNameController.text.trim(),
         ).toJson(),
       );
       if (res.statusCode == 200) {
@@ -383,9 +386,9 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.post(
         "classes/PropertyBooking",
         data: PropertyBookingModel(
-          "",
-          "rOIkuoPLN2",
-          "bookedPropertyId",
+          objectId: "",
+          userId: "rOIkuoPLN2",
+          bookedPropertyId: "bookedPropertyId",
         ).toJson(),
       );
       if (res.statusCode == 201) {
@@ -405,9 +408,9 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.put(
         "classes/PropertyBooking/$selectedPropertyTypeId",
         data: PropertyBookingModel(
-          selectedPropertyBookingId ?? "",
-          "rOIkuoPLN2",
-          "bookedPropertyId",
+          objectId: selectedPropertyBookingId ?? "",
+          userId: "rOIkuoPLN2",
+          bookedPropertyId: "bookedPropertyId",
         ).toJson(),
       );
       if (res.statusCode == 200) {
