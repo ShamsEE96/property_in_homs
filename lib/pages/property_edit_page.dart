@@ -225,7 +225,7 @@ class PropertyEditPage extends StatelessWidget {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      height: 50,
+                      height: 55,
                       child: ElevatedButton(
                         onPressed: () {
                           appCubit.saveProperty();
