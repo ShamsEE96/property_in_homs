@@ -76,10 +76,22 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
+  void propertyTypeChangedEvent(String? objectId) {
+    selectedPropertyTypeId = objectId;
+    emit(
+      AppRefreshUIState(),
+    );
+  }
+
   void fillPropertyTypeDetailsPage(PropertyTypeModel propertyTypeList) {
     selectedPropertyTypeId = propertyTypeList.objectId;
     propertyTypeNameController.text = propertyTypeList.propertyTypeName;
 
+    emit(AppRefreshUIState());
+  }
+
+  void withFurnitureChangedEvent(newValue) {
+    withFurniture = newValue;
     emit(AppRefreshUIState());
   }
 
@@ -168,7 +180,7 @@ class AppCubit extends Cubit<AppStates> {
   List bottomNavBarPages = [
     const PropertyListWidget(),
     const PropertyBookedPage(),
-    const PropertyEditPage(),
+    PropertyEditPage(),
     const AdminHomePage(),
   ];
   int navigationBarCurrentIndex = 0;
