@@ -153,6 +153,31 @@ class PropertyViewPage extends StatelessWidget {
                     },
                     controlAffinity: ListTileControlAffinity.leading,
                   ),
+                  // SizedBox(
+                  //   height: 60,
+                  //   child: ToggleButtons(
+                  //     isSelected: appCubit.selectionsType,
+                  //     onPressed: (newState) {
+                  //       // appCubit.propretyTypeChangedEvent(newState == 0
+                  //       //     ? PropertyStateEnum.sale
+                  //       //     : PropertyStateEnum.rental);
+                  //     },
+                  //     color: Colors.black,
+                  //     selectedColor: const Color.fromARGB(255, 255, 255, 255),
+                  //     fillColor: Colors.blue,
+                  //     renderBorder: true,
+                  //     borderWidth: 2,
+                  //     borderColor: const Color.fromARGB(181, 31, 29, 29),
+                  //     borderRadius: BorderRadius.circular(30),
+                  //     textStyle: const TextStyle(
+                  //       fontSize: 25,
+                  //     ),
+                  //     children: const [
+                  //       Text("   For Sale   "),
+                  //       Text("  For Rental  "),
+                  //     ],
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 60,
                     child: ToggleButtons(
