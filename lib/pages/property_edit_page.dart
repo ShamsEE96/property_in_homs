@@ -12,7 +12,8 @@ import 'package:collection/collection.dart';
 
 
 class PropertyEditPage extends StatelessWidget {
-  const PropertyEditPage({super.key});
+   PropertyEditPage({super.key});
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
 
   @override
@@ -250,7 +251,7 @@ class PropertyEditPage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ViewPage()));
+                                    builder: (context) => const PropertyViewPage()));
                           }
 
                         },
