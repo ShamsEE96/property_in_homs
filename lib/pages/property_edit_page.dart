@@ -10,9 +10,10 @@ import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 import 'package:collection/collection.dart';
 
-class EditPage extends StatelessWidget {
-  EditPage({super.key});
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+class PropertyEditPage extends StatelessWidget {
+  const PropertyEditPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class EditPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text("Edit Page"),
-            titleTextStyle: TextStyle(color: AppColors.darkNavyColor),
+            // titleTextStyle: TextStyle(color: AppColors.darkNavyColor),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -180,6 +181,7 @@ class EditPage extends StatelessWidget {
                         return null;
                       },
                     ),
+
                     const SizedBox(
                       height: 8,
                     ),
@@ -250,6 +252,7 @@ class EditPage extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => const ViewPage()));
                           }
+
                         },
                         child: const Text("Save"),
                       ),

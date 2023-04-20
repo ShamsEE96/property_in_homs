@@ -5,8 +5,8 @@ import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 
-class ViewPage extends StatelessWidget {
-  const ViewPage({super.key});
+class PropertyViewPage extends StatelessWidget {
+  const PropertyViewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +24,21 @@ class ViewPage extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(Icons.edit_document),
                 )
-              ]
+              ],
+              IconButton(
+                tooltip: "Delete",
+                onPressed: () {
+                  appCubit.deleteProperty(appCubit.selectedPropertyId!);
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.delete),
+              )
             ],
           ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: (Column(
+              child: Column(
                 children: [
                   TextFormField(
                     controller: appCubit.addressController,
@@ -166,18 +174,15 @@ class ViewPage extends StatelessWidget {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                        onPressed: () async {
+                        onPressed: () {
                           // await appCubit.save();
                           // if (!context.mounted) return;
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EditPage()));
+                          Navigator.pop(context);
                         },
                         child: const Text("Save")),
                   ),
                 ],
-              )),
+              ),
             ),
           ),
         );

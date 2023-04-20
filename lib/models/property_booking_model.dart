@@ -1,9 +1,9 @@
 class PropertyBookingModel {
-  PropertyBookingModel(
-    this.objectId,
-    this.userId,
-    this.bookedPropertyId,
-  );
+  PropertyBookingModel({
+    required this.objectId,
+    required this.userId,
+    required this.bookedPropertyId,
+  });
 
   String objectId;
   String userId;
@@ -17,8 +17,8 @@ class PropertyBookingModel {
 
   factory PropertyBookingModel.fromJson(Map<String, dynamic> json) =>
       PropertyBookingModel(
-        json["objectId"] as String,
-        json["userId"] as String,
-        json["bookedPropertyId"] as String,
+        objectId: json["objectId"] as String,
+        userId: json["userId"] as String,
+        bookedPropertyId: json["bookedPropertyId"] as String,
       );
 }
