@@ -38,7 +38,6 @@ class PropertyListWidget extends StatelessWidget {
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
                 itemCount: appCubit.propertyList.length,
                 itemBuilder: (context, index) => ListTile(
                   title: Text(
