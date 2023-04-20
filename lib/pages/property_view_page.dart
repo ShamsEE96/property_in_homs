@@ -178,6 +178,7 @@ class PropertyViewPage extends StatelessWidget {
                   //     ],
                   //   ),
                   // ),
+                  
                   SizedBox(
                     height: 60,
                     child: ToggleButtons(
