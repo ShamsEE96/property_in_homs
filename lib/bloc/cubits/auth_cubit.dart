@@ -65,4 +65,8 @@ class AuthCubit extends Cubit<AuthStates> {
       emit(AuthErrorState());
     }
   }
+
+  Future<void> logout() async {
+    await saveTokenInSP('');
+  }
 }
