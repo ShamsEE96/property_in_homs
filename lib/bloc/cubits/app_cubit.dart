@@ -74,10 +74,22 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
+  void propertyTypeChangedEvent(String? objectId) {
+    selectedPropertyTypeId = objectId;
+    emit(
+      AppRefreshUIState(),
+    );
+  }
+
   void fillPropertyTypeDetailsPage(PropertyTypeModel propertyTypeList) {
     selectedPropertyTypeId = propertyTypeList.objectId;
     propertyTypeNameController.text = propertyTypeList.propertyTypeName;
 
+    emit(AppRefreshUIState());
+  }
+
+  void withFurnitureChangedEvent(newValue) {
+    withFurniture = newValue;
     emit(AppRefreshUIState());
   }
 
