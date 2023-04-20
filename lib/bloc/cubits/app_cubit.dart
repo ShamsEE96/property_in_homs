@@ -30,7 +30,7 @@ class AppCubit extends Cubit<AppStates> {
 
   TextEditingController propertyTypeNameController = TextEditingController();
 
-  String? selectedPropertyId;
+  String? selectedPropertyId = "";
   String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
   String? currentUserId = "rOIkuoPLN2";
@@ -38,12 +38,13 @@ class AppCubit extends Cubit<AppStates> {
   late List<bool> selections = List.generate(2, (_) => false);
 
   List<PropertyModel> propertyList = [];
-  // List<PropertyModel> readyPropertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
   List<PropertyBookingModel> propertyBookingList = [];
+  // List<PropertyModel> readyPropertyList = [];
   List<PropertyBookingModel> currentUserPropertyBookingList = [];
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
+    selectedPropertyId = propertyList.objectId;
     addressController.text = propertyList.address;
     spaceController.text = propertyList.space.toString();
     costController.text = propertyList.cost.toString();
@@ -55,6 +56,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void clearPropertyDetailsPage() {
+    selectedPropertyId = "";
     addressController.text = "";
     spaceController.text = "";
     costController.text = "";
@@ -67,7 +69,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Future<void> saveProperty() async {
-    if (selectedPropertyId == null) {
+    if (selectedPropertyId == '') {
       await postProperty();
     } else {
       await updateProperty();
@@ -94,8 +96,8 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void clearPropertyTypeDetailsPage() {
-    selectedPropertyTypeId = "";
-    propertyTypeNameController.text = "";
+    selectedPropertyTypeId = '';
+    propertyTypeNameController.text = '';
 
     emit(AppRefreshUIState());
   }

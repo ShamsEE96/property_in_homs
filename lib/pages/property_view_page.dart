@@ -18,10 +18,17 @@ class PropertyViewPage extends StatelessWidget {
           appBar: AppBar(
             title: const Text("View Page"),
             actions: [
-              if (true) ...[
+              if (appCubit.currentUserId != "rOIkuoPLN2") ...[
                 IconButton(
                   tooltip: "Edit",
-                  onPressed: () {},
+                  onPressed: () {
+                    // appCubit.fillPropertyDetailsPage(context);
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const PropertyEditPage(),
+                    //     ));
+                  },
                   icon: const Icon(Icons.edit_document),
                 )
               ],
