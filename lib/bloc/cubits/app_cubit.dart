@@ -178,7 +178,7 @@ class AppCubit extends Cubit<AppStates> {
   List bottomNavBarPages = [
     const PropertyListWidget(),
     const PropertyBookedPage(),
-    const PropertyEditPage(),
+    PropertyEditPage(),
     const AdminHomePage(),
   ];
   int navigationBarCurrentIndex = 0;
