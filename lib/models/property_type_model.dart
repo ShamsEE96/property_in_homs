@@ -1,8 +1,8 @@
 class PropertyTypeModel {
-  PropertyTypeModel(
-    this.objectId,
-    this.propertyTypeName,
-  );
+  PropertyTypeModel({
+    required this.objectId,
+    required this.propertyTypeName,
+  });
 
   String objectId;
   String propertyTypeName;
@@ -14,7 +14,7 @@ class PropertyTypeModel {
 
   factory PropertyTypeModel.fromJson(Map<String, dynamic> json) =>
       PropertyTypeModel(
-        json["objectId"] as String,
-        json["propertyTypeName"] as String,
+        objectId: json["objectId"] as String,
+        propertyTypeName: json["propertyTypeName"] as String,
       );
 }
