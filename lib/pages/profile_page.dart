@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/auth_states.dart';
 
-class profilePage extends StatelessWidget {
-  const profilePage({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +39,9 @@ class profilePage extends StatelessWidget {
         return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
-              backgroundColor: Color.fromARGB(255, 18, 44, 126),
+              backgroundColor: const Color.fromARGB(255, 18, 44, 126),
               leading: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 onPressed: () {},
               ),
             ),
@@ -54,25 +54,25 @@ class profilePage extends StatelessWidget {
                     Container(
                       height: 450,
                       width: double.infinity,
-                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          SizedBox(
-                            height: size.height / 15,
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                authCubit.profil();
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) => const profilePage(),
-                                //     ));
-                              },
-                              child: const Text('THIS IS YOUR PROFILE'),
-                            ),
-                          ),
+                          // SizedBox(
+                          //   height: size.height / 15,
+                          //   width: double.infinity,
+                          //   child: ElevatedButton(
+                          //     onPressed: () {
+                          //       authCubit.profil();
+                          //       // Navigator.push(
+                          //       //     context,
+                          //       //     MaterialPageRoute(
+                          //       //       builder: (context) => const profilePage(),
+                          //       //     ));
+                          //     },
+                          //     child: const Text('THIS IS YOUR PROFILE'),
+                          //   ),
+                          // ),
                           Text(authCubit.username,
                               style: TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20)),
