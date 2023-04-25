@@ -4,6 +4,7 @@ import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/pages/admin_property_type_home_page.dart';
+import 'package:property_in_homs/pages/profile_page.dart';
 
 class AdminHomePage extends StatelessWidget {
   const AdminHomePage({super.key});
@@ -62,6 +63,21 @@ class AdminHomePage extends StatelessWidget {
                           ));
                     },
                     child: const Text('View Property Types'),
+                  ),
+                ),
+                SizedBox(
+                  height: size.height / 15,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      appCubit.getPropertyTypes();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ProfilePage(),
+                          ));
+                    },
+                    child: const Text('Proflie'),
                   ),
                 ),
               ],

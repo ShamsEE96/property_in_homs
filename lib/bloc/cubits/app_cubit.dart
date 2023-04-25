@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/pages/profile_page.dart';
 import 'package:property_in_homs/utils/dio_helper.dart';
 import 'package:property_in_homs/models/property_booking_model.dart';
 import 'package:property_in_homs/models/property_model.dart';
@@ -41,6 +42,7 @@ class AppCubit extends Cubit<AppStates> {
   List<PropertyBookingModel> propertyBookingList = [];
   // List<PropertyModel> readyPropertyList = [];
   List<PropertyBookingModel> currentUserPropertyBookingList = [];
+  List<PropertyModel> filteredProperty = [];
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
     selectedPropertyId = propertyList.objectId;
@@ -171,6 +173,18 @@ class AppCubit extends Cubit<AppStates> {
     );
   }
 
+  void filterChangedEvent(PropertyStateEnum? filter) {
+    filteredProperty.clear();
+    if (filter == null) {
+      filteredProperty.addAll(propertyList);
+    } else {
+      filteredProperty.addAll(propertyList
+          .where((element) => element.propertyState == filter)
+          .toList());
+    }
+    emit(AppRefreshUIState());
+  }
+
   // void addBookedPropertyIdEvent(int index) {
   //   propertyBookingList.where(
   //     (element) {
@@ -184,7 +198,7 @@ class AppCubit extends Cubit<AppStates> {
     const PropertyListWidget(),
     const PropertyBookedPage(),
     PropertyEditPage(),
-    const AdminHomePage(),
+    const ProfilePage(),
   ];
   int navigationBarCurrentIndex = 0;
 
