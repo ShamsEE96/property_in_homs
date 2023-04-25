@@ -247,10 +247,10 @@ class PropertyEditPage extends StatelessWidget {
                           backgroundColor: AppColors.mainBlueColor,
                           // padding: const EdgeInsets.symmetric(
                           //     horizontal: 50, vertical: 20),
-                          // textStyle: const TextStyle(
-                          //   fontSize: 30,
-                          //   fontWeight: FontWeight.bold,
-                          // ),
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            // fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),

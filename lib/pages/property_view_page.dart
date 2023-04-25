@@ -175,7 +175,7 @@ class PropertyViewPage extends StatelessWidget {
                     },
                     controlAffinity: ListTileControlAffinity.leading,
                   ),
-                  
+
                   SizedBox(
                     height: 60,
                     child: ToggleButtons(
@@ -213,10 +213,10 @@ class PropertyViewPage extends StatelessWidget {
                         backgroundColor: AppColors.mainBlueColor,
                         // padding: const EdgeInsets.symmetric(
                         //     horizontal: 50, vertical: 20),
-                        // textStyle: const TextStyle(
-                        //   fontSize: 30,
-                        //   fontWeight: FontWeight.bold,
-                        // ),
+                        textStyle: const TextStyle(
+                          fontSize: 20,
+                          // fontWeight: FontWeight.bold,
+                        ),
                       ),
                       child: const Text("add to Book List"),
                     ),
