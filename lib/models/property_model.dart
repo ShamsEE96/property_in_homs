@@ -1,4 +1,5 @@
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
+import 'package:property_in_homs/widgets/propertys.dart';
 
 class PropertyModel {
   PropertyModel({
@@ -34,7 +35,7 @@ class PropertyModel {
         "space": space,
         "withFurniture": withFurniture,
         "cost": cost,
-        "propertyState": propertyState.index,
+        "propertyState": propertyState,
         "propertyTypeId": propertyTypeId,
         "posterUserId": posterUserId,
         "propertyPostApproval": propertyPostApproval,
