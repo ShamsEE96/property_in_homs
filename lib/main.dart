@@ -19,8 +19,10 @@ Future<void> main() async {
         ..getPropertyBooking(),
     ),
     BlocProvider(
-      create: (context) => AuthCubit(sp)..loadTokenFromSP(),
-    )
+        create: (context) => AuthCubit(sp)
+          ..loadTokenFromSP()
+          ..profil()
+          ..loadinf())
   ], child: const MyApp()));
 }
 
