@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
-import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
-import 'package:property_in_homs/widgets/category.dart';
-import 'package:property_in_homs/widgets/propertys.dart';
-import 'package:property_in_homs/widgets/search.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -25,7 +21,7 @@ class HomeScreen extends StatelessWidget {
             //   toolbarHeight: 50.0,
             //   title: const Text("TEST Zone"),
             // ),
-            backgroundColor: AppColors.seconderyBlueColor,
+            backgroundColor: AppColors.mainWhiteColor,
             body:
                 appCubit.bottomNavBarPages[appCubit.navigationBarCurrentIndex],
             bottomNavigationBar: BottomNavigationBar(
@@ -39,9 +35,11 @@ class HomeScreen extends StatelessWidget {
                 }
                 appCubit.changeBottomNavBar(index);
               },
-              elevation: 1.0,
+              type: BottomNavigationBarType.fixed,
+              currentIndex: appCubit.navigationBarCurrentIndex,
+              elevation: 2.0,
               backgroundColor: AppColors.mainBlueColor,
-              selectedItemColor: AppColors.darkNavyColor,
+              selectedItemColor: AppColors.mainNavyColor,
               unselectedItemColor: AppColors.seconderyBlueColor,
               showSelectedLabels: false,
               showUnselectedLabels: false,
