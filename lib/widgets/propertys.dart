@@ -17,6 +17,8 @@ class PropertyListWidget extends StatelessWidget {
       builder: (context, state) {
         AppCubit appCubit = AppCubit.get(context);
 
+        appCubit.filteredProperty.addAll(appCubit.propertyList);
+
         return SingleChildScrollView(
           child: Column(children: [
             const SizedBox(
@@ -36,23 +38,23 @@ class PropertyListWidget extends StatelessWidget {
                     appCubit.filterChangedEvent(PropertyStateEnum.rental);
                   },
                   color: AppColors.mainWhiteColor,
-                  icon: Icon(Icons.holiday_village),
+                  icon: const Icon(Icons.holiday_village),
                 ),
                 IconButton(
                   onPressed: () {
                     appCubit.filterChangedEvent(PropertyStateEnum.sale);
                   },
                   color: AppColors.mainWhiteColor,
-                  icon: Icon(Icons.location_city),
+                  icon: const Icon(Icons.location_city),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: appCubit.filteredProperty.length,
               itemBuilder: (context, index) => ListTile(
                 title: Text(
@@ -71,10 +73,10 @@ class PropertyListWidget extends StatelessWidget {
                 trailing:
                     Text(appCubit.filteredProperty[index].cost.toString()),
                 leading: const Icon(Icons.location_on),
+                iconColor: AppColors.darkNavyColor,
                 hoverColor: AppColors.mainGreyColor,
                 tileColor: AppColors.mainWhiteColor,
                 onTap: () {
-                  print("on tap");
                   appCubit.fillPropertyDetailsPage(
                       appCubit.filteredProperty[index]);
                   Navigator.push(

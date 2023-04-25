@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/auth_states.dart';
+import 'package:property_in_homs/utils/colors.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -39,7 +40,8 @@ class ProfilePage extends StatelessWidget {
         return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
-              backgroundColor: const Color.fromARGB(255, 18, 44, 126),
+              backgroundColor: AppColors.seconderyBlueColor,
+              title: Text("profile"),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {},
@@ -75,16 +77,18 @@ class ProfilePage extends StatelessWidget {
                           // ),
 
                           Text(authCubit.username,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20)),
                           Text(
                             authCubit.userEmail,
+
                             style: TextStyle(
                                 color: Color(0xFF0B2447), fontSize: 20),
                           ),
                           Text(authCubit.number,
                               style: TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20))
+
 
                           // Container(
                           //   height: 55,
@@ -113,7 +117,7 @@ class ProfilePage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(20),
                       child: Text(
                         "",
@@ -136,11 +140,11 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 270, left: 184),
+                  padding: const EdgeInsets.only(bottom: 270, left: 184),
                   child: CircleAvatar(
                     backgroundColor: Colors.black,
                     child: IconButton(
-                      icon: Icon(Icons.edit, color: Colors.white),
+                      icon: const Icon(Icons.edit, color: Colors.white),
                       onPressed: () {},
                     ),
                   ),

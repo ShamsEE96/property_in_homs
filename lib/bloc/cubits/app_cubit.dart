@@ -32,6 +32,7 @@ class AppCubit extends Cubit<AppStates> {
   String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
   String? currentUserId = "rOIkuoPLN2";
+  PropertyTypeModel? selectedType;
   late PropertyModel currentPropertyItem;
   late List<bool> selections = List.generate(2, (_) => false);
   late List<bool> selectionsType =
@@ -115,8 +116,8 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  void propertyTypeChangedEvent(String? objectId) {
-    selectedPropertyTypeId = objectId;
+  void propertyTypeChangedEvent(PropertyTypeModel objectId) {
+    selectedType = objectId;
     emit(
       AppRefreshUIState(),
     );
