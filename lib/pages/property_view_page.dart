@@ -46,6 +46,28 @@ class PropertyViewPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  // TextFormField(
+                  //   controller: appCubit.addressController,
+                  //   style: const TextStyle(fontSize: 20),
+                  //   decoration: InputDecoration(
+                  //     label: const Text("Address:"),
+                  //     border: InputBorder.none,
+                  //     focusedBorder: InputBorder.none,
+                  //     enabledBorder: InputBorder.none,
+                  //     errorBorder: InputBorder.none,
+                  //     disabledBorder: InputBorder.none,
+                  //     icon: const Icon(Icons.location_on),
+                  //     iconColor: AppColors.darkNavyColor,
+                  //     labelStyle: TextStyle(
+                  //       color: AppColors.darkNavyColor,
+                  //     ),
+                  //   ),
+                  //   readOnly: true,
+                  //   enabled: true,
+                  // ),
+                  // const SizedBox(
+                  //   height: 8,
+                  // ),
                   TextFormField(
                     controller: appCubit.addressController,
                     style: const TextStyle(fontSize: 20),
