@@ -34,7 +34,7 @@ class PropertyModel {
         "space": space,
         "withFurniture": withFurniture,
         "cost": cost,
-        "propertyState": propertyState,
+        "propertyState": propertyState.index,
         "propertyTypeId": propertyTypeId,
         "posterUserId": posterUserId,
         "propertyPostApproval": propertyPostApproval,
