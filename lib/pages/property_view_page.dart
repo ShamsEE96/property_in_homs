@@ -175,6 +175,7 @@ class PropertyViewPage extends StatelessWidget {
                     },
                     controlAffinity: ListTileControlAffinity.leading,
                   ),
+                  
                   SizedBox(
                     height: 60,
                     child: ToggleButtons(
@@ -208,7 +209,6 @@ class PropertyViewPage extends StatelessWidget {
                         // if (!context.mounted) return;
                         Navigator.pop(context);
                       },
-                      child: const Text("add to Book List"),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.mainBlueColor,
                         // padding: const EdgeInsets.symmetric(
@@ -218,6 +218,7 @@ class PropertyViewPage extends StatelessWidget {
                         //   fontWeight: FontWeight.bold,
                         // ),
                       ),
+                      child: const Text("add to Book List"),
                     ),
                   ),
                 ],
