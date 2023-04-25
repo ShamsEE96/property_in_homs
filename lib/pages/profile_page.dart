@@ -74,14 +74,14 @@ class ProfilePage extends StatelessWidget {
                           //   ),
                           // ),
                           Text(authCubit.username,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20)),
                           Text(
                             authCubit.userEmail,
-                            style: TextStyle(color: Color(0xFF0B2447)),
+                            style: const TextStyle(color: Color(0xFF0B2447)),
                           ),
                           Text(authCubit.number,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFF0B2447),
                               ))
                           // Container(
@@ -111,7 +111,7 @@ class ProfilePage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(20),
                       child: Text(
                         "",
@@ -134,11 +134,11 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 270, left: 184),
+                  padding: const EdgeInsets.only(bottom: 270, left: 184),
                   child: CircleAvatar(
                     backgroundColor: Colors.black,
                     child: IconButton(
-                      icon: Icon(Icons.edit, color: Colors.white),
+                      icon: const Icon(Icons.edit, color: Colors.white),
                       onPressed: () {},
                     ),
                   ),

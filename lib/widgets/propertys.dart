@@ -61,6 +61,7 @@ class PropertyListWidget extends StatelessWidget {
                 trailing:
                     Text(appCubit.filteredProperty[index].cost.toString()),
                 leading: const Icon(Icons.location_on),
+                iconColor: AppColors.darkNavyColor,
                 hoverColor: AppColors.mainGreyColor,
                 tileColor: AppColors.mainWhiteColor,
                 onTap: () {

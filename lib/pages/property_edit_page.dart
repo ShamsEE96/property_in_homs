@@ -24,6 +24,7 @@ class PropertyEditPage extends StatelessWidget {
           appBar: AppBar(
             title: const Text("Edit Page"),
             // titleTextStyle: TextStyle(color: AppColors.darkNavyColor),
+            backgroundColor: AppColors.mainBlueColor,
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -72,7 +73,7 @@ class PropertyEditPage extends StatelessWidget {
                             width: 1,
                           )),
                       incIconDecoration: const BoxDecoration(
-                        color: Colors.blue,
+                        color: Color(0xFF576CBC),
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
@@ -80,7 +81,7 @@ class PropertyEditPage extends StatelessWidget {
                       ),
                       separateIcons: true,
                       decIconDecoration: const BoxDecoration(
-                        color: Colors.blue,
+                        color: Color(0xFF576CBC),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10),
@@ -112,6 +113,7 @@ class PropertyEditPage extends StatelessWidget {
                         appCubit.withFurnitureChangedEvent(newValue);
                       },
                       controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: AppColors.mainBlueColor,
                     ),
                     const SizedBox(
                       height: 8,
@@ -193,6 +195,8 @@ class PropertyEditPage extends StatelessWidget {
                         onChanged: (value) {
                           appCubit.propertyTypeChangedEvent(value?.objectId);
                         },
+                        dropdownColor: AppColors.mainBlueColor,
+                        iconEnabledColor: AppColors.mainBlueColor,
                       ),
                     ),
                     SizedBox(
@@ -206,7 +210,7 @@ class PropertyEditPage extends StatelessWidget {
                         },
                         color: Colors.black,
                         selectedColor: const Color.fromARGB(255, 255, 255, 255),
-                        fillColor: Colors.blue,
+                        fillColor: AppColors.mainBlueColor,
                         renderBorder: true,
                         borderWidth: 2,
                         borderColor: const Color.fromARGB(181, 31, 29, 29),
@@ -221,13 +225,13 @@ class PropertyEditPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 130,
+                      height: 80,
                     ),
                     SizedBox(
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           appCubit.saveProperty();
                           if (!context.mounted) return;
                           if (formKey.currentState!.validate()) {
@@ -238,7 +242,6 @@ class PropertyEditPage extends StatelessWidget {
                                         const PropertyViewPage()));
                           }
                         },
-                        child: const Text("Save"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.mainBlueColor,
                           // padding: const EdgeInsets.symmetric(
@@ -248,6 +251,7 @@ class PropertyEditPage extends StatelessWidget {
                             // fontWeight: FontWeight.bold,
                           ),
                         ),
+                        child: const Text("Save"),
                       ),
                     ),
                   ],
