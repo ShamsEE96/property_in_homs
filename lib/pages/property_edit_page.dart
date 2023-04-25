@@ -222,7 +222,9 @@ class PropertyEditPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
+
                       height: 80,
+
                     ),
                     SizedBox(
                       width: double.infinity,

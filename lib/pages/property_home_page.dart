@@ -4,7 +4,6 @@ import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/utils/colors.dart';
 
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -16,15 +15,13 @@ class HomeScreen extends StatelessWidget {
         AppCubit appCubit = AppCubit.get(context);
         return SafeArea(
           child: Scaffold(
-
             appBar: AppBar(
               // elevation: 0.0,
               backgroundColor: AppColors.seconderyBlueColor,
               // toolbarHeight: 50.0,
-              title: const Text("TEST Zone"),
+              title: const Text("حقل نجارب -_-"),
             ),
             backgroundColor: AppColors.seconderyBlueColor,
-
             body:
                 appCubit.bottomNavBarPages[appCubit.navigationBarCurrentIndex],
             bottomNavigationBar: BottomNavigationBar(
@@ -38,7 +35,6 @@ class HomeScreen extends StatelessWidget {
                 }
                 appCubit.changeBottomNavBar(index);
               },
-
               type: BottomNavigationBarType.fixed,
               currentIndex: appCubit.navigationBarCurrentIndex,
               elevation: 2.0,
