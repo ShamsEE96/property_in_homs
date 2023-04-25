@@ -33,6 +33,8 @@ class AppCubit extends Cubit<AppStates> {
   String? currentUserId = "rOIkuoPLN2";
   late PropertyModel currentPropertyItem;
   late List<bool> selections = List.generate(2, (_) => false);
+  late List<bool> selectionsType =
+      List.generate(propertyTypeList.length, (_) => false);
 
   List<PropertyModel> propertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
@@ -123,6 +125,10 @@ class AppCubit extends Cubit<AppStates> {
     if (propertyStateEnum.index == 0) {
       selections = [false, true];
     }
+    emit(AppRefreshUIState());
+  }
+
+  void propretyTypeChangedEvent(PropertyStateEnum newState) {
     emit(AppRefreshUIState());
   }
 
