@@ -16,6 +16,7 @@ class PropertyViewPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text("View Page"),
+            backgroundColor: AppColors.mainBlueColor,
             actions: [
               if (appCubit.currentUserId == "rOIkuoPLN2") ...[
                 IconButton(
@@ -181,7 +182,7 @@ class PropertyViewPage extends StatelessWidget {
                       onPressed: (newState) {},
                       color: Colors.black,
                       selectedColor: const Color.fromARGB(255, 255, 255, 255),
-                      fillColor: Colors.blue,
+                      fillColor: AppColors.darkNavyColor,
                       renderBorder: true,
                       borderWidth: 2,
                       borderColor: const Color.fromARGB(181, 31, 29, 29),
@@ -202,12 +203,22 @@ class PropertyViewPage extends StatelessWidget {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                        onPressed: () {
-                          // await appCubit.save();
-                          // if (!context.mounted) return;
-                          Navigator.pop(context);
-                        },
-                        child: const Text("add to Book List")),
+                      onPressed: () {
+                        // await appCubit.save();
+                        // if (!context.mounted) return;
+                        Navigator.pop(context);
+                      },
+                      child: const Text("add to Book List"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.mainBlueColor,
+                        // padding: const EdgeInsets.symmetric(
+                        //     horizontal: 50, vertical: 20),
+                        // textStyle: const TextStyle(
+                        //   fontSize: 30,
+                        //   fontWeight: FontWeight.bold,
+                        // ),
+                      ),
+                    ),
                   ),
                 ],
               ),

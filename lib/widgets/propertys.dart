@@ -26,6 +26,7 @@ class PropertyListWidget extends StatelessWidget {
               leading: const Icon(Icons.location_on),
               hoverColor: AppColors.seconderyBlueColor,
               tileColor: AppColors.mainWhiteColor,
+              iconColor: AppColors.darkNavyColor,
               onTap: () {
                 appCubit.fillPropertyDetailsPage(appCubit.propertyList[index]);
                 Navigator.push(
