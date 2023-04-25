@@ -6,7 +6,6 @@ import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 import 'package:property_in_homs/widgets/category.dart';
 import 'package:property_in_homs/widgets/propertys.dart';
-import 'package:property_in_homs/widgets/search.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,12 +18,12 @@ class HomeScreen extends StatelessWidget {
         AppCubit appCubit = AppCubit.get(context);
         return SafeArea(
           child: Scaffold(
-            // appBar: AppBar(
-            //   elevation: 0.0,
-            //   backgroundColor: AppColors.seconderyBlueColor,
-            //   toolbarHeight: 50.0,
-            //   title: const Text("TEST Zone"),
-            // ),
+            appBar: AppBar(
+              // elevation: 0.0,
+              backgroundColor: AppColors.seconderyBlueColor,
+              // toolbarHeight: 50.0,
+              title: const Text("TEST Zone"),
+            ),
             backgroundColor: AppColors.seconderyBlueColor,
             body:
                 appCubit.bottomNavBarPages[appCubit.navigationBarCurrentIndex],
@@ -40,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                 appCubit.changeBottomNavBar(index);
               },
               elevation: 1.0,
-              backgroundColor: AppColors.mainBlueColor,
+              backgroundColor: AppColors.seconderyBlueColor,
               selectedItemColor: AppColors.darkNavyColor,
               unselectedItemColor: AppColors.seconderyBlueColor,
               showSelectedLabels: false,

@@ -19,39 +19,56 @@ class PropertyListWidget extends StatelessWidget {
 
           return Column(
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
                       onPressed: () {
                         appCubit.filterChangedEvent(null);
                       },
+                      color: AppColors.mainWhiteColor,
                       icon: const Icon(Icons.list)),
                   IconButton(
-                    icon: Icon(Icons.abc),
+                    onPressed: () {
+                      appCubit.filterChangedEvent(PropertyStateEnum.rental);
+                    },
+                    color: AppColors.mainWhiteColor,
+                    icon: Icon(Icons.holiday_village),
+                  ),
+                  IconButton(
                     onPressed: () {
                       appCubit.filterChangedEvent(PropertyStateEnum.sale);
                     },
-                  )
+                    color: AppColors.mainWhiteColor,
+                    icon: Icon(Icons.location_city),
+                  ),
                 ],
+              ),
+              SizedBox(
+                height: 20,
               ),
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: appCubit.propertyList.length,
+                itemCount: appCubit.filteredProperty.length,
                 itemBuilder: (context, index) => ListTile(
                   title: Text(
-                    appCubit.propertyList[index].address,
+                    appCubit.filteredProperty[index].address,
                   ),
-                  subtitle: Text(appCubit.propertyList[index].propertyTypeId),
-                  trailing: Text(appCubit.propertyList[index].cost.toString()),
+                  subtitle:
+                      Text(appCubit.filteredProperty[index].propertyTypeId),
+                  trailing:
+                      Text(appCubit.filteredProperty[index].cost.toString()),
                   leading: const Icon(Icons.location_on),
                   hoverColor: AppColors.mainGreyColor,
                   tileColor: AppColors.mainWhiteColor,
                   onTap: () {
                     print("on tap");
-                    appCubit
-                        .fillPropertyDetailsPage(appCubit.propertyList[index]);
+                    appCubit.fillPropertyDetailsPage(
+                        appCubit.filteredProperty[index]);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

@@ -18,7 +18,7 @@ class PropertyViewPage extends StatelessWidget {
           appBar: AppBar(
             title: const Text("View Page"),
             actions: [
-              if (appCubit.currentUserId == "rOIkuoPLN2") ...[
+              if (appCubit.currentUserId != "rOIkuoPLN2") ...[
                 IconButton(
                   tooltip: "Edit",
                   onPressed: () {
