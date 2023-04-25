@@ -176,10 +176,7 @@ class PropertyEditPage extends StatelessWidget {
                       width: double.infinity,
                       child: DropdownButton(
                         isExpanded: true,
-                        value: appCubit.propertyTypeList
-                            .where((element) =>
-                                element.objectId == appCubit.propertyTypeList)
-                            .firstOrNull,
+                        value: appCubit.selectedType,
                         items: [
                           const DropdownMenuItem(
                             value: null,
@@ -193,7 +190,7 @@ class PropertyEditPage extends StatelessWidget {
                             ),
                         ],
                         onChanged: (value) {
-                          appCubit.propertyTypeChangedEvent(value?.objectId);
+                          appCubit.propertyTypeChangedEvent(value!);
                         },
                         dropdownColor: AppColors.mainBlueColor,
                         iconEnabledColor: AppColors.mainBlueColor,

@@ -53,67 +53,36 @@ class PropertyViewPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Icon(Icons.person,
-                          color: AppColors.darkNavyColor, size: 40),
-                      Text(
-                        "User : ${authCubit.username}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
+                      Row(
+                        children: [
+                          Icon(Icons.person,
+                              color: AppColors.darkNavyColor, size: 40),
+                          Text(
+                            "User : ${authCubit.username}",
+                            style: const TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
                       ),
-                      Icon(Icons.phone,
-                          color: AppColors.darkNavyColor, size: 40),
-                      Text(
-                        "Number : ${authCubit.number}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
+                      const SizedBox(
+                        height: 8,
                       ),
-
-                      // TextFormField(
-                      //   controller: authCubit.username,
-                      //   style: const TextStyle(fontSize: 20),
-                      //   decoration: InputDecoration(
-                      //     label: const Text("User:"),
-                      //     border: InputBorder.none,
-                      //     focusedBorder: InputBorder.none,
-                      //     enabledBorder: InputBorder.none,
-                      //     errorBorder: InputBorder.none,
-                      //     disabledBorder: InputBorder.none,
-                      //     icon: const Icon(Icons.person),
-                      //     iconColor: AppColors.darkNavyColor,
-                      //     labelStyle: TextStyle(
-                      //       color: AppColors.darkNavyColor,
-                      //     ),
-                      //   ),
-                      //   readOnly: true,
-                      //   enabled: true,
-                      // ),
-                      // const SizedBox(
-                      //   height: 8,
-                      // ),
-                      // TextFormField(
-                      //   controller: appCubit.addressController,
-                      //   style: const TextStyle(fontSize: 20),
-                      //   decoration: InputDecoration(
-                      //     label: const Text("Phone Number:"),
-                      //     border: InputBorder.none,
-                      //     focusedBorder: InputBorder.none,
-                      //     enabledBorder: InputBorder.none,
-                      //     errorBorder: InputBorder.none,
-                      //     disabledBorder: InputBorder.none,
-                      //     icon: const Icon(Icons.phone),
-                      //     iconColor: AppColors.darkNavyColor,
-                      //     labelStyle: TextStyle(
-                      //       color: AppColors.darkNavyColor,
-                      //     ),
-                      //   ),
-                      //   readOnly: true,
-                      //   enabled: true,
-                      // ),
-                      // const SizedBox(
-                      //   height: 8,
-                      // ),
+                      Row(
+                        children: [
+                          Icon(Icons.phone,
+                              color: AppColors.darkNavyColor, size: 35),
+                          Text(
+                            "Number : ${authCubit.number}",
+                            style: const TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       TextFormField(
                         controller: appCubit.addressController,
                         style: const TextStyle(fontSize: 20),
