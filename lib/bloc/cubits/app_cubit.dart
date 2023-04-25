@@ -43,6 +43,15 @@ class AppCubit extends Cubit<AppStates> {
   // List<PropertyModel> readyPropertyList = [];
   List<PropertyBookingModel> currentUserPropertyBookingList = [];
   List<PropertyModel> filteredProperty = [];
+  List<PropertyModel> item = [];
+
+  void testModel() {
+    for (int i = 0; i <= propertyList.length; i++) {
+      for (var element in item) {
+        if (Element == propertyList[i]) {}
+      }
+    }
+  }
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
     selectedPropertyId = propertyList.objectId;
