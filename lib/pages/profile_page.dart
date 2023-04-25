@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
+import 'package:property_in_homs/bloc/states/auth_states.dart';
 
 class profilePage extends StatelessWidget {
   const profilePage({super.key});
@@ -29,98 +32,121 @@ class profilePage extends StatelessWidget {
     //   }
 
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Color.fromARGB(255, 108, 131, 207),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {},
-          ),
-        ),
-        body: Stack(
-          alignment: Alignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+    return BlocConsumer<AuthCubit, AuthStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        AuthCubit authCubit = AuthCubit.get(context);
+        return Scaffold(
+            appBar: AppBar(
+              elevation: 0.0,
+              backgroundColor: Color.fromARGB(255, 18, 44, 126),
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {},
+              ),
+            ),
+            body: Stack(
+              alignment: Alignment.center,
               children: [
-                Container(
-                  height: 450,
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        'User Name',
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 450,
+                      width: double.infinity,
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            height: size.height / 15,
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                authCubit.profil();
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) => const profilePage(),
+                                //     ));
+                              },
+                              child: const Text('THIS IS YOUR PROFILE'),
+                            ),
+                          ),
+                          Text(authCubit.username,
+                              style: TextStyle(
+                                  color: Color(0xFF0B2447), fontSize: 20)),
+                          Text(
+                            authCubit.userEmail,
+                            style: TextStyle(color: Color(0xFF0B2447)),
+                          ),
+                          Text(authCubit.number,
+                              style: TextStyle(
+                                color: Color(0xFF0B2447),
+                              ))
+                          // Container(
+                          //   height: 55,
+                          //   width: double.infinity,
+                          //   child: ElevatedButton(
+                          //       style: ElevatedButton.styleFrom(
+                          //           backgroundColor: Colors.black45),
+                          //       onPressed: () {},
+                          //       child: Text(
+                          //         "update",
+                          //         style:
+                          //             TextStyle(fontSize: 23, color: Colors.white),
+                          //       )),
+                          // )
+                        ],
                       ),
-                      Text(
-                        'Email',
+                    )
+                  ],
+                ),
+                CustomPaint(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text(
+                        "",
+                        style: TextStyle(
+                            fontSize: 35,
+                            letterSpacing: 1.5,
+                            color: Color(0xFF0B2447),
+                            fontWeight: FontWeight.w600),
                       ),
-                      Text(
-                        'Number',
+                    ),
+                    Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 5),
+                        shape: BoxShape.circle,
+                        color: Colors.white,
                       ),
-                      // Container(
-                      //   height: 55,
-                      //   width: double.infinity,
-                      //   child: ElevatedButton(
-                      //       style: ElevatedButton.styleFrom(
-                      //           backgroundColor: Colors.black45),
-                      //       onPressed: () {},
-                      //       child: Text(
-                      //         "update",
-                      //         style:
-                      //             TextStyle(fontSize: 23, color: Colors.white),
-                      //       )),
-                      // )
-                    ],
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 270, left: 184),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.black,
+                    child: IconButton(
+                      icon: Icon(Icons.edit, color: Colors.white),
+                      onPressed: () {},
+                    ),
                   ),
                 )
               ],
-            ),
-            CustomPaint(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Text(
-                    "profile",
-                    style: TextStyle(
-                        fontSize: 35,
-                        letterSpacing: 1.5,
-                        color: Color(0xFF3842C9),
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 5),
-                    shape: BoxShape.circle,
-                    color: Color(0xFF3842C9),
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 270, left: 184),
-              child: CircleAvatar(
-                backgroundColor: Colors.black,
-                child: IconButton(
-                  icon: Icon(Icons.edit, color: Colors.white),
-                  onPressed: () {},
-                ),
-              ),
-            )
-          ],
-        ));
+            ));
+      },
+    );
   }
 }
 

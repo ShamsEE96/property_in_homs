@@ -6,6 +6,7 @@ import 'package:property_in_homs/bloc/states/auth_states.dart';
 import 'package:property_in_homs/pages/admin_home_page.dart';
 import 'package:property_in_homs/pages/api_test_page.dart';
 import 'package:property_in_homs/pages/login_page.dart';
+import 'package:property_in_homs/pages/profile_page.dart';
 import 'package:property_in_homs/pages/register_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/cubits/auth_cubit.dart';
@@ -23,8 +24,10 @@ Future<void> main() async {
         ..getPropertyBooking(),
     ),
     BlocProvider(
-      create: (context) => AuthCubit(sp)..loadTokenFromSP(),
-    )
+        create: (context) => AuthCubit(sp)
+          ..loadTokenFromSP()
+          ..profil()
+          ..loadinf())
   ], child: const MyApp()));
 }
 
