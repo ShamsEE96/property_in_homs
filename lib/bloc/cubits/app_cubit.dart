@@ -41,6 +41,7 @@ class AppCubit extends Cubit<AppStates> {
   List<PropertyBookingModel> propertyBookingList = [];
   // List<PropertyModel> readyPropertyList = [];
   List<PropertyBookingModel> currentUserPropertyBookingList = [];
+  List<PropertyModel> filteredProperty = [];
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
     selectedPropertyId = propertyList.objectId;
@@ -169,6 +170,18 @@ class AppCubit extends Cubit<AppStates> {
             propertyTypeList[index].propertyTypeName;
       },
     );
+  }
+
+  void filterChangedEvent(PropertyStateEnum? filter) {
+    filteredProperty.clear();
+    if (filter == null) {
+      filteredProperty.addAll(propertyList);
+    } else {
+      filteredProperty.addAll(propertyList
+          .where((element) => element.propertyState == filter)
+          .toList());
+    }
+    emit(AppRefreshUIState());
   }
 
   // void addBookedPropertyIdEvent(int index) {
