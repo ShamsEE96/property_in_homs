@@ -73,17 +73,19 @@ class ProfilePage extends StatelessWidget {
                           //     child: const Text('THIS IS YOUR PROFILE'),
                           //   ),
                           // ),
+
                           Text(authCubit.username,
                               style: TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20)),
                           Text(
                             authCubit.userEmail,
-                            style: TextStyle(color: Color(0xFF0B2447)),
+                            style: TextStyle(
+                                color: Color(0xFF0B2447), fontSize: 20),
                           ),
                           Text(authCubit.number,
                               style: TextStyle(
-                                color: Color(0xFF0B2447),
-                              ))
+                                  color: Color(0xFF0B2447), fontSize: 20))
+
                           // Container(
                           //   height: 55,
                           //   width: double.infinity,

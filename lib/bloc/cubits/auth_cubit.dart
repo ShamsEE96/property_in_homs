@@ -94,6 +94,7 @@ class AuthCubit extends Cubit<AuthStates> {
 
   Future<void> logout() async {
     await saveTokenInSP('');
+    await saveUser('', '', '');
   }
 
   Future<bool> profil() async {
