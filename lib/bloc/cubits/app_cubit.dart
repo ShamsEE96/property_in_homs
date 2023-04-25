@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/utils/dio_helper.dart';
 import 'package:property_in_homs/models/property_booking_model.dart';
 import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/admin_home_page.dart';
-import 'package:property_in_homs/pages/admin_property_approval_page.dart';
-import 'package:property_in_homs/pages/admin_property_type_edit_page.dart';
-import 'package:property_in_homs/pages/admin_property_type_home_page.dart';
 import 'package:property_in_homs/pages/property_booked_page.dart';
 import 'package:property_in_homs/pages/property_edit_page.dart';
-import 'package:property_in_homs/utils/dio_helper.dart';
 import 'package:collection/collection.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 import 'package:property_in_homs/widgets/propertys.dart';
@@ -36,6 +33,8 @@ class AppCubit extends Cubit<AppStates> {
   String? currentUserId = "rOIkuoPLN2";
   late PropertyModel currentPropertyItem;
   late List<bool> selections = List.generate(2, (_) => false);
+  late List<bool> selectionsType =
+      List.generate(propertyTypeList.length, (_) => false);
 
   List<PropertyModel> propertyList = [];
   List<PropertyTypeModel> propertyTypeList = [];
@@ -127,6 +126,10 @@ class AppCubit extends Cubit<AppStates> {
     if (propertyStateEnum.index == 0) {
       selections = [false, true];
     }
+    emit(AppRefreshUIState());
+  }
+
+  void propretyTypeChangedEvent(PropertyStateEnum newState) {
     emit(AppRefreshUIState());
   }
 
