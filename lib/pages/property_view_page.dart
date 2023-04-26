@@ -182,7 +182,7 @@ class PropertyViewPage extends StatelessWidget {
                         height: 8,
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 30, 0.0, 0.0),
+                        padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
                         child: Row(
                           children: [
                             Icon(Icons.attach_money,
