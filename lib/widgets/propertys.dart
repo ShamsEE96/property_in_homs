@@ -17,94 +17,105 @@ class PropertyListWidget extends StatelessWidget {
       builder: (context, state) {
         AppCubit appCubit = AppCubit.get(context);
 
-        appCubit.filteredProperty.addAll(appCubit.propertyList);
+        // appCubit.filteredProperty.addAll(appCubit.propertyList);
 
-        return SingleChildScrollView(
-          child: Column(children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        return Scaffold(
+          backgroundColor: AppColors.mainWhiteColor,
+          appBar: AppBar(
+            // elevation: 0.0,
+            backgroundColor: AppColors.seconderyBlueColor,
+            // toolbarHeight: 50.0,
+            title: const Text("HomePage"),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
               children: [
-
-                Column(
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(
-                        onPressed: () {
-                          appCubit.filterChangedEvent(null);
-                        },
-                        color: AppColors.mainWhiteColor,
-                        icon: const Icon(Icons.list)),
-                    Text("All"),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            appCubit.filterChangedEvent(null);
+                          },
+                          // color: AppColors.mainWhiteColor,
+                          icon: const Icon(Icons.list),
+                        ),
+                        const Text("All"),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            appCubit
+                                .filterChangedEvent(PropertyStateEnum.rental);
+                          },
+                          // color: AppColors.mainWhiteColor,
+                          icon: const Icon(Icons.holiday_village),
+                        ),
+                        const Text("Rental"),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            appCubit.filterChangedEvent(PropertyStateEnum.sale);
+                          },
+                          // color: AppColors.mainWhiteColor,
+                          icon: const Icon(Icons.location_city),
+                        ),
+                        const Text(" Sale"),
+                      ],
+                    ),
                   ],
                 ),
-                Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        appCubit.filterChangedEvent(PropertyStateEnum.rental);
-                      },
-                      color: AppColors.mainWhiteColor,
-                      icon: Icon(Icons.holiday_village),
-                    ),
-                    Text("Rental"),
-                  ],
+                const SizedBox(
+                  height: 20,
                 ),
-                Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        appCubit.filterChangedEvent(PropertyStateEnum.sale);
-                      },
-                      color: AppColors.mainWhiteColor,
-                      icon: Icon(Icons.location_city),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: appCubit.filteredProperty.length,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text(
+                      appCubit.filteredProperty[index].address,
                     ),
-                    Text(" Sale"),
-                  ],
-
+                    subtitle: Text(appCubit.propertyTypeList
+                        .firstWhere(
+                          (element) =>
+                              element.objectId ==
+                              appCubit.filteredProperty[index].propertyTypeId,
+                          orElse: () => PropertyTypeModel(
+                              objectId: "no Id Found",
+                              propertyTypeName: "no Id Found"),
+                        )
+                        .propertyTypeName),
+                    trailing:
+                        Text(appCubit.filteredProperty[index].cost.toString()),
+                    leading: const Icon(Icons.location_on),
+                    iconColor: AppColors.darkNavyColor,
+                    hoverColor: AppColors.mainGreyColor,
+                    tileColor: AppColors.mainWhiteColor,
+                    onTap: () {
+                      appCubit.fillPropertyDetailsPage(
+                          appCubit.filteredProperty[index]);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PropertyViewPage(),
+                          ));
+                    },
+                  ),
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: appCubit.filteredProperty.length,
-              itemBuilder: (context, index) => ListTile(
-                title: Text(
-                  appCubit.filteredProperty[index].address,
-                ),
-                subtitle: Text(appCubit.propertyTypeList
-                    .firstWhere(
-                      (element) =>
-                          element.objectId ==
-                          appCubit.filteredProperty[index].propertyTypeId,
-                      orElse: () => PropertyTypeModel(
-                          objectId: "no Id Found",
-                          propertyTypeName: "no Id Found"),
-                    )
-                    .propertyTypeName),
-                trailing:
-                    Text(appCubit.filteredProperty[index].cost.toString()),
-                leading: const Icon(Icons.location_on),
-                iconColor: AppColors.darkNavyColor,
-                hoverColor: AppColors.mainGreyColor,
-                tileColor: AppColors.mainWhiteColor,
-                onTap: () {
-                  appCubit.fillPropertyDetailsPage(
-                      appCubit.filteredProperty[index]);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PropertyViewPage(),
-                      ));
-                },
-              ),
-            ),
-          ]),
+          ),
         );
       },
     );

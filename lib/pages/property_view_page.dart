@@ -24,7 +24,7 @@ class PropertyViewPage extends StatelessWidget {
                 title: const Text("View Page"),
                 backgroundColor: AppColors.mainBlueColor,
                 actions: [
-                  if (appCubit.currentUserId != "rOIkuoPLN2") ...[
+                  if (AuthCubit.currentUserId == AuthCubit.adminUserId) ...[
                     IconButton(
                       tooltip: "Edit",
                       onPressed: () {
@@ -53,6 +53,7 @@ class PropertyViewPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
+
                       Icon(Icons.person,
                           color: AppColors.darkNavyColor, size: 40),
                       Text(
@@ -60,10 +61,12 @@ class PropertyViewPage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 20,
                         ),
+
                       ),
                       const SizedBox(
                         height: 8,
                       ),
+
                       Icon(Icons.phone,
                           color: AppColors.darkNavyColor, size: 35),
                       Text(
@@ -71,6 +74,7 @@ class PropertyViewPage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 20,
                         ),
+
                       ),
                       const SizedBox(
                         height: 8,
@@ -240,9 +244,8 @@ class PropertyViewPage extends StatelessWidget {
                         width: double.infinity,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () {
-                            // await appCubit.save();
-                            // if (!context.mounted) return;
+                          onPressed: () async {
+                            appCubit.postPropertyBooking();
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
@@ -254,7 +257,7 @@ class PropertyViewPage extends StatelessWidget {
                               // fontWeight: FontWeight.bold,
                             ),
                           ),
-                          child: const Text("add to Book List"),
+                          child: const Text("Add to Book List"),
                         ),
                       ),
                     ],
