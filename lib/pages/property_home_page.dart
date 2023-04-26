@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
               // elevation: 0.0,
               backgroundColor: AppColors.seconderyBlueColor,
               // toolbarHeight: 50.0,
-              title: const Text("حقل نجارب -_-"),
+              title: const Text("حقل تجارب -_-"),
             ),
             backgroundColor: AppColors.seconderyBlueColor,
             body:
