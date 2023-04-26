@@ -181,6 +181,24 @@ class PropertyViewPage extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0.0, 30, 0.0, 0.0),
+                        child: Row(
+                          children: [
+                            Icon(Icons.attach_money,
+                                color: AppColors.darkNavyColor,
+                                semanticLabel: "State",
+                                size: 30),
+                            Text(
+                              "  ${appCubit.propertyStateEnum.name}",
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       CheckboxListTile(
                         title: const Text(
                           "With Furniture?",
@@ -193,28 +211,28 @@ class PropertyViewPage extends StatelessWidget {
                         },
                         controlAffinity: ListTileControlAffinity.leading,
                       ),
-                      SizedBox(
-                        height: 60,
-                        child: ToggleButtons(
-                          isSelected: appCubit.selections,
-                          onPressed: (newState) {},
-                          color: Colors.black,
-                          selectedColor:
-                              const Color.fromARGB(255, 255, 255, 255),
-                          fillColor: AppColors.darkNavyColor,
-                          renderBorder: true,
-                          borderWidth: 2,
-                          borderColor: const Color.fromARGB(181, 31, 29, 29),
-                          borderRadius: BorderRadius.circular(30),
-                          textStyle: const TextStyle(
-                            fontSize: 25,
-                          ),
-                          children: const [
-                            Text("   For Sale   "),
-                            Text("  For Rental  "),
-                          ],
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 60,
+                      //   child: ToggleButtons(
+                      //     isSelected: appCubit.selections,
+                      //     onPressed: (newState) {},
+                      //     color: Colors.black,
+                      //     selectedColor:
+                      //         const Color.fromARGB(255, 255, 255, 255),
+                      //     fillColor: AppColors.darkNavyColor,
+                      //     renderBorder: true,
+                      //     borderWidth: 2,
+                      //     borderColor: const Color.fromARGB(181, 31, 29, 29),
+                      //     borderRadius: BorderRadius.circular(30),
+                      //     textStyle: const TextStyle(
+                      //       fontSize: 25,
+                      //     ),
+                      //     children: const [
+                      //       Text("   For Sale   "),
+                      //       Text("  For Rental  "),
+                      //     ],
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 80,
                       ),
