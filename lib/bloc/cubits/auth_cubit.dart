@@ -18,24 +18,22 @@ class AuthCubit extends Cubit<AuthStates> {
   TextEditingController registerMobileNoController = TextEditingController();
   TextEditingController registerPasswordController = TextEditingController();
   TextEditingController registerPassowrdConfirmation = TextEditingController();
-  String username = "";
-  String userEmail = "";
-  String number = "";
+
+  static String adminUserId = "rOIkuoPLN2";
+  static String? currentUserId;
+  String? currentUserName;
+  String? currentUserEmail;
+  String? currentUserNumber;
+
 //Saving Token In Shared Prefrences
-  Future<void> saveTokenInSP(String t) async {
+  Future<void> saveTokenInSP(
+    String t,
+  ) async {
     await sp.setString("token", t);
     loadTokenFromSP();
   }
 
   // Loading Token from Shared Prefrences
-  Future<void> saveUser(
-      String userName, String userEmail, String number) async {
-    await sp.setString("UserName", userName);
-    await sp.setString("UserEMail", userEmail);
-    await sp.setString("Numper", number);
-    loadinf();
-  }
-
   void loadTokenFromSP() {
     String t = sp.getString('token') ?? "";
     DioHelper.initialize(token: t);
@@ -43,13 +41,24 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(AuthRefreshUIState());
   }
 
-  void loadinf() {
+  Future<void> saveUserInfo(String currentUserId, String currentUserName,
+      String currentUserEmail, String currentUserNumber) async {
+    await sp.setString("UserId", currentUserId);
+    await sp.setString("UserName", currentUserName);
+    await sp.setString("UserEmail", currentUserEmail);
+    await sp.setString("Number", currentUserNumber);
+    loadUserInfo();
+  }
+
+  void loadUserInfo() {
+    String userId = sp.getString('UserId') ?? "";
+    currentUserId = userId;
     String user = sp.getString('UserName') ?? "";
-    username = user;
-    String email = sp.getString('UserEMail') ?? "";
-    userEmail = email;
-    String num = sp.getString('Numper') ?? "";
-    number = num;
+    currentUserName = user;
+    String email = sp.getString('UserEmail') ?? "";
+    currentUserEmail = email;
+    String num = sp.getString('Number') ?? "";
+    currentUserNumber = num;
     emit(AuthRefreshUIState());
   }
 
@@ -82,7 +91,7 @@ class AuthCubit extends Cubit<AuthStates> {
       };
       var res = await DioHelper.dio!.get('login', queryParameters: logData);
       if (res.statusCode == 200) {
-        saveTokenInSP(res.data['sessionToken' as String]);
+        saveTokenInSP(res.data['sessionToken']);
         emit(AuthSuccessState());
         return true;
       }
@@ -94,17 +103,21 @@ class AuthCubit extends Cubit<AuthStates> {
 
   Future<void> logout() async {
     await saveTokenInSP('');
-    await saveUser('', '', '');
+    await saveUserInfo('', '', '', '');
   }
 
-  Future<bool> profil() async {
+  Future<bool> getProfileInfo() async {
     try {
       var res = await DioHelper.dio!.get(
         'users/me',
       );
       if (res.statusCode == 200) {
-        saveUser(res.data['username' as String], res.data['email' as String],
-            res.data['mobileNo' as String]);
+        saveUserInfo(
+          res.data['objectId'],
+          res.data['username'],
+          res.data['email'],
+          res.data['mobileNo'],
+        );
 
         emit(AuthSuccessState());
         return true;
