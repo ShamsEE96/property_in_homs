@@ -41,9 +41,7 @@ class ProfilePage extends StatelessWidget {
         return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
-
               backgroundColor: AppColors.mainBlueColor,
-
               title: const Text("Profile"),
               actions: [
                 if (AuthCubit.currentUserId == AuthCubit.adminUserId) ...[
@@ -59,16 +57,11 @@ class ProfilePage extends StatelessWidget {
                     icon: const Icon(Icons.admin_panel_settings),
                   )
                 ],
-                Row(
-                  children: [
-                    Text(" Logout", style: TextStyle(color: Colors.white)),
-                    IconButton(
-                        onPressed: () async {
-                          await AuthCubit.get(context).logout();
-                        },
-                        icon: const Icon(Icons.logout)),
-                  ],
-                ),
+                IconButton(
+                    onPressed: () async {
+                      await AuthCubit.get(context).logout();
+                    },
+                    icon: const Icon(Icons.logout)),
               ],
             ),
             body: Stack(
@@ -114,14 +107,11 @@ class ProfilePage extends StatelessWidget {
                               style: const TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20)),
                           Text(
-
-                            "The User Email iS : ${authCubit.currentUserEmail}",
+                            authCubit.currentUserEmail ?? "Error",
                             style: const TextStyle(
                                 color: Color(0xFF0B2447), fontSize: 20),
                           ),
-                          Text(
-                              "The User Number iS : ${authCubit.currentUserNumber}",
-
+                          Text(authCubit.currentUserNumber ?? "Error",
                               style: const TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20))
 
