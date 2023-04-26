@@ -56,7 +56,7 @@ class PropertyViewPage extends StatelessWidget {
                       Icon(Icons.person,
                           color: AppColors.darkNavyColor, size: 40),
                       Text(
-                        " User : ${authCubit.username}",
+                        " User : ${authCubit.currentUserName}",
                         style: const TextStyle(
                           fontSize: 20,
                         ),
@@ -68,7 +68,7 @@ class PropertyViewPage extends StatelessWidget {
                       Icon(Icons.phone,
                           color: AppColors.darkNavyColor, size: 35),
                       Text(
-                        "  Number : ${authCubit.number}",
+                        "  Number : ${authCubit.currentUserNumber}",
                         style: const TextStyle(
                           fontSize: 20,
                         ),
