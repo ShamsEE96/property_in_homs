@@ -41,7 +41,9 @@ class ProfilePage extends StatelessWidget {
         return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
+
               backgroundColor: AppColors.mainBlueColor,
+
               title: const Text("Profile"),
               actions: [
                 if (AuthCubit.currentUserId == AuthCubit.adminUserId) ...[
@@ -57,11 +59,16 @@ class ProfilePage extends StatelessWidget {
                     icon: const Icon(Icons.admin_panel_settings),
                   )
                 ],
-                IconButton(
-                    onPressed: () async {
-                      await AuthCubit.get(context).logout();
-                    },
-                    icon: const Icon(Icons.logout)),
+                Row(
+                  children: [
+                    Text(" Logout", style: TextStyle(color: Colors.white)),
+                    IconButton(
+                        onPressed: () async {
+                          await AuthCubit.get(context).logout();
+                        },
+                        icon: const Icon(Icons.logout)),
+                  ],
+                ),
               ],
             ),
             body: Stack(
@@ -92,16 +99,29 @@ class ProfilePage extends StatelessWidget {
                           //     child: const Text('THIS IS YOUR PROFILE'),
                           //   ),
                           // ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
 
-                          Text(authCubit.currentUserName ?? "Error",
+                          Text(
+                              "The User Name iS :  ${authCubit.currentUserName}",
                               style: const TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20)),
                           Text(
-                            authCubit.currentUserEmail ?? "Error",
+
+                            "The User Email iS : ${authCubit.currentUserEmail}",
                             style: const TextStyle(
                                 color: Color(0xFF0B2447), fontSize: 20),
                           ),
-                          Text(authCubit.currentUserNumber ?? "Error",
+                          Text(
+                              "The User Number iS : ${authCubit.currentUserNumber}",
+
                               style: const TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20))
 
@@ -143,13 +163,17 @@ class ProfilePage extends StatelessWidget {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 5),
-                        shape: BoxShape.circle,
-                        color: Colors.white,
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 5),
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: Image.asset("images/user1.jpeg"),
                       ),
                     )
                   ],
