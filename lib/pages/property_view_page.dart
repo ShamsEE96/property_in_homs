@@ -53,15 +53,13 @@ class PropertyViewPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-
                       Icon(Icons.person,
                           color: AppColors.darkNavyColor, size: 40),
                       Text(
-                        " User : ${authCubit.username}",
+                        " User : ${authCubit.currentUserName}",
                         style: const TextStyle(
                           fontSize: 20,
                         ),
-
                       ),
                       const SizedBox(
                         height: 8,
@@ -70,11 +68,10 @@ class PropertyViewPage extends StatelessWidget {
                       Icon(Icons.phone,
                           color: AppColors.darkNavyColor, size: 35),
                       Text(
-                        "  Number : ${authCubit.number}",
+                        "  Number : ${authCubit.currentUserNumber}",
                         style: const TextStyle(
                           fontSize: 20,
                         ),
-
                       ),
                       const SizedBox(
                         height: 8,
