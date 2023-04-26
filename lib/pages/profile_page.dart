@@ -75,20 +75,42 @@ class ProfilePage extends StatelessWidget {
                           //     child: const Text('THIS IS YOUR PROFILE'),
                           //   ),
                           // ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
 
-                          Text(authCubit.username,
-                              style: const TextStyle(
-                                  color: Color(0xFF0B2447), fontSize: 20)),
                           Text(
                             authCubit.userEmail,
-
                             style: TextStyle(
-                                color: Color(0xFF0B2447), fontSize: 20),
+                                color: Color(0xFF0B2447), fontSize: 30),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(authCubit.username,
+                              style: const TextStyle(
+                                  color: Color(0xFF0B2447), fontSize: 30)),
+                          const SizedBox(
+                            height: 8,
                           ),
                           Text(authCubit.number,
                               style: TextStyle(
-                                  color: Color(0xFF0B2447), fontSize: 20))
+                                  color: Color(0xFF0B2447), fontSize: 30)),
 
+                          IconButton(
+                              onPressed: () async {
+                                await AuthCubit.get(context).logout();
+                              },
+                              icon: const Icon(Icons.logout)),
+                          const SizedBox(
+                            height: 8,
+                          ),
 
                           // Container(
                           //   height: 55,
