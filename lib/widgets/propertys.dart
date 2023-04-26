@@ -27,25 +27,42 @@ class PropertyListWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                    onPressed: () {
-                      appCubit.filterChangedEvent(null);
-                    },
-                    color: AppColors.mainWhiteColor,
-                    icon: const Icon(Icons.list)),
-                IconButton(
-                  onPressed: () {
-                    appCubit.filterChangedEvent(PropertyStateEnum.rental);
-                  },
-                  color: AppColors.mainWhiteColor,
-                  icon: const Icon(Icons.holiday_village),
+
+                Column(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          appCubit.filterChangedEvent(null);
+                        },
+                        color: AppColors.mainWhiteColor,
+                        icon: const Icon(Icons.list)),
+                    Text("All"),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {
-                    appCubit.filterChangedEvent(PropertyStateEnum.sale);
-                  },
-                  color: AppColors.mainWhiteColor,
-                  icon: const Icon(Icons.location_city),
+                Column(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        appCubit.filterChangedEvent(PropertyStateEnum.rental);
+                      },
+                      color: AppColors.mainWhiteColor,
+                      icon: Icon(Icons.holiday_village),
+                    ),
+                    Text("Rental"),
+                  ],
+                ),
+                Column(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        appCubit.filterChangedEvent(PropertyStateEnum.sale);
+                      },
+                      color: AppColors.mainWhiteColor,
+                      icon: Icon(Icons.location_city),
+                    ),
+                    Text(" Sale"),
+                  ],
+
                 ),
               ],
             ),
