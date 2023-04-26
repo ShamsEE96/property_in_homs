@@ -36,7 +36,7 @@ class PropertyListWidget extends StatelessWidget {
                         },
                         color: AppColors.mainWhiteColor,
                         icon: const Icon(Icons.list)),
-                    const Text("All"),
+                    Text("All"),
                   ],
                 ),
                 Column(
@@ -46,9 +46,9 @@ class PropertyListWidget extends StatelessWidget {
                         appCubit.filterChangedEvent(PropertyStateEnum.rental);
                       },
                       color: AppColors.mainWhiteColor,
-                      icon: const Icon(Icons.holiday_village),
+                      icon: Icon(Icons.holiday_village),
                     ),
-                    const Text("Rental"),
+                    Text("Rental"),
                   ],
                 ),
                 Column(
@@ -58,9 +58,9 @@ class PropertyListWidget extends StatelessWidget {
                         appCubit.filterChangedEvent(PropertyStateEnum.sale);
                       },
                       color: AppColors.mainWhiteColor,
-                      icon: const Icon(Icons.location_city),
+                      icon: Icon(Icons.location_city),
                     ),
-                    const Text(" Sale"),
+                    Text(" Sale"),
                   ],
 
                 ),
