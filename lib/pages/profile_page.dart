@@ -41,7 +41,7 @@ class ProfilePage extends StatelessWidget {
             appBar: AppBar(
               elevation: 0.0,
               backgroundColor: AppColors.seconderyBlueColor,
-              title: Text("profile"),
+              title: const Text("profile"),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {},
@@ -82,11 +82,11 @@ class ProfilePage extends StatelessWidget {
                           Text(
                             authCubit.userEmail,
 
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color(0xFF0B2447), fontSize: 20),
                           ),
                           Text(authCubit.number,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20))
 
 
