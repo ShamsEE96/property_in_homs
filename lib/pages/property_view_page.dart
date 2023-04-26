@@ -53,32 +53,24 @@ class PropertyViewPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Icon(Icons.person,
-                              color: AppColors.darkNavyColor, size: 40),
-                          Text(
-                            " User : ${authCubit.username}",
-                            style: const TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
+                      Icon(Icons.person,
+                          color: AppColors.darkNavyColor, size: 40),
+                      Text(
+                        " User : ${authCubit.username}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
                       ),
                       const SizedBox(
                         height: 8,
                       ),
-                      Row(
-                        children: [
-                          Icon(Icons.phone,
-                              color: AppColors.darkNavyColor, size: 35),
-                          Text(
-                            "  Number : ${authCubit.number}",
-                            style: const TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
+                      Icon(Icons.phone,
+                          color: AppColors.darkNavyColor, size: 35),
+                      Text(
+                        "  Number : ${authCubit.number}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
                       ),
                       const SizedBox(
                         height: 8,
