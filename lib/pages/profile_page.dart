@@ -41,8 +41,7 @@ class ProfilePage extends StatelessWidget {
         return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
-              backgroundColor: AppColors.seconderyBlueColor,
-
+              backgroundColor: AppColors.mainBlueColor,
               title: const Text("Profile"),
               actions: [
                 if (AuthCubit.currentUserId == AuthCubit.adminUserId) ...[
@@ -64,7 +63,6 @@ class ProfilePage extends StatelessWidget {
                     },
                     icon: const Icon(Icons.logout)),
               ],
-
             ),
             body: Stack(
               alignment: Alignment.center,
@@ -99,13 +97,11 @@ class ProfilePage extends StatelessWidget {
                               style: const TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20)),
                           Text(
-
                             authCubit.currentUserEmail ?? "Error",
                             style: const TextStyle(
                                 color: Color(0xFF0B2447), fontSize: 20),
                           ),
                           Text(authCubit.currentUserNumber ?? "Error",
-
                               style: const TextStyle(
                                   color: Color(0xFF0B2447), fontSize: 20))
 

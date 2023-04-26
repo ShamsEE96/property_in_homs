@@ -23,9 +23,9 @@ class PropertyListWidget extends StatelessWidget {
           backgroundColor: AppColors.mainWhiteColor,
           appBar: AppBar(
             // elevation: 0.0,
-            backgroundColor: AppColors.seconderyBlueColor,
+            backgroundColor: AppColors.mainBlueColor,
             // toolbarHeight: 50.0,
-            title: const Text("HomePage"),
+            title: const Text("Home Page حقل تجارب -_-"),
           ),
           body: SingleChildScrollView(
             child: Column(
