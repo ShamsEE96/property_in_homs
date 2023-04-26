@@ -234,7 +234,7 @@ class PropertyEditPage extends StatelessWidget {
                           appCubit.saveProperty();
                           if (!context.mounted) return;
                           if (_formKey.currentState!.validate()) {
-                            Navigator.pushReplacement(
+                            Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
