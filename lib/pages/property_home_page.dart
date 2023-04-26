@@ -15,12 +15,12 @@ class HomeScreen extends StatelessWidget {
         AppCubit appCubit = AppCubit.get(context);
         return SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              // elevation: 0.0,
-              backgroundColor: AppColors.seconderyBlueColor,
-              // toolbarHeight: 50.0,
-              title: const Text("حقل نجارب -_-"),
-            ),
+            // appBar: AppBar(
+            //   // elevation: 0.0,
+            //   backgroundColor: AppColors.seconderyBlueColor,
+            //   // toolbarHeight: 50.0,
+            //   title: const Text("حقل نجارب -_-"),
+            // ),
             backgroundColor: AppColors.seconderyBlueColor,
             body:
                 appCubit.bottomNavBarPages[appCubit.navigationBarCurrentIndex],

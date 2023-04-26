@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/pages/profile_page.dart';
 import 'package:property_in_homs/utils/dio_helper.dart';
@@ -31,7 +32,7 @@ class AppCubit extends Cubit<AppStates> {
   String? selectedPropertyId = "";
   String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
-  String? currentUserId = "rOIkuoPLN2";
+  // String? currentUserId = "rOIkuoPLN2";
   PropertyTypeModel? selectedType;
   late PropertyModel currentPropertyItem;
   late List<bool> selections = List.generate(2, (_) => false);
@@ -45,7 +46,7 @@ class AppCubit extends Cubit<AppStates> {
   List<PropertyBookingModel> currentUserPropertyBookingList = [];
   List<PropertyModel> filteredProperty = [];
 
-  List<Map<String, dynamic>> item = [];
+  // List<Map<String, dynamic>> item = [];
 
 // void testModel() {
 //   for (int i = 0; i <= propertyList.length; i++) {
@@ -54,23 +55,24 @@ class AppCubit extends Cubit<AppStates> {
 //     }
 //   }
 // }
-  void sss() {
-    int i = 0;
-    int j = 0;
-    while (i < propertyList.length && j < propertyTypeList.length) {
-      String typeid = propertyList[i].propertyTypeId;
-      String id = propertyTypeList[i].objectId;
-      if (typeid == id) {
-        item.add({
-          'objectId': propertyList[i].objectId,
-          'address': propertyList[i].address,
-          'roomCount': propertyList[i].roomCount,
-          'space': propertyList[i].space,
-          'withFurniture': propertyList[i].withFurniture,
-        });
-      }
-    }
-  }
+
+  // void sss() {
+  //   int i = 0;
+  //   int j = 0;
+  //   while (i < propertyList.length && j < propertyTypeList.length) {
+  //     String typeid = propertyList[i].propertyTypeId;
+  //     String id = propertyTypeList[i].objectId;
+  //     if (typeid == id) {
+  //       item.add({
+  //         'objectId': propertyList[i].objectId,
+  //         'address': propertyList[i].address,
+  //         'roomCount': propertyList[i].roomCount,
+  //         'space': propertyList[i].space,
+  //         'withFurniture': propertyList[i].withFurniture,
+  //       });
+  //     }
+  //   }
+  // }
 
   String? getPropertyName(String id) {
     PropertyTypeModel? propertyTypeModel =
@@ -80,6 +82,17 @@ class AppCubit extends Cubit<AppStates> {
       return null;
     } else {
       return propertyTypeModel.propertyTypeName;
+    }
+  }
+
+  String? getPropertyIdforBooking(String id) {
+    PropertyBookingModel? propertyBookingModel = propertyBookingList
+        .firstWhere((element) => element.bookedPropertyId == id);
+
+    if (propertyBookingModel == null) {
+      return null;
+    } else {
+      return propertyBookingModel.bookedPropertyId;
     }
   }
 
@@ -188,7 +201,7 @@ class AppCubit extends Cubit<AppStates> {
   findAndCreateCurrentUserBookedPropertyListEvent() {
     currentUserPropertyBookingList = propertyBookingList.where(
       (element) {
-        return element.userId == currentUserId;
+        return element.userId == AuthCubit.currentUserId;
       },
     ).toList();
     return currentUserPropertyBookingList;
@@ -203,14 +216,14 @@ class AppCubit extends Cubit<AppStates> {
     return type;
   }
 
-  navigateFromBookedPropertyListToSelectedPropertyViewPageEvent(int index) {
-    var res = currentUserPropertyBookingList.where(
-      (element) {
-        return element.bookedPropertyId ==
-            propertyTypeList[index].propertyTypeName;
-      },
-    );
-  }
+  // navigateFromBookedPropertyListToSelectedPropertyViewPageEvent(int index) {
+  //   var res = currentUserPropertyBookingList.where(
+  //     (element) {
+  //       return element.bookedPropertyId ==
+  //           propertyTypeList[index].propertyTypeName;
+  //     },
+  //   );
+  // }
 
   void filterChangedEvent(PropertyStateEnum? filter) {
     filteredProperty.clear();
@@ -280,9 +293,11 @@ class AppCubit extends Cubit<AppStates> {
           withFurniture: withFurniture,
           cost: int.parse(costController.text.trim()),
           propertyState: propertyStateEnum,
-          propertyTypeId: selectedPropertyTypeId ?? "", //propertyTypeId
-          posterUserId:
-              "rOIkuoPLN2", //posterUserID for this is going to be the admin
+          propertyTypeId: selectedType!.objectId, //propertyTypeId
+          // propertyTypeId: selectedPropertyTypeId ?? "", //propertyTypeId
+          posterUserId: AuthCubit.currentUserId ??
+              AuthCubit
+                  .adminUserId, //posterUserID for this is going to be the admin
           propertyPostApproval: propertyPostApproval,
         ).toJson(),
       );
@@ -310,9 +325,11 @@ class AppCubit extends Cubit<AppStates> {
           withFurniture: withFurniture,
           cost: int.parse(costController.text.trim()),
           propertyState: propertyStateEnum,
-          propertyTypeId: selectedPropertyTypeId ?? "", //propertyTypeId
-          posterUserId:
-              "rOIkuoPLN2", //posterUserID for this is going to be the admin
+          propertyTypeId: selectedType!.objectId, //propertyTypeId
+          // propertyTypeId: selectedPropertyTypeId ?? "", //propertyTypeId
+          posterUserId: AuthCubit.currentUserId ??
+              AuthCubit
+                  .adminUserId, //posterUserID for this is going to be the admin
           propertyPostApproval: propertyPostApproval,
         ).toJson(),
       );
@@ -457,8 +474,8 @@ class AppCubit extends Cubit<AppStates> {
         "classes/PropertyBooking",
         data: PropertyBookingModel(
           objectId: "",
-          userId: "rOIkuoPLN2",
-          bookedPropertyId: "bookedPropertyId",
+          userId: AuthCubit.currentUserId!,
+          bookedPropertyId: selectedPropertyId!,
         ).toJson(),
       );
       if (res.statusCode == 201) {

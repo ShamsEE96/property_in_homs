@@ -44,11 +44,11 @@ class AdminHomePage extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                IconButton(
-                    onPressed: () async {
-                      await AuthCubit.get(context).logout();
-                    },
-                    icon: const Icon(Icons.logout)),
+                // IconButton(
+                //     onPressed: () async {
+                //       await AuthCubit.get(context).logout();
+                //     },
+                //     icon: const Icon(Icons.logout)),
                 SizedBox(
                   height: size.height / 15,
                   width: double.infinity,
@@ -65,21 +65,21 @@ class AdminHomePage extends StatelessWidget {
                     child: const Text('View Property Types'),
                   ),
                 ),
-                SizedBox(
-                  height: size.height / 15,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      appCubit.getPropertyTypes();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ProfilePage(),
-                          ));
-                    },
-                    child: const Text('Proflie'),
-                  ),
-                ),
+                // SizedBox(
+                //   height: size.height / 15,
+                //   width: double.infinity,
+                //   child: ElevatedButton(
+                //     onPressed: () {
+                //       appCubit.getPropertyTypes();
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //             builder: (context) => const ProfilePage(),
+                //           ));
+                //     },
+                //     child: const Text('Proflie'),
+                //   ),
+                // ),
               ],
             ),
           ),

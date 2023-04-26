@@ -21,8 +21,8 @@ Future<void> main() async {
     BlocProvider(
         create: (context) => AuthCubit(sp)
           ..loadTokenFromSP()
-          ..profil()
-          ..loadinf())
+          ..getProfileInfo()
+          ..loadUserInfo())
   ], child: const MyApp()));
 }
 
