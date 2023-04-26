@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/utils/colors.dart';
 
 class PropertyBookedPage extends StatelessWidget {
   const PropertyBookedPage({super.key});
@@ -14,6 +15,7 @@ class PropertyBookedPage extends StatelessWidget {
         AppCubit appCubit = AppCubit.get(context);
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: AppColors.mainBlueColor,
             title: const Text("My Booked Property List"),
           ),
           body: ListView.builder(
