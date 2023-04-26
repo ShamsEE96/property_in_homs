@@ -32,6 +32,7 @@ class AppCubit extends Cubit<AppStates> {
   String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
   String? currentUserId = "rOIkuoPLN2";
+  PropertyTypeModel? selectedType;
   late PropertyModel currentPropertyItem;
   late List<bool> selections = List.generate(2, (_) => false);
   late List<bool> selectionsType =
@@ -43,6 +44,44 @@ class AppCubit extends Cubit<AppStates> {
   // List<PropertyModel> readyPropertyList = [];
   List<PropertyBookingModel> currentUserPropertyBookingList = [];
   List<PropertyModel> filteredProperty = [];
+
+  List<Map<String, dynamic>> item = [];
+
+// void testModel() {
+//   for (int i = 0; i <= propertyList.length; i++) {
+//     for (var element in propertyTypeList) {
+//       if (Element == propertyList[i]) {}
+//     }
+//   }
+// }
+  void sss() {
+    int i = 0;
+    int j = 0;
+    while (i < propertyList.length && j < propertyTypeList.length) {
+      String typeid = propertyList[i].propertyTypeId;
+      String id = propertyTypeList[i].objectId;
+      if (typeid == id) {
+        item.add({
+          'objectId': propertyList[i].objectId,
+          'address': propertyList[i].address,
+          'roomCount': propertyList[i].roomCount,
+          'space': propertyList[i].space,
+          'withFurniture': propertyList[i].withFurniture,
+        });
+      }
+    }
+  }
+
+  String? getPropertyName(String id) {
+    PropertyTypeModel? propertyTypeModel =
+        propertyTypeList.firstWhere((element) => element.objectId == id);
+
+    if (propertyTypeModel == null) {
+      return null;
+    } else {
+      return propertyTypeModel.propertyTypeName;
+    }
+  }
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
     selectedPropertyId = propertyList.objectId;
@@ -77,8 +116,8 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  void propertyTypeChangedEvent(String? objectId) {
-    selectedPropertyTypeId = objectId;
+  void propertyTypeChangedEvent(PropertyTypeModel objectId) {
+    selectedType = objectId;
     emit(
       AppRefreshUIState(),
     );
