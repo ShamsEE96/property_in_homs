@@ -4,16 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
+import 'package:property_in_homs/pages/property_home_page.dart';
+
 import 'package:property_in_homs/pages/property_view_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
-import 'package:collection/collection.dart';
+import 'package:property_in_homs/widgets/propertys.dart';
 
 class PropertyEditPage extends StatelessWidget {
   PropertyEditPage({super.key});
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -30,7 +32,7 @@ class PropertyEditPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Form(
-                key: formKey,
+                key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
@@ -41,7 +43,7 @@ class PropertyEditPage extends StatelessWidget {
                         border: OutlineInputBorder(),
                       ),
                       validator: (currentText) {
-                        if (currentText == null) {
+                        if (currentText == null || currentText.isEmpty) {
                           return "This field is required!";
                         }
                         return null;
@@ -94,7 +96,7 @@ class PropertyEditPage extends StatelessWidget {
                       incIconColor: Colors.white,
                       decIconColor: Colors.white,
                       validator: (currentText) {
-                        if (currentText == null) {
+                        if (currentText == null || currentText.isEmpty) {
                           return "This field is required!";
                         }
                         return null;
@@ -140,7 +142,7 @@ class PropertyEditPage extends StatelessWidget {
                         suffixText: "Square Metre",
                       ),
                       validator: (currentText) {
-                        if (currentText == null) {
+                        if (currentText == null || currentText.isEmpty) {
                           return "This field is required!";
                         }
                         return null;
@@ -162,7 +164,7 @@ class PropertyEditPage extends StatelessWidget {
                         hintText: "Only Number",
                       ),
                       validator: (currentText) {
-                        if (currentText == null) {
+                        if (currentText == null || currentText.isEmpty) {
                           return "This field is required!";
                         }
                         return null;
@@ -222,9 +224,7 @@ class PropertyEditPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-
                       height: 80,
-
                     ),
                     SizedBox(
                       width: double.infinity,
@@ -233,8 +233,8 @@ class PropertyEditPage extends StatelessWidget {
                         onPressed: () async {
                           appCubit.saveProperty();
                           if (!context.mounted) return;
-                          if (formKey.currentState!.validate()) {
-                            Navigator.push(
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>

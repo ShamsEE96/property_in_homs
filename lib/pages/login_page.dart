@@ -78,6 +78,8 @@ class LoginPage extends StatelessWidget {
                       if (formKey.currentState!.validate()) {
                         if (await authCubit.login()) {
                           if (!context.mounted) return;
+                          authCubit.getProfileInfo();
+                          authCubit.loadUserInfo();
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

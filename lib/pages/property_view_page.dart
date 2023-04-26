@@ -24,7 +24,7 @@ class PropertyViewPage extends StatelessWidget {
                 title: const Text("View Page"),
                 backgroundColor: AppColors.mainBlueColor,
                 actions: [
-                  if (appCubit.currentUserId != "rOIkuoPLN2") ...[
+                  if (AuthCubit.currentUserId == AuthCubit.adminUserId) ...[
                     IconButton(
                       tooltip: "Edit",
                       onPressed: () {
@@ -53,32 +53,28 @@ class PropertyViewPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Icon(Icons.person,
-                              color: AppColors.darkNavyColor, size: 40),
-                          Text(
-                            "User : ${authCubit.username}",
-                            style: const TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
+
+                      Icon(Icons.person,
+                          color: AppColors.darkNavyColor, size: 40),
+                      Text(
+                        " User : ${authCubit.username}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+
                       ),
                       const SizedBox(
                         height: 8,
                       ),
-                      Row(
-                        children: [
-                          Icon(Icons.phone,
-                              color: AppColors.darkNavyColor, size: 35),
-                          Text(
-                            "Number : ${authCubit.number}",
-                            style: const TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
+
+                      Icon(Icons.phone,
+                          color: AppColors.darkNavyColor, size: 35),
+                      Text(
+                        "  Number : ${authCubit.number}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+
                       ),
                       const SizedBox(
                         height: 8,
@@ -171,8 +167,38 @@ class PropertyViewPage extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+                        child: Row(
+                          children: [
+                            Icon(Icons.house,
+                                color: AppColors.darkNavyColor,
+                                semanticLabel: "Type",
+                                size: 30),
+                            Text(
+                              "  ${appCubit.selectedType?.propertyTypeName}",
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ),
                       const SizedBox(
-                        height: 20,
+                        height: 8,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+                        child: Row(
+                          children: [
+                            Icon(Icons.attach_money,
+                                color: AppColors.darkNavyColor,
+                                semanticLabel: "State",
+                                size: 30),
+                            Text(
+                              "  ${appCubit.propertyStateEnum.name}",
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 8,
@@ -189,28 +215,28 @@ class PropertyViewPage extends StatelessWidget {
                         },
                         controlAffinity: ListTileControlAffinity.leading,
                       ),
-                      SizedBox(
-                        height: 60,
-                        child: ToggleButtons(
-                          isSelected: appCubit.selections,
-                          onPressed: (newState) {},
-                          color: Colors.black,
-                          selectedColor:
-                              const Color.fromARGB(255, 255, 255, 255),
-                          fillColor: AppColors.darkNavyColor,
-                          renderBorder: true,
-                          borderWidth: 2,
-                          borderColor: const Color.fromARGB(181, 31, 29, 29),
-                          borderRadius: BorderRadius.circular(30),
-                          textStyle: const TextStyle(
-                            fontSize: 25,
-                          ),
-                          children: const [
-                            Text("   For Sale   "),
-                            Text("  For Rental  "),
-                          ],
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 60,
+                      //   child: ToggleButtons(
+                      //     isSelected: appCubit.selections,
+                      //     onPressed: (newState) {},
+                      //     color: Colors.black,
+                      //     selectedColor:
+                      //         const Color.fromARGB(255, 255, 255, 255),
+                      //     fillColor: AppColors.darkNavyColor,
+                      //     renderBorder: true,
+                      //     borderWidth: 2,
+                      //     borderColor: const Color.fromARGB(181, 31, 29, 29),
+                      //     borderRadius: BorderRadius.circular(30),
+                      //     textStyle: const TextStyle(
+                      //       fontSize: 25,
+                      //     ),
+                      //     children: const [
+                      //       Text("   For Sale   "),
+                      //       Text("  For Rental  "),
+                      //     ],
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 80,
                       ),
@@ -218,9 +244,8 @@ class PropertyViewPage extends StatelessWidget {
                         width: double.infinity,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () {
-                            // await appCubit.save();
-                            // if (!context.mounted) return;
+                          onPressed: () async {
+                            appCubit.postPropertyBooking();
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
@@ -232,7 +257,7 @@ class PropertyViewPage extends StatelessWidget {
                               // fontWeight: FontWeight.bold,
                             ),
                           ),
-                          child: const Text("add to Book List"),
+                          child: const Text("Add to Book List"),
                         ),
                       ),
                     ],

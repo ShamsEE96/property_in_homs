@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/auth_states.dart';
+import 'package:property_in_homs/pages/admin_home_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -41,11 +42,27 @@ class ProfilePage extends StatelessWidget {
             appBar: AppBar(
               elevation: 0.0,
               backgroundColor: AppColors.seconderyBlueColor,
-              title: Text("profile"),
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {},
-              ),
+              title: const Text("Profile"),
+              actions: [
+                if (AuthCubit.currentUserId == AuthCubit.adminUserId) ...[
+                  IconButton(
+                    tooltip: "Admin Panel",
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AdminHomePage(),
+                          ));
+                    },
+                    icon: const Icon(Icons.admin_panel_settings),
+                  )
+                ],
+                IconButton(
+                    onPressed: () async {
+                      await AuthCubit.get(context).logout();
+                    },
+                    icon: const Icon(Icons.logout)),
+              ],
             ),
             body: Stack(
               alignment: Alignment.center,
@@ -85,32 +102,17 @@ class ProfilePage extends StatelessWidget {
                             height: 8,
                           ),
 
-                          Text(
-                            authCubit.userEmail,
-                            style: TextStyle(
-                                color: Color(0xFF0B2447), fontSize: 30),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Text(authCubit.username,
+                          Text(authCubit.currentUserName ?? "Error",
                               style: const TextStyle(
-                                  color: Color(0xFF0B2447), fontSize: 30)),
-                          const SizedBox(
-                            height: 8,
+                                  color: Color(0xFF0B2447), fontSize: 20)),
+                          Text(
+                            authCubit.currentUserEmail ?? "Error",
+                            style: const TextStyle(
+                                color: Color(0xFF0B2447), fontSize: 20),
                           ),
-                          Text(authCubit.number,
-                              style: TextStyle(
-                                  color: Color(0xFF0B2447), fontSize: 30)),
-
-                          IconButton(
-                              onPressed: () async {
-                                await AuthCubit.get(context).logout();
-                              },
-                              icon: const Icon(Icons.logout)),
-                          const SizedBox(
-                            height: 8,
-                          ),
+                          Text(authCubit.currentUserNumber ?? "Error",
+                              style: const TextStyle(
+                                  color: Color(0xFF0B2447), fontSize: 20))
 
                           // Container(
                           //   height: 55,
