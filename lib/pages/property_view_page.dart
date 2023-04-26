@@ -53,7 +53,6 @@ class PropertyViewPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-
                       Icon(Icons.person,
                           color: AppColors.darkNavyColor, size: 40),
                       Text(
@@ -61,7 +60,6 @@ class PropertyViewPage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 20,
                         ),
-
                       ),
                       const SizedBox(
                         height: 8,
@@ -74,7 +72,6 @@ class PropertyViewPage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 20,
                         ),
-
                       ),
                       const SizedBox(
                         height: 8,

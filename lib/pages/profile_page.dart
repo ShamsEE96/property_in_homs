@@ -152,13 +152,16 @@ class ProfilePage extends StatelessWidget {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 5),
-                        shape: BoxShape.circle,
-                        color: Colors.white,
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 5),
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
                       ),
                     )
                   ],
