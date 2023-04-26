@@ -173,7 +173,7 @@ class PropertyViewPage extends StatelessWidget {
                                 semanticLabel: "Type",
                                 size: 30),
                             Text(
-                              "  ${appCubit.selectedType?.propertyTypeName}",
+                              "  ${appCubit.selectedType!.propertyTypeName}",
                               style: const TextStyle(fontSize: 20),
                             ),
                           ],
@@ -191,7 +191,7 @@ class PropertyViewPage extends StatelessWidget {
                                 semanticLabel: "State",
                                 size: 30),
                             Text(
-                              "  ${appCubit.propertyStateEnum.name}",
+                              "  For ${appCubit.propertyStateEnum.name}",
                               style: const TextStyle(fontSize: 20),
                             ),
                           ],
