@@ -53,25 +53,32 @@ class PropertyViewPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Icon(Icons.person,
-                          color: AppColors.darkNavyColor, size: 40),
-                      Text(
-                        " User : ${authCubit.currentUserName}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
+                      Row(
+                        children: [
+                          Icon(Icons.person,
+                              color: AppColors.darkNavyColor, size: 40),
+                          Text(
+                            "User : ${authCubit.currentUserName}",
+                            style: const TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 8,
                       ),
-
-                      Icon(Icons.phone,
-                          color: AppColors.darkNavyColor, size: 35),
-                      Text(
-                        "  Number : ${authCubit.currentUserNumber}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
+                      Row(
+                        children: [
+                          Icon(Icons.phone,
+                              color: AppColors.darkNavyColor, size: 35),
+                          Text(
+                            "Number : ${authCubit.currentUserNumber}",
+                            style: const TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 8,
@@ -164,38 +171,8 @@ class PropertyViewPage extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
-                        child: Row(
-                          children: [
-                            Icon(Icons.house,
-                                color: AppColors.darkNavyColor,
-                                semanticLabel: "Type",
-                                size: 30),
-                            Text(
-                              "  ${appCubit.selectedType?.propertyTypeName}",
-                              style: const TextStyle(fontSize: 20),
-                            ),
-                          ],
-                        ),
-                      ),
                       const SizedBox(
-                        height: 8,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-                        child: Row(
-                          children: [
-                            Icon(Icons.attach_money,
-                                color: AppColors.darkNavyColor,
-                                semanticLabel: "State",
-                                size: 30),
-                            Text(
-                              "  ${appCubit.propertyStateEnum.name}",
-                              style: const TextStyle(fontSize: 20),
-                            ),
-                          ],
-                        ),
+                        height: 20,
                       ),
                       const SizedBox(
                         height: 8,
@@ -212,28 +189,28 @@ class PropertyViewPage extends StatelessWidget {
                         },
                         controlAffinity: ListTileControlAffinity.leading,
                       ),
-                      // SizedBox(
-                      //   height: 60,
-                      //   child: ToggleButtons(
-                      //     isSelected: appCubit.selections,
-                      //     onPressed: (newState) {},
-                      //     color: Colors.black,
-                      //     selectedColor:
-                      //         const Color.fromARGB(255, 255, 255, 255),
-                      //     fillColor: AppColors.darkNavyColor,
-                      //     renderBorder: true,
-                      //     borderWidth: 2,
-                      //     borderColor: const Color.fromARGB(181, 31, 29, 29),
-                      //     borderRadius: BorderRadius.circular(30),
-                      //     textStyle: const TextStyle(
-                      //       fontSize: 25,
-                      //     ),
-                      //     children: const [
-                      //       Text("   For Sale   "),
-                      //       Text("  For Rental  "),
-                      //     ],
-                      //   ),
-                      // ),
+                      SizedBox(
+                        height: 60,
+                        child: ToggleButtons(
+                          isSelected: appCubit.selections,
+                          onPressed: (newState) {},
+                          color: Colors.black,
+                          selectedColor:
+                              const Color.fromARGB(255, 255, 255, 255),
+                          fillColor: AppColors.darkNavyColor,
+                          renderBorder: true,
+                          borderWidth: 2,
+                          borderColor: const Color.fromARGB(181, 31, 29, 29),
+                          borderRadius: BorderRadius.circular(30),
+                          textStyle: const TextStyle(
+                            fontSize: 25,
+                          ),
+                          children: const [
+                            Text("   For Sale   "),
+                            Text("  For Rental  "),
+                          ],
+                        ),
+                      ),
                       const SizedBox(
                         height: 80,
                       ),
