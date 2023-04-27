@@ -138,7 +138,7 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  void propertyTypeChangedEvent(PropertyTypeModel objectId) {
+  void propertyTypeChangedEvent(PropertyTypeModel? objectId) {
     selectedType = objectId;
     // print(selectedType?.propertyTypeName);
     emit(

@@ -191,7 +191,7 @@ class PropertyEditPage extends StatelessWidget {
                             ),
                         ],
                         onChanged: (value) {
-                          appCubit.propertyTypeChangedEvent(value!);
+                          appCubit.propertyTypeChangedEvent(value);
                         },
                         dropdownColor: AppColors.mainBlueColor,
                         iconEnabledColor: AppColors.mainBlueColor,
@@ -207,7 +207,7 @@ class PropertyEditPage extends StatelessWidget {
                               : PropertyStateEnum.rental);
                         },
                         color: Colors.black,
-                        selectedColor: AppColors.darkNavyColor,
+                        selectedColor: Colors.white,
                         fillColor: AppColors.mainBlueColor,
                         renderBorder: true,
                         borderWidth: 2,
