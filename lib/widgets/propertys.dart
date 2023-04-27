@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/property_view_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
