@@ -47,6 +47,7 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                             Icons.cancel_sharp,
                             color: Color.fromARGB(255, 37, 72, 121),
                           ),
+                          iconSize: 35,
                         ),
                         const Text("Rejected"),
                       ],
@@ -63,6 +64,7 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                             Icons.pending_actions_rounded,
                             color: Color.fromARGB(255, 37, 72, 121),
                           ),
+                          iconSize: 35,
                         ),
                         const Text("Pending"),
                       ],
@@ -79,6 +81,7 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                             Icons.done,
                             color: Color.fromARGB(255, 37, 72, 121),
                           ),
+                          iconSize: 35,
                         ),
                         const Text("Approval"),
                       ],
@@ -96,34 +99,36 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                     title: Text(
                       appCubit.filteredProperty[index].address,
                     ),
-                    subtitle: Text(appCubit.propertyTypeList
-                        .firstWhere(
-                          (element) =>
-                              element.objectId ==
-                              appCubit.filteredProperty[index].propertyTypeId,
-                        )
-                        .propertyTypeName),
+                    // subtitle: Text( appCubit.propertyTypeList
+                    //     .firstWhere(
+                    //       (element) =>
+                    //           element.objectId ==
+                    //           appCubit.filteredProperty[index].propertyTypeId,
+                    //     )
+                    //     .propertyTypeName),
                     trailing: IconButton(
                       onPressed: () {
                         appCubit.approvalChangedEvent(
-                            index,
+                            appCubit.filteredProperty[index].objectId,
                             appCubit.filteredProperty[index]
                                     .propertyPostApproval =
                                 PropertyApprovalEnum.approved);
                       },
                       color: const Color.fromARGB(255, 27, 180, 32),
                       icon: const Icon(Icons.turn_left_outlined),
+                      tooltip: "Approve",
                     ),
                     leading: IconButton(
                       onPressed: () {
                         appCubit.approvalChangedEvent(
-                            index,
+                            appCubit.filteredProperty[index].objectId,
                             appCubit.filteredProperty[index]
                                     .propertyPostApproval =
                                 PropertyApprovalEnum.rejected);
                       },
                       icon: const Icon(Icons.cancel_schedule_send_outlined),
                       color: Colors.red,
+                      tooltip: "Rejected",
                     ),
                     // leading: const Icon(Icons.location_on),
                     // iconColor: const Color.fromARGB(255, 37, 72, 121),
