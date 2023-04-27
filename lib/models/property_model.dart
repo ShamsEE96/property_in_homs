@@ -1,3 +1,4 @@
+import 'package:property_in_homs/utils/enums/property_approval_enum.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 
 class PropertyModel {
@@ -25,7 +26,7 @@ class PropertyModel {
   String propertyTypeId;
   String posterUserId;
   String? propertyName;
-  bool propertyPostApproval;
+  PropertyApprovalEnum propertyPostApproval;
 
   Map<String, dynamic> toJson() => {
         "objectId": objectId,
@@ -37,7 +38,7 @@ class PropertyModel {
         "propertyState": propertyState.index,
         "propertyTypeId": propertyTypeId,
         "posterUserId": posterUserId,
-        "propertyPostApproval": propertyPostApproval,
+        "propertyPostApproval": propertyPostApproval.index,
       };
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) => PropertyModel(
@@ -50,6 +51,7 @@ class PropertyModel {
         propertyState: PropertyStateEnum.values[json["propertyState"] as int],
         propertyTypeId: json["propertyTypeId"] as String,
         posterUserId: json["posterUserId"] as String,
-        propertyPostApproval: json["propertyPostApproval"] as bool,
+        propertyPostApproval:
+            PropertyApprovalEnum.values[json["propertyState"] as int],
       );
 }
