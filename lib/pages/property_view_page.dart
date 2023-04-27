@@ -46,7 +46,7 @@ class PropertyViewPage extends StatelessWidget {
                         context: context,
                         builder: (context) => AlertDialog(
                           title: const Text(
-                              "Are you sure you want to delete this record?"),
+                              "Are you sure you want to delete this Property?"),
                           content:
                               const Text("this operation cannot be undone!"),
                           actions: [
