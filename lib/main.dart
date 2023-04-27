@@ -13,11 +13,10 @@ Future<void> main() async {
   SharedPreferences sp = await SharedPreferences.getInstance();
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
-      create: (context) => AppCubit()
-        ..getProperty()
-        ..getPropertyTypes()
-        ..getPropertyBooking(),
-    ),
+        create: (context) => AppCubit()
+          ..getProperty()
+          ..getPropertyTypes()
+          ..getPropertyBooking()),
     BlocProvider(
         create: (context) => AuthCubit(sp)
           ..loadTokenFromSP()
