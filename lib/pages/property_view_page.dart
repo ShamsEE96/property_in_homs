@@ -4,7 +4,6 @@ import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/bloc/states/auth_states.dart';
-import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/utils/colors.dart';
 
 class PropertyViewPage extends StatelessWidget {
@@ -213,28 +212,28 @@ class PropertyViewPage extends StatelessWidget {
                         },
                         controlAffinity: ListTileControlAffinity.leading,
                       ),
-                      // SizedBox(
-                      //   height: 60,
-                      //   child: ToggleButtons(
-                      //     isSelected: appCubit.selections,
-                      //     onPressed: (newState) {},
-                      //     color: Colors.black,
-                      //     selectedColor:
-                      //         const Color.fromARGB(255, 255, 255, 255),
-                      //     fillColor: AppColors.darkNavyColor,
-                      //     renderBorder: true,
-                      //     borderWidth: 2,
-                      //     borderColor: const Color.fromARGB(181, 31, 29, 29),
-                      //     borderRadius: BorderRadius.circular(30),
-                      //     textStyle: const TextStyle(
-                      //       fontSize: 25,
-                      //     ),
-                      //     children: const [
-                      //       Text("   For Sale   "),
-                      //       Text("  For Rental  "),
-                      //     ],
-                      //   ),
-                      // ),
+                      SizedBox(
+                        height: 60,
+                        child: ToggleButtons(
+                          isSelected: appCubit.selections,
+                          onPressed: (newState) {},
+                          color: Colors.black,
+                          selectedColor:
+                              const Color.fromARGB(255, 255, 255, 255),
+                          fillColor: AppColors.darkNavyColor,
+                          renderBorder: true,
+                          borderWidth: 2,
+                          borderColor: const Color.fromARGB(181, 31, 29, 29),
+                          borderRadius: BorderRadius.circular(30),
+                          textStyle: const TextStyle(
+                            fontSize: 25,
+                          ),
+                          children: const [
+                            Text("   For Sale   "),
+                            Text("  For Rental  "),
+                          ],
+                        ),
+                      ),
                       const SizedBox(
                         height: 80,
                       ),

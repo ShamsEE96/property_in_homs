@@ -7,7 +7,6 @@ import 'package:property_in_homs/utils/dio_helper.dart';
 import 'package:property_in_homs/models/property_booking_model.dart';
 import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
-import 'package:property_in_homs/pages/admin_home_page.dart';
 import 'package:property_in_homs/pages/property_booked_page.dart';
 import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:collection/collection.dart';
@@ -75,27 +74,34 @@ class AppCubit extends Cubit<AppStates> {
   //   }
   // }
 
-  String? getPropertyName(String id) {
-    PropertyTypeModel? propertyTypeModel =
-        propertyTypeList.firstWhere((element) => element.objectId == id);
+  // String? getPropertyName(String id) {
+  //   PropertyTypeModel? propertyTypeModel =
+  //       propertyTypeList.firstWhere((element) => element.objectId == id);
 
-    if (propertyTypeModel == null) {
-      return null;
-    } else {
-      return propertyTypeModel.propertyTypeName;
-    }
-  }
+  //   if (propertyTypeModel == null) {
+  //     return null;
+  //   } else {
+  //     return propertyTypeModel.propertyTypeName;
+  //   }
+  // }
 
-  String? getPropertyIdforBooking(String id) {
-    PropertyBookingModel? propertyBookingModel = propertyBookingList
-        .firstWhere((element) => element.bookedPropertyId == id);
+  // PropertyModel getPropertyIdforBooking(String id) {
+  //   PropertyModel propertyModel =
+  //       filteredProperty.firstWhere((element) => element.objectId == id).;
 
-    if (propertyBookingModel == null) {
-      return null;
-    } else {
-      return propertyBookingModel.bookedPropertyId;
-    }
-  }
+  //     return propertyModel;
+
+  // }
+  // String? getPropertyIdforBooking(String id) {
+  //   PropertyBookingModel? propertyBookingModel = propertyBookingList
+  //       .firstWhere((element) => element.bookedPropertyId == id);
+
+  //   if (propertyBookingModel == null) {
+  //     return null;
+  //   } else {
+  //     return propertyBookingModel.bookedPropertyId;
+  //   }
+  // }
 
   void fillPropertyDetailsPage(PropertyModel propertyList) {
     selectedPropertyId = propertyList.objectId;
@@ -134,7 +140,7 @@ class AppCubit extends Cubit<AppStates> {
 
   void propertyTypeChangedEvent(PropertyTypeModel objectId) {
     selectedType = objectId;
-    print(selectedType?.propertyTypeName);
+    // print(selectedType?.propertyTypeName);
     emit(
       AppRefreshUIState(),
     );
@@ -274,7 +280,7 @@ class AppCubit extends Cubit<AppStates> {
         for (var element in res.data["results"]) {
           propertyList.add(PropertyModel.fromJson(element));
         }
-        print(propertyList);
+        // print(propertyList);
         emit(AppSuccessState());
       } else {
         emit(AppErrorState("Error Code ${res.statusCode}"));
@@ -378,7 +384,7 @@ class AppCubit extends Cubit<AppStates> {
         for (var element in res.data["results"]) {
           propertyTypeList.add(PropertyTypeModel.fromJson(element));
         }
-        print(propertyTypeList);
+        // print(propertyTypeList);
         emit(AppSuccessState());
       } else {
         emit(AppErrorState("Error Code ${res.statusCode}"));
@@ -461,7 +467,7 @@ class AppCubit extends Cubit<AppStates> {
         for (var element in res.data["results"]) {
           propertyBookingList.add(PropertyBookingModel.fromJson(element));
         }
-        print(propertyBookingList);
+        // print(propertyBookingList);
         emit(AppSuccessState());
       } else {
         emit(AppErrorState("Error Code ${res.statusCode}"));
