@@ -136,7 +136,7 @@ class AppCubit extends Cubit<AppStates> {
     if (selectedPropertyId == '') {
       await postProperty();
     } else {
-      await updateProperty();
+      await updateProperty(selectedPropertyId);
     }
   }
 
@@ -262,10 +262,10 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Future<void> approvalChangedEvent(
-      int id, PropertyApprovalEnum newState) async {
+      String id, PropertyApprovalEnum newState) async {
     propertyApprovalEnum = newState;
-    filteredProperty[id];
-    await updateProperty();
+
+    await updateProperty(id);
 
     emit(AppRefreshUIState());
   }
@@ -350,13 +350,13 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  Future<void> updateProperty() async {
+  Future<void> updateProperty(String? id) async {
     try {
       DioHelper.initialize();
       var res = await DioHelper.dio!.put(
-        "classes/Property/$selectedPropertyId",
+        "classes/Property/$id",
         data: PropertyModel(
-          objectId: selectedPropertyId ?? "",
+          objectId: id ?? "",
           address: addressController.text.trim(),
           roomCount: int.parse(roomCountController.text.trim()),
           space: int.parse(spaceController.text.trim()),
