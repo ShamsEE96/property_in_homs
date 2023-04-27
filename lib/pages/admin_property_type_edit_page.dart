@@ -17,7 +17,8 @@ class AdminPropertyTypeEditPage extends StatelessWidget {
         AppCubit appCubit = AppCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Api Test'),
+            title: const Text('Edit Type'),
+            backgroundColor: AppColors.mainBlueColor,
             actions: [
               IconButton(
                 onPressed: () {

@@ -6,6 +6,7 @@ import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/property_view_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
+import 'package:property_in_homs/utils/enums/property_approval_enum.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 
 class AdminPropertyApprovalPage extends StatelessWidget {
@@ -17,9 +18,6 @@ class AdminPropertyApprovalPage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit appCubit = AppCubit.get(context);
-
-        // appCubit.filteredProperty.addAll(appCubit.propertyList);
-
         return Scaffold(
           backgroundColor: AppColors.mainWhiteColor,
           appBar: AppBar(
@@ -35,13 +33,30 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                   height: 20,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       children: [
                         IconButton(
-                          onPressed: () {
-                            appCubit.adminFilterChangedEvent(false);
+                          onPressed: () async {
+                            appCubit.approvalFilterChangedEvent(
+                                PropertyApprovalEnum.rejected);
+                          },
+                          // color: AppColors.mainWhiteColor,
+                          icon: const Icon(
+                            Icons.cancel_sharp,
+                            color: Color.fromARGB(255, 37, 72, 121),
+                          ),
+                        ),
+                        const Text("Rejected"),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            appCubit.approvalFilterChangedEvent(
+                                PropertyApprovalEnum.pending);
                           },
                           // color: AppColors.mainWhiteColor,
                           icon: const Icon(
@@ -53,12 +68,11 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                       ],
                     ),
                     Column(
-                      
                       children: [
                         IconButton(
                           onPressed: () {
-                            appCubit.adminFilterChangedEvent(
-                                true);
+                            appCubit.approvalFilterChangedEvent(
+                                PropertyApprovalEnum.approved);
                           },
                           // color: AppColors.mainWhiteColor,
                           icon: const Icon(
@@ -87,17 +101,34 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                           (element) =>
                               element.objectId ==
                               appCubit.filteredProperty[index].propertyTypeId,
-                          orElse: () => PropertyTypeModel(
-                              objectId: "no Id Found",
-                              propertyTypeName: "no Id Found"),
                         )
                         .propertyTypeName),
-                    trailing:
-                        Text(appCubit.filteredProperty[index].cost.toString()),
-                    leading: const Icon(Icons.location_on),
-                    iconColor: const Color.fromARGB(255, 37, 72, 121),
-                    hoverColor: AppColors.mainGreyColor,
-                    tileColor: AppColors.mainWhiteColor,
+                    trailing: IconButton(
+                      onPressed: () {
+                        appCubit.approvalChangedEvent(
+                            index,
+                            appCubit.filteredProperty[index]
+                                    .propertyPostApproval =
+                                PropertyApprovalEnum.approved);
+                      },
+                      color: const Color.fromARGB(255, 27, 180, 32),
+                      icon: const Icon(Icons.turn_left_outlined),
+                    ),
+                    leading: IconButton(
+                      onPressed: () {
+                        appCubit.approvalChangedEvent(
+                            index,
+                            appCubit.filteredProperty[index]
+                                    .propertyPostApproval =
+                                PropertyApprovalEnum.rejected);
+                      },
+                      icon: const Icon(Icons.cancel_schedule_send_outlined),
+                      color: Colors.red,
+                    ),
+                    // leading: const Icon(Icons.location_on),
+                    // iconColor: const Color.fromARGB(255, 37, 72, 121),
+                    // hoverColor: AppColors.mainGreyColor,
+                    // tileColor: AppColors.mainWhiteColor,
                     onTap: () {
                       appCubit.fillPropertyDetailsPage(
                           appCubit.filteredProperty[index]);

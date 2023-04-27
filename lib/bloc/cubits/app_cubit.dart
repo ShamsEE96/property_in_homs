@@ -249,18 +249,27 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppRefreshUIState());
   }
 
-  void adminFilterChangedEvent(bool approve) {
+  void approvalFilterChangedEvent(PropertyApprovalEnum? filters) {
     filteredProperty.clear();
-    if (approve == false) {
+    if (filters == null) {
+      filteredProperty.addAll(propertyList);
+    } else {
       filteredProperty.addAll(propertyList
-          .where((element) => element.propertyPostApproval == false));
-    } else if(approve == true){
-      filteredProperty.addAll(propertyList
-          .where((element) => element.propertyPostApproval == true)
+          .where((element) => element.propertyPostApproval == filters)
           .toList());
     }
     emit(AppRefreshUIState());
   }
+
+  Future<void> approvalChangedEvent(
+      int id, PropertyApprovalEnum newState) async {
+    propertyApprovalEnum = newState;
+    filteredProperty[id];
+    await updateProperty();
+
+    emit(AppRefreshUIState());
+  }
+
   // void addBookedPropertyIdEvent(int index) {
   //   propertyBookingList.where(
   //     (element) {
