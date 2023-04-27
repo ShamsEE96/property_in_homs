@@ -138,7 +138,7 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  void propertyTypeChangedEvent(PropertyTypeModel objectId) {
+  void propertyTypeChangedEvent(PropertyTypeModel? objectId) {
     selectedType = objectId;
     // print(selectedType?.propertyTypeName);
     emit(
@@ -279,6 +279,11 @@ class AppCubit extends Cubit<AppStates> {
         propertyList.clear();
         for (var element in res.data["results"]) {
           propertyList.add(PropertyModel.fromJson(element));
+        }
+
+        filteredProperty.clear();
+        for (var element in propertyList) {
+          filteredProperty.add(element);
         }
         // print(propertyList);
         emit(AppSuccessState());
