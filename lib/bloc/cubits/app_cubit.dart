@@ -247,6 +247,18 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppRefreshUIState());
   }
 
+  void adminFilterChangedEvent(bool approve) {
+    filteredProperty.clear();
+    if (approve == false) {
+      filteredProperty.addAll(propertyList
+          .where((element) => element.propertyPostApproval == false));
+    } else if(approve == true){
+      filteredProperty.addAll(propertyList
+          .where((element) => element.propertyPostApproval == true)
+          .toList());
+    }
+    emit(AppRefreshUIState());
+  }
   // void addBookedPropertyIdEvent(int index) {
   //   propertyBookingList.where(
   //     (element) {

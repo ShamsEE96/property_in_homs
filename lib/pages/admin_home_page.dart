@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/pages/admin_property_approval_page.dart';
 import 'package:property_in_homs/pages/admin_property_type_home_page.dart';
 
 class AdminHomePage extends StatelessWidget {
@@ -33,7 +34,8 @@ class AdminHomePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Placeholder(),
+                            builder: (context) =>
+                                const AdminPropertyApprovalPage(),
                           ));
                     },
                     child: const Text('View Property Pending List'),
