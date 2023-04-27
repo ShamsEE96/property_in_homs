@@ -24,7 +24,8 @@ class AppCubit extends Cubit<AppStates> {
   bool withFurniture = false;
   TextEditingController costController = TextEditingController();
   PropertyStateEnum propertyStateEnum = PropertyStateEnum.rental;
-
+  String? propertyTypeId;
+  String? posterUserId;
   bool propertyPostApproval = false;
 
   TextEditingController propertyTypeNameController = TextEditingController();
@@ -105,6 +106,8 @@ class AppCubit extends Cubit<AppStates> {
     withFurniture = propertyList.withFurniture;
     propertyPostApproval = propertyList.propertyPostApproval;
     propertyStateEnum = propertyList.propertyState;
+    propertyTypeId = propertyList.propertyTypeId;
+    posterUserId = propertyList.posterUserId;
     emit(AppRefreshUIState());
   }
 
@@ -131,6 +134,7 @@ class AppCubit extends Cubit<AppStates> {
 
   void propertyTypeChangedEvent(PropertyTypeModel objectId) {
     selectedType = objectId;
+    print(selectedType?.propertyTypeName);
     emit(
       AppRefreshUIState(),
     );

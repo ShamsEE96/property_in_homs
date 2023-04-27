@@ -9,7 +9,6 @@ import 'package:property_in_homs/utils/colors.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 
-
 class PropertyEditPage extends StatelessWidget {
   PropertyEditPage({super.key});
 
@@ -61,6 +60,7 @@ class PropertyEditPage extends StatelessWidget {
                       ],
                     ),
                     NumberInputWithIncrementDecrement(
+                      readOnly: true,
                       controller: appCubit.roomCountController,
                       numberFieldDecoration: const InputDecoration(
                         border: InputBorder.none,
@@ -99,6 +99,7 @@ class PropertyEditPage extends StatelessWidget {
                         }
                         return null;
                       },
+                      enabled: true,
                     ),
                     const SizedBox(
                       height: 8,
