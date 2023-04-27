@@ -108,6 +108,7 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                     //     .propertyTypeName),
                     trailing: IconButton(
                       onPressed: () {
+                      
                         appCubit.approvalChangedEvent(
                             appCubit.filteredProperty[index].objectId,
                             appCubit.filteredProperty[index]

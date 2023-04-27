@@ -354,7 +354,7 @@ class AppCubit extends Cubit<AppStates> {
     try {
       DioHelper.initialize();
       var res = await DioHelper.dio!.put(
-        "classes/Property/$id",
+        "classes/Property/$id".toString(),
         data: PropertyModel(
           objectId: id ?? "",
           address: addressController.text.trim(),

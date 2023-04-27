@@ -22,10 +22,35 @@ class AdminPropertyTypeEditPage extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  appCubit.deletePropertyType(appCubit.selectedPropertyTypeId!);
-                  Navigator.pop(context);
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text(
+                          "Are you sure you want to delete this Type?"),
+                      content: const Text("this operation cannot be undone!"),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("No")),
+                        TextButton(
+                          onPressed: () async {
+                            await appCubit.deletePropertyType(
+                                appCubit.selectedPropertyTypeId!);
+                            if (!context.mounted) return;
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Yes"),
+                        ),
+                      ],
+                    ),
+                  );
+                  // appCubit.deletePropertyType(appCubit.selectedPropertyTypeId!);
+                  // Navigator.pop(context);
                 },
                 icon: const Icon(Icons.delete),
+                tooltip: "Delete",
               )
             ],
           ),

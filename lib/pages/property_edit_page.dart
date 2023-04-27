@@ -60,7 +60,7 @@ class PropertyEditPage extends StatelessWidget {
                       ],
                     ),
                     NumberInputWithIncrementDecrement(
-                      // readOnly: true,
+                      readOnly: false,
                       controller: appCubit.roomCountController,
                       numberFieldDecoration: const InputDecoration(
                         border: InputBorder.none,
@@ -94,6 +94,9 @@ class PropertyEditPage extends StatelessWidget {
                       incIconColor: Colors.white,
                       decIconColor: Colors.white,
                       validator: (currentText) {
+                        // if (currentText == null) {
+                        //   currentText == 0;
+                        // }
                         if (currentText == null || currentText.isEmpty) {
                           return "This field is required!";
                         }
