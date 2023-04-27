@@ -56,7 +56,7 @@ class PropertyViewPage extends StatelessWidget {
                       Icon(Icons.person,
                           color: AppColors.darkNavyColor, size: 40),
                       Text(
-                        " User : ${authCubit.currentUserName}",
+                        " User : ${appCubit.posterUserId}",
                         style: const TextStyle(
                           fontSize: 20,
                         ),
@@ -65,14 +65,14 @@ class PropertyViewPage extends StatelessWidget {
                         height: 8,
                       ),
 
-                      Icon(Icons.phone,
-                          color: AppColors.darkNavyColor, size: 35),
-                      Text(
-                        "  Number : ${authCubit.currentUserNumber}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
+                      // Icon(Icons.phone,
+                      //     color: AppColors.darkNavyColor, size: 35),
+                      // Text(
+                      //   "  Number : ${authCubit.currentUserNumber}",
+                      //   style: const TextStyle(
+                      //     fontSize: 20,
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 8,
                       ),
@@ -173,7 +173,7 @@ class PropertyViewPage extends StatelessWidget {
                                 semanticLabel: "Type",
                                 size: 30),
                             Text(
-                              "  ${appCubit.selectedType?.propertyTypeName}",
+                              appCubit.propertyTypeId.toString(),
                               style: const TextStyle(fontSize: 20),
                             ),
                           ],
@@ -191,7 +191,7 @@ class PropertyViewPage extends StatelessWidget {
                                 semanticLabel: "State",
                                 size: 30),
                             Text(
-                              "  ${appCubit.propertyStateEnum.name}",
+                              "  For ${appCubit.propertyStateEnum.name}",
                               style: const TextStyle(fontSize: 20),
                             ),
                           ],
@@ -212,28 +212,28 @@ class PropertyViewPage extends StatelessWidget {
                         },
                         controlAffinity: ListTileControlAffinity.leading,
                       ),
-                      // SizedBox(
-                      //   height: 60,
-                      //   child: ToggleButtons(
-                      //     isSelected: appCubit.selections,
-                      //     onPressed: (newState) {},
-                      //     color: Colors.black,
-                      //     selectedColor:
-                      //         const Color.fromARGB(255, 255, 255, 255),
-                      //     fillColor: AppColors.darkNavyColor,
-                      //     renderBorder: true,
-                      //     borderWidth: 2,
-                      //     borderColor: const Color.fromARGB(181, 31, 29, 29),
-                      //     borderRadius: BorderRadius.circular(30),
-                      //     textStyle: const TextStyle(
-                      //       fontSize: 25,
-                      //     ),
-                      //     children: const [
-                      //       Text("   For Sale   "),
-                      //       Text("  For Rental  "),
-                      //     ],
-                      //   ),
-                      // ),
+                      SizedBox(
+                        height: 60,
+                        child: ToggleButtons(
+                          isSelected: appCubit.selections,
+                          onPressed: (newState) {},
+                          color: Colors.black,
+                          selectedColor:
+                              const Color.fromARGB(255, 255, 255, 255),
+                          fillColor: AppColors.darkNavyColor,
+                          renderBorder: true,
+                          borderWidth: 2,
+                          borderColor: const Color.fromARGB(181, 31, 29, 29),
+                          borderRadius: BorderRadius.circular(30),
+                          textStyle: const TextStyle(
+                            fontSize: 25,
+                          ),
+                          children: const [
+                            Text("   For Sale   "),
+                            Text("  For Rental  "),
+                          ],
+                        ),
+                      ),
                       const SizedBox(
                         height: 80,
                       ),

@@ -27,10 +27,10 @@ class AdminPropertyTypeHomePage extends StatelessWidget {
                 subtitle:
                     Text("ID: ${appCubit.propertyTypeList[index].objectId}"),
                 onTap: () {
-                  String? propertyTypeNAME =
-                      appCubit.changePropertyTypeNameToIdEvent(
-                    appCubit.propertyTypeList[index].propertyTypeName,
-                  );
+                  // String? propertyTypeNAME =
+                  //     appCubit.changePropertyTypeNameToIdEvent(
+                  //   appCubit.propertyTypeList[index].propertyTypeName,
+                  // );
                   // appCubit.propertyTypeList[index].propertyTypeName =
                   //     propertyTypeNAME ?? "";
 
