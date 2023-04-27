@@ -280,6 +280,11 @@ class AppCubit extends Cubit<AppStates> {
         for (var element in res.data["results"]) {
           propertyList.add(PropertyModel.fromJson(element));
         }
+
+        filteredProperty.clear();
+        for (var element in propertyList) {
+          filteredProperty.add(element);
+        }
         // print(propertyList);
         emit(AppSuccessState());
       } else {
