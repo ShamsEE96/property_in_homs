@@ -40,6 +40,8 @@ dependencies:
   equatable: ^2.0.5
   number_inc_dec: ^0.8.0
   flutter_masked_text: ^0.8.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.2.19
 
 dev_dependencies:
   flutter_test:
