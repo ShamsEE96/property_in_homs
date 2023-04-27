@@ -4,6 +4,7 @@ import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/bloc/states/auth_states.dart';
+import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/utils/colors.dart';
 
 class PropertyViewPage extends StatelessWidget {
@@ -56,7 +57,7 @@ class PropertyViewPage extends StatelessWidget {
                       Icon(Icons.person,
                           color: AppColors.darkNavyColor, size: 40),
                       Text(
-                        " User : ${authCubit.currentUserName}",
+                        " User : ${appCubit.posterUserId}",
                         style: const TextStyle(
                           fontSize: 20,
                         ),
@@ -65,14 +66,14 @@ class PropertyViewPage extends StatelessWidget {
                         height: 8,
                       ),
 
-                      Icon(Icons.phone,
-                          color: AppColors.darkNavyColor, size: 35),
-                      Text(
-                        "  Number : ${authCubit.currentUserNumber}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
+                      // Icon(Icons.phone,
+                      //     color: AppColors.darkNavyColor, size: 35),
+                      // Text(
+                      //   "  Number : ${authCubit.currentUserNumber}",
+                      //   style: const TextStyle(
+                      //     fontSize: 20,
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 8,
                       ),
@@ -173,7 +174,7 @@ class PropertyViewPage extends StatelessWidget {
                                 semanticLabel: "Type",
                                 size: 30),
                             Text(
-                              "  ${appCubit.selectedType?.propertyTypeName}",
+                              appCubit.propertyTypeId.toString(),
                               style: const TextStyle(fontSize: 20),
                             ),
                           ],
@@ -191,7 +192,7 @@ class PropertyViewPage extends StatelessWidget {
                                 semanticLabel: "State",
                                 size: 30),
                             Text(
-                              "  ${appCubit.propertyStateEnum.name}",
+                              "  For ${appCubit.propertyStateEnum.name}",
                               style: const TextStyle(fontSize: 20),
                             ),
                           ],
