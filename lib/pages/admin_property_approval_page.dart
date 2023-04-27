@@ -117,6 +117,7 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                       color: const Color.fromARGB(255, 27, 180, 32),
                       icon: const Icon(Icons.turn_left_outlined),
                       tooltip: "Approve",
+                      iconSize: 30,
                     ),
                     leading: IconButton(
                       onPressed: () {
@@ -129,6 +130,7 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                       icon: const Icon(Icons.cancel_schedule_send_outlined),
                       color: Colors.red,
                       tooltip: "Rejected",
+                      iconSize: 28,
                     ),
                     // leading: const Icon(Icons.location_on),
                     // iconColor: const Color.fromARGB(255, 37, 72, 121),
