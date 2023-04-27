@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/property_view_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
@@ -23,9 +24,9 @@ class PropertyListWidget extends StatelessWidget {
           backgroundColor: AppColors.mainWhiteColor,
           appBar: AppBar(
             // elevation: 0.0,
-            backgroundColor: AppColors.seconderyBlueColor,
+            backgroundColor: AppColors.mainBlueColor,
             // toolbarHeight: 50.0,
-            title: const Text("HomePage"),
+            title: const Text("Home Page حقل تجارب -_-"),
           ),
           body: SingleChildScrollView(
             child: Column(

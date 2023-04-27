@@ -60,6 +60,7 @@ class PropertyEditPage extends StatelessWidget {
                       ],
                     ),
                     NumberInputWithIncrementDecrement(
+                      // readOnly: true,
                       controller: appCubit.roomCountController,
                       numberFieldDecoration: const InputDecoration(
                         border: InputBorder.none,
@@ -98,6 +99,7 @@ class PropertyEditPage extends StatelessWidget {
                         }
                         return null;
                       },
+                      enabled: true,
                     ),
                     const SizedBox(
                       height: 8,
@@ -205,18 +207,18 @@ class PropertyEditPage extends StatelessWidget {
                               : PropertyStateEnum.rental);
                         },
                         color: Colors.black,
-                        selectedColor: const Color.fromARGB(255, 255, 255, 255),
+                        selectedColor: AppColors.darkNavyColor,
                         fillColor: AppColors.mainBlueColor,
                         renderBorder: true,
                         borderWidth: 2,
-                        borderColor: const Color.fromARGB(181, 31, 29, 29),
-                        borderRadius: BorderRadius.circular(30),
+                        borderColor: AppColors.darkNavyColor,
+                        borderRadius: BorderRadius.circular(20),
                         textStyle: const TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                         ),
                         children: const [
                           Text("   For Sale   "),
-                          Text("  For Rental  "),
+                          Text(" For Rental "),
                         ],
                       ),
                     ),
