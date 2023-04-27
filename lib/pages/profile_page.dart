@@ -112,20 +112,23 @@ class ProfilePage extends StatelessWidget {
                           ),
 
                           Text(
-                            "The User Name iS :  ${authCubit.currentUserName}",
-                            style: const TextStyle(
-                                color: Color(0xFF0B2447), fontSize: 20),
-                          ),
+                              "The User Name iS :  ${authCubit.currentUserName}",
+                              style: const TextStyle(
+                                color: Color(0xFF0B2447),
+                                fontSize: 20,
+                              ),
+                              textAlign: TextAlign.center),
                           Text(
                             "The User Email iS : ${authCubit.currentUserEmail}",
                             style: const TextStyle(
                                 color: Color(0xFF0B2447), fontSize: 20),
+                            textAlign: TextAlign.center,
                           ),
                           Text(
-                            "The User Number iS : ${authCubit.currentUserNumber}",
-                            style: const TextStyle(
-                                color: Color(0xFF0B2447), fontSize: 20),
-                          )
+                              "The User Number iS : ${authCubit.currentUserNumber}",
+                              style: const TextStyle(
+                                  color: Color(0xFF0B2447), fontSize: 20),
+                              textAlign: TextAlign.center)
 
                           // Container(
                           //   height: 55,
