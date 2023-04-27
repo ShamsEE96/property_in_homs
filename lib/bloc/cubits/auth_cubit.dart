@@ -92,6 +92,8 @@ class AuthCubit extends Cubit<AuthStates> {
       var res = await DioHelper.dio!.get('login', queryParameters: logData);
       if (res.statusCode == 200) {
         saveTokenInSP(res.data['sessionToken']);
+        await getProfileInfo();
+        loadUserInfo();
         emit(AuthSuccessState());
         return true;
       }

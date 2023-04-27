@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/auth_states.dart';
 import 'package:property_in_homs/pages/admin_home_page.dart';
+import 'package:property_in_homs/pages/register_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -66,6 +67,15 @@ class ProfilePage extends StatelessWidget {
                     IconButton(
                       onPressed: () async {
                         await AuthCubit.get(context).logout();
+                        if (!context.mounted) {
+                          return;
+                        }
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RegisterPage(),
+                            ),
+                            (route) => false);
                       },
                       icon: const Icon(Icons.logout),
                     ),
@@ -82,7 +92,7 @@ class ProfilePage extends StatelessWidget {
                     Container(
                       height: 450,
                       width: double.infinity,
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      // margin: const EdgeInsets.symmetric(horizontal: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -112,17 +122,17 @@ class ProfilePage extends StatelessWidget {
                           ),
 
                           Text(
-                            "The User Name iS :  ${authCubit.currentUserName}",
+                            "The User Name is :  ${authCubit.currentUserName}",
                             style: const TextStyle(
                                 color: Color(0xFF0B2447), fontSize: 20),
                           ),
                           Text(
-                            "The User Email iS : ${authCubit.currentUserEmail}",
+                            "The User Email is : ${authCubit.currentUserEmail}",
                             style: const TextStyle(
                                 color: Color(0xFF0B2447), fontSize: 20),
                           ),
                           Text(
-                            "The User Number iS : ${authCubit.currentUserNumber}",
+                            "The User Number is : ${authCubit.currentUserNumber}",
                             style: const TextStyle(
                                 color: Color(0xFF0B2447), fontSize: 20),
                           )
