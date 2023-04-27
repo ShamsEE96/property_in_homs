@@ -43,7 +43,10 @@ class PropertyListWidget extends StatelessWidget {
                             appCubit.filterChangedEvent(null);
                           },
                           // color: AppColors.mainWhiteColor,
-                          icon: const Icon(Icons.list),
+                          icon: const Icon(
+                            Icons.list,
+                            color: Color.fromARGB(255, 37, 72, 121),
+                          ),
                         ),
                         const Text("All"),
                       ],
@@ -56,7 +59,10 @@ class PropertyListWidget extends StatelessWidget {
                                 .filterChangedEvent(PropertyStateEnum.rental);
                           },
                           // color: AppColors.mainWhiteColor,
-                          icon: const Icon(Icons.holiday_village),
+                          icon: const Icon(
+                            Icons.holiday_village,
+                            color: Color.fromARGB(255, 37, 72, 121),
+                          ),
                         ),
                         const Text("Rental"),
                       ],
@@ -68,7 +74,10 @@ class PropertyListWidget extends StatelessWidget {
                             appCubit.filterChangedEvent(PropertyStateEnum.sale);
                           },
                           // color: AppColors.mainWhiteColor,
-                          icon: const Icon(Icons.location_city),
+                          icon: const Icon(
+                            Icons.location_city,
+                            color: Color.fromARGB(255, 37, 72, 121),
+                          ),
                         ),
                         const Text(" Sale"),
                       ],
@@ -99,7 +108,7 @@ class PropertyListWidget extends StatelessWidget {
                     trailing:
                         Text(appCubit.filteredProperty[index].cost.toString()),
                     leading: const Icon(Icons.location_on),
-                    iconColor: AppColors.darkNavyColor,
+                    iconColor: Color.fromARGB(255, 37, 72, 121),
                     hoverColor: AppColors.mainGreyColor,
                     tileColor: AppColors.mainWhiteColor,
                     onTap: () {
