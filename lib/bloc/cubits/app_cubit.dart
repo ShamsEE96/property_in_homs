@@ -10,6 +10,7 @@ import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/property_booked_page.dart';
 import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:collection/collection.dart';
+import 'package:property_in_homs/utils/enums/property_approval_enum.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 import 'package:property_in_homs/widgets/propertys.dart';
 
@@ -25,7 +26,8 @@ class AppCubit extends Cubit<AppStates> {
   PropertyStateEnum propertyStateEnum = PropertyStateEnum.rental;
   String? propertyTypeId;
   String? posterUserId;
-  bool propertyPostApproval = false;
+  // bool propertyPostApproval = false;
+  PropertyApprovalEnum propertyApprovalEnum = PropertyApprovalEnum.pending;
 
   TextEditingController propertyTypeNameController = TextEditingController();
 
@@ -110,7 +112,7 @@ class AppCubit extends Cubit<AppStates> {
     costController.text = propertyList.cost.toString();
     roomCountController.text = propertyList.roomCount.toString();
     withFurniture = propertyList.withFurniture;
-    propertyPostApproval = propertyList.propertyPostApproval;
+    propertyApprovalEnum = propertyList.propertyPostApproval;
     propertyStateEnum = propertyList.propertyState;
     propertyTypeId = propertyList.propertyTypeId;
     posterUserId = propertyList.posterUserId;
@@ -124,7 +126,7 @@ class AppCubit extends Cubit<AppStates> {
     costController.text = "";
     roomCountController.text = "";
     withFurniture = false;
-    propertyPostApproval = false;
+    propertyApprovalEnum = PropertyApprovalEnum.pending;
     propertyStateEnum = PropertyStateEnum.rental;
 
     emit(AppRefreshUIState());
@@ -325,7 +327,7 @@ class AppCubit extends Cubit<AppStates> {
           posterUserId: AuthCubit.currentUserId ??
               AuthCubit
                   .adminUserId, //posterUserID for this is going to be the admin
-          propertyPostApproval: propertyPostApproval,
+          propertyPostApproval: propertyApprovalEnum,
         ).toJson(),
       );
       if (res.statusCode == 201) {
@@ -357,7 +359,7 @@ class AppCubit extends Cubit<AppStates> {
           posterUserId: AuthCubit.currentUserId ??
               AuthCubit
                   .adminUserId, //posterUserID for this is going to be the admin
-          propertyPostApproval: propertyPostApproval,
+          propertyPostApproval: propertyApprovalEnum,
         ).toJson(),
       );
       if (res.statusCode == 200) {
