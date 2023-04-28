@@ -52,6 +52,6 @@ class PropertyModel {
         propertyTypeId: json["propertyTypeId"] as String,
         posterUserId: json["posterUserId"] as String,
         propertyPostApproval:
-            PropertyApprovalEnum.values[json["propertyState"] as int],
+            PropertyApprovalEnum.values[json["propertyPostApproval"] as int],
       );
 }

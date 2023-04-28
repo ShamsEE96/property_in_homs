@@ -136,7 +136,7 @@ class AppCubit extends Cubit<AppStates> {
     if (selectedPropertyId == '') {
       await postProperty();
     } else {
-      await updateProperty();
+      await updateProperty(selectedPropertyId);
     }
   }
 
@@ -249,6 +249,27 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppRefreshUIState());
   }
 
+  void approvalFilterChangedEvent(PropertyApprovalEnum? filters) {
+    filteredProperty.clear();
+    if (filters == null) {
+      filteredProperty.addAll(propertyList);
+    } else {
+      filteredProperty.addAll(propertyList
+          .where((element) => element.propertyPostApproval == filters)
+          .toList());
+    }
+    emit(AppRefreshUIState());
+  }
+
+  Future<void> approvalChangedEvent(
+      String id, PropertyApprovalEnum newState) async {
+    propertyApprovalEnum = newState;
+
+    await updateProperty(id);
+
+    emit(AppRefreshUIState());
+  }
+
   // void addBookedPropertyIdEvent(int index) {
   //   propertyBookingList.where(
   //     (element) {
@@ -329,13 +350,13 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  Future<void> updateProperty() async {
+  Future<void> updateProperty(String? id) async {
     try {
       DioHelper.initialize();
       var res = await DioHelper.dio!.put(
-        "classes/Property/$selectedPropertyId",
+        "classes/Property/$id".toString(),
         data: PropertyModel(
-          objectId: selectedPropertyId ?? "",
+          objectId: id ?? "",
           address: addressController.text.trim(),
           roomCount: int.parse(roomCountController.text.trim()),
           space: int.parse(spaceController.text.trim()),
