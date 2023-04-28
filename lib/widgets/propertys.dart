@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
+import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/bloc/states/auth_states.dart';
 import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/property_view_page.dart';
@@ -13,122 +15,141 @@ class PropertyListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
+    return BlocConsumer<AuthCubit, AuthStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        AppCubit appCubit = AppCubit.get(context);
+        AuthCubit authCubit = AuthCubit.get(context);
+        return BlocConsumer<AppCubit, AppStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            AppCubit appCubit = AppCubit.get(context);
 
-        // appCubit.filteredProperty.addAll(appCubit.propertyList);
+            // appCubit.filteredProperty.addAll(appCubit.propertyList);
 
-        return Scaffold(
-          backgroundColor: AppColors.mainWhiteColor,
-          appBar: AppBar(
-            // elevation: 0.0,
-            backgroundColor: AppColors.mainBlueColor,
-            // toolbarHeight: 50.0,
-            title: const Text("Home Page"),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            return Scaffold(
+              backgroundColor: AppColors.mainWhiteColor,
+              appBar: AppBar(
+                // elevation: 0.0,
+                backgroundColor: AppColors.mainBlueColor,
+                // toolbarHeight: 50.0,
+                title: const Text("Home Page"),
+              ),
+              body: SingleChildScrollView(
+                child: Column(
                   children: [
-                    Column(
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        IconButton(
-                          onPressed: () {
-                            appCubit.filterChangedEvent(null);
-                          },
-                          // color: AppColors.mainWhiteColor,
-                          icon: const Icon(
-                            Icons.list,
-                            color: Color.fromARGB(255, 37, 72, 121),
-                          ),
-                          iconSize: 35,
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                appCubit.filterChangedEvent(null);
+                              },
+                              // color: AppColors.mainWhiteColor,
+                              icon: const Icon(
+                                Icons.list,
+                                color: Color.fromARGB(255, 37, 72, 121),
+                              ),
+                            ),
+                            const Text("All"),
+                          ],
                         ),
-                        const Text("All"),
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                appCubit.filterChangedEvent(
+                                    PropertyStateEnum.rental);
+                              },
+                              // color: AppColors.mainWhiteColor,
+                              icon: const Icon(
+                                Icons.holiday_village,
+                                color: Color.fromARGB(255, 37, 72, 121),
+                              ),
+                            ),
+                            const Text("Rental"),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                appCubit
+                                    .filterChangedEvent(PropertyStateEnum.sale);
+                              },
+                              // color: AppColors.mainWhiteColor,
+                              icon: const Icon(
+                                Icons.location_city,
+                                color: Color.fromARGB(255, 37, 72, 121),
+                              ),
+                            ),
+                            const Text(" Sale"),
+                          ],
+                        ),
                       ],
                     ),
-                    Column(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            appCubit
-                                .filterChangedEvent(PropertyStateEnum.rental);
-                          },
-                          // color: AppColors.mainWhiteColor,
-                          icon: const Icon(
-                            Icons.holiday_village,
-                            color: Color.fromARGB(255, 37, 72, 121),
-                          ),
-                          iconSize: 35,
-                        ),
-                        const Text("Rental"),
-                      ],
+                    const SizedBox(
+                      height: 20,
                     ),
-                    Column(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            appCubit.filterChangedEvent(PropertyStateEnum.sale);
-                          },
-                          // color: AppColors.mainWhiteColor,
-                          icon: const Icon(
-                            Icons.location_city,
-                            color: Color.fromARGB(255, 37, 72, 121),
-                          ),
-                          iconSize: 35,
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: appCubit.filteredProperty.length,
+                      itemBuilder: (context, index) => ListTile(
+                        title: Text(
+                          appCubit.filteredProperty[index].address,
                         ),
-                        const Text(" Sale"),
-                      ],
+                        subtitle: Text(appCubit.propertyTypeList
+                            .firstWhere(
+                              (element) =>
+                                  element.objectId ==
+                                  appCubit
+                                      .filteredProperty[index].propertyTypeId,
+                              orElse: () => PropertyTypeModel(
+                                  objectId: "no Id Found",
+                                  propertyTypeName: "no Id Found"),
+                            )
+                            .propertyTypeName),
+                        trailing: Text(
+                            appCubit.filteredProperty[index].cost.toString()),
+                        leading: const Icon(Icons.location_on),
+                        iconColor: const Color.fromARGB(255, 37, 72, 121),
+                        hoverColor: AppColors.mainGreyColor,
+                        tileColor: AppColors.mainWhiteColor,
+                        onTap: () async {
+                          await authCubit.getPosterUserInfo(
+                              appCubit.filteredProperty[index].posterUserId);
+                          appCubit.filteredProperty[index].posterUserId =
+                              authCubit.posterUserName;
+                          // String res = appCubit.propertyTypeList
+                          //     .firstWhere((element) =>
+                          //         element.objectId ==
+                          //         appCubit
+                          //             .filteredProperty[index].propertyTypeId)
+                          //     .propertyTypeName;
+                          // appCubit.filteredProperty[index].propertyTypeId = res;
+                          appCubit.fillPropertyDetailsPage(
+                              appCubit.filteredProperty[index]);
+                          if (!context.mounted) {
+                            return;
+                          }
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const PropertyViewPage(),
+                              ));
+                        },
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: appCubit.filteredProperty.length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(
-                      appCubit.filteredProperty[index].address,
-                    ),
-                    subtitle: Text(appCubit.propertyTypeList
-                        .firstWhere(
-                          (element) =>
-                              element.objectId ==
-                              appCubit.filteredProperty[index].propertyTypeId,
-                          orElse: () => PropertyTypeModel(
-                              objectId: "no Id Found",
-                              propertyTypeName: "no Id Found"),
-                        )
-                        .propertyTypeName),
-                    trailing:
-                        Text(appCubit.filteredProperty[index].cost.toString()),
-                    leading: const Icon(Icons.location_on),
-                    iconColor: const Color.fromARGB(255, 37, 72, 121),
-                    hoverColor: AppColors.mainGreyColor,
-                    tileColor: AppColors.mainWhiteColor,
-                    onTap: () {
-                      appCubit.fillPropertyDetailsPage(
-                          appCubit.filteredProperty[index]);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PropertyViewPage(),
-                          ));
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     );

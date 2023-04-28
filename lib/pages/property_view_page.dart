@@ -37,41 +37,41 @@ class PropertyViewPage extends StatelessWidget {
                             ));
                       },
                       icon: const Icon(Icons.edit_document),
-                    )
-                  ],
-                  IconButton(
-                    tooltip: "Delete",
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text(
-                              "Are you sure you want to delete this Property?"),
-                          content:
-                              const Text("this operation cannot be undone!"),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
+                    ),
+                    IconButton(
+                      tooltip: "Delete",
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text(
+                                "Are you sure you want to delete this Property?"),
+                            content:
+                                const Text("this operation cannot be undone!"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("No")),
+                              TextButton(
+                                onPressed: () async {
+                                  await appCubit.deleteProperty(
+                                      appCubit.selectedPropertyId!);
+                                  if (!context.mounted) return;
                                   Navigator.pop(context);
                                 },
-                                child: const Text("No")),
-                            TextButton(
-                              onPressed: () async {
-                                await appCubit.deleteProperty(
-                                    appCubit.selectedPropertyId!);
-                                if (!context.mounted) return;
-                                Navigator.pop(context);
-                              },
-                              child: const Text("Yes"),
-                            ),
-                          ],
-                        ),
-                      );
-                      // appCubit.deleteProperty(appCubit.selectedPropertyId!);
-                      // Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.delete),
-                  )
+                                child: const Text("Yes"),
+                              ),
+                            ],
+                          ),
+                        );
+                        // appCubit.deleteProperty(appCubit.selectedPropertyId!);
+                        // Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.delete),
+                    )
+                  ],
                 ],
               ),
               body: SingleChildScrollView(
@@ -91,14 +91,14 @@ class PropertyViewPage extends StatelessWidget {
                         height: 8,
                       ),
 
-                      // Icon(Icons.phone,
-                      //     color: AppColors.darkNavyColor, size: 35),
-                      // Text(
-                      //   "  Number : ${authCubit.currentUserNumber}",
-                      //   style: const TextStyle(
-                      //     fontSize: 20,
-                      //   ),
-                      // ),
+                      Icon(Icons.phone,
+                          color: AppColors.darkNavyColor, size: 35),
+                      Text(
+                        "  Number : ${authCubit.posterUserMobileNo}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
                       const SizedBox(
                         height: 8,
                       ),

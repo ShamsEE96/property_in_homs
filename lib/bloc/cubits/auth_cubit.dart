@@ -21,7 +21,8 @@ class AuthCubit extends Cubit<AuthStates> {
 
   static String adminUserId = "rOIkuoPLN2";
   static String? currentUserId;
-  String? posterUserName;
+  String posterUserName = '';
+  String? posterUserMobileNo;
   String? currentUserName;
   String? currentUserEmail;
   String? currentUserNumber;
@@ -131,12 +132,15 @@ class AuthCubit extends Cubit<AuthStates> {
     return false;
   }
 
-  Future<bool> getPosterUser() async {
+  Future<bool> getPosterUserInfo(String id) async {
     try {
       var res = await DioHelper.dio!.get(
-        'users/me',
+        'users/$id'.toString(),
       );
       if (res.statusCode == 200) {
+        posterUserName = res.data['username'].toString();
+        posterUserMobileNo = res.data['mobileNo'].toString();
+
         emit(AuthSuccessState());
         return true;
       }
