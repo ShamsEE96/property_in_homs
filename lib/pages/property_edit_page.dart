@@ -60,7 +60,7 @@ class PropertyEditPage extends StatelessWidget {
                       ],
                     ),
                     NumberInputWithIncrementDecrement(
-                      readOnly: false,
+                      // readOnly: false,
                       controller: appCubit.roomCountController,
                       numberFieldDecoration: const InputDecoration(
                         border: InputBorder.none,
