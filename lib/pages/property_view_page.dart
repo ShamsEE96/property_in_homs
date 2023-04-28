@@ -37,16 +37,16 @@ class PropertyViewPage extends StatelessWidget {
                             ));
                       },
                       icon: const Icon(Icons.edit_document),
+                    ),
+                    IconButton(
+                      tooltip: "Delete",
+                      onPressed: () {
+                        appCubit.deleteProperty(appCubit.selectedPropertyId!);
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.delete),
                     )
                   ],
-                  IconButton(
-                    tooltip: "Delete",
-                    onPressed: () {
-                      appCubit.deleteProperty(appCubit.selectedPropertyId!);
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.delete),
-                  )
                 ],
               ),
               body: SingleChildScrollView(
@@ -66,14 +66,14 @@ class PropertyViewPage extends StatelessWidget {
                         height: 8,
                       ),
 
-                      // Icon(Icons.phone,
-                      //     color: AppColors.darkNavyColor, size: 35),
-                      // Text(
-                      //   "  Number : ${authCubit.currentUserNumber}",
-                      //   style: const TextStyle(
-                      //     fontSize: 20,
-                      //   ),
-                      // ),
+                      Icon(Icons.phone,
+                          color: AppColors.darkNavyColor, size: 35),
+                      Text(
+                        "  Number : ${authCubit.posterUserMobileNo}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
                       const SizedBox(
                         height: 8,
                       ),
