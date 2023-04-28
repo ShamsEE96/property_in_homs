@@ -34,7 +34,7 @@ class RegisterPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   const Center(
                     child: Text(
-                      'Create your account now',
+                      "Create your account now",
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
@@ -44,10 +44,10 @@ class RegisterPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   //USERNAME CONTROLLER
                   CustomTextField(
-                    myLabelText: 'Username',
+                    myLabelText: "Username",
                     myValidator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'This field is required';
+                        return "This field is required";
                       }
                       return null;
                     },
@@ -58,11 +58,11 @@ class RegisterPage extends StatelessWidget {
                   //EMAIL CONTROLLER
                   CustomTextField(
                     controller: authCubit.registerEmailController,
-                    myLabelText: 'Email Address',
+                    myLabelText: "Email Address",
                     fillColor: Colors.white,
                     myValidator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'This field is required';
+                        return "This field is required";
                       }
                       return null;
                     },
@@ -71,45 +71,125 @@ class RegisterPage extends StatelessWidget {
                   //EMAIL CONTROLLER
                   CustomTextField(
                     controller: authCubit.registerMobileNoController,
-                    myLabelText: 'Moblie Phone Number',
+                    myLabelText: "Moblie Phone Number",
                     fillColor: Colors.white,
                     myValidator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'This field is required';
+                        return "This field is required";
                       }
                       return null;
                     },
                   ),
                   const SizedBox(height: 10),
                   //PASSWORD CONTORLLER
-                  CustomTextField(
-                    myLabelText: 'Password',
-                    myValidator: (value) {
+                  TextFormField(
+                    textAlign: TextAlign.start,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: double.minPositive * 0.06),
+                      constraints: const BoxConstraints(
+                          // maxHeight: double.maxFinite * 0.08,
+                          // maxWidth: double.maxFinite * 0.9,
+                          ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.transparentColor,
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        // borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          authCubit.hidePasswordChangedEvent(
+                              authCubit.passwordVisible);
+                        },
+                        icon: authCubit.passwordVisible
+                            ? Icon(
+                                Icons.visibility,
+                                color: AppColors.mainBlueColor,
+                              )
+                            : Icon(
+                                Icons.visibility_off,
+                                color: AppColors.mainBlueColor,
+                              ),
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      label: const Text("Password"),
+                      fillColor: Colors.white,
+                    ),
+                    validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'This field is required';
+                        return "This field is required";
+                      }
+                      if (value.length < 6) {
+                        return "Password too short-must be at least 6 characters";
                       }
                       return null;
                     },
                     controller: authCubit.registerPasswordController,
-                    fillColor: Colors.white,
+                    obscureText: !authCubit.passwordVisible,
                   ),
                   const SizedBox(height: 10),
-                  CustomTextField(
-                    myLabelText: 'Password confirm',
-                    myValidator: (value) {
+                  TextFormField(
+                    textAlign: TextAlign.start,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: double.minPositive * 0.06),
+                      constraints: const BoxConstraints(
+                          // maxHeight: double.maxFinite * 0.08,
+                          // maxWidth: double.maxFinite * 0.9,
+                          ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.transparentColor,
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        // borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          authCubit.hidePasswordConfirmationChangedEvent(
+                              authCubit.passwordConfirmationVisible);
+                        },
+                        icon: authCubit.passwordConfirmationVisible
+                            ? Icon(
+                                Icons.visibility,
+                                color: AppColors.mainBlueColor,
+                              )
+                            : Icon(
+                                Icons.visibility_off,
+                                color: AppColors.mainBlueColor,
+                              ),
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      label: const Text("Password"),
+                      fillColor: Colors.white,
+                    ),
+                    validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'This field is required';
+                        return "This field is required";
+                      }
+                      if (value != authCubit.registerPasswordController.text) {
+                        return "The password confirmation does not match";
                       }
                       return null;
                     },
                     controller: authCubit.registerPassowrdConfirmation,
-                    fillColor: Colors.white,
+                    obscureText: !authCubit.passwordConfirmationVisible,
                   ),
                   const SizedBox(
                     height: 30,
                   ),
                   CustomButton(
-                    myButtonText: 'Register',
+                    myButtonText: "Register",
                     myTextColor: AppColors.mainWhiteColor,
                     backgroundColor: AppColors.darkNavyColor,
                     onPressed: () async {
@@ -132,7 +212,7 @@ class RegisterPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Already have an account ? ',
+                        "Already have an account ? ",
                         style: TextStyle(fontSize: 15),
                       ),
                       InkWell(
@@ -142,11 +222,11 @@ class RegisterPage extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => LoginPage(),
                             ),
-                            ModalRoute.withName('/'),
+                            ModalRoute.withName("/"),
                           );
                         },
                         child: const Text(
-                          'Login now',
+                          "Login now",
                           style: TextStyle(
                               color: Color.fromARGB(255, 25, 100, 160),
                               decoration: TextDecoration.underline,
