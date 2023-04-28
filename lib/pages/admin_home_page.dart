@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/pages/admin_property_approval_page.dart';
 import 'package:property_in_homs/pages/admin_property_type_home_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 
@@ -30,14 +31,25 @@ class AdminHomePage extends StatelessWidget {
                   height: size.height / 15,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       appCubit.getProperty();
+                      // appCubit.filteredProperty.clear();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Placeholder(),
+                            builder: (context) =>
+                                const AdminPropertyApprovalPage(),
                           ));
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.mainBlueColor,
+                      // padding: const EdgeInsets.symmetric(
+                      //     horizontal: 50, vertical: 20),
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     child: const Text('View Property Pending List'),
                   ),
                 ),
@@ -62,6 +74,15 @@ class AdminHomePage extends StatelessWidget {
                                 const AdminPropertyTypeHomePage(),
                           ));
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.mainBlueColor,
+                      // padding: const EdgeInsets.symmetric(
+                      //     horizontal: 50, vertical: 20),
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     child: const Text('View Property Types'),
                   ),
                 ),

@@ -35,7 +35,7 @@ class PropertyListWidget extends StatelessWidget {
                   height: 20,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       children: [
@@ -48,6 +48,7 @@ class PropertyListWidget extends StatelessWidget {
                             Icons.list,
                             color: Color.fromARGB(255, 37, 72, 121),
                           ),
+                          iconSize: 35,
                         ),
                         const Text("All"),
                       ],
@@ -64,6 +65,7 @@ class PropertyListWidget extends StatelessWidget {
                             Icons.holiday_village,
                             color: Color.fromARGB(255, 37, 72, 121),
                           ),
+                          iconSize: 35,
                         ),
                         const Text("Rental"),
                       ],
@@ -79,6 +81,7 @@ class PropertyListWidget extends StatelessWidget {
                             Icons.location_city,
                             color: Color.fromARGB(255, 37, 72, 121),
                           ),
+                          iconSize: 35,
                         ),
                         const Text(" Sale"),
                       ],
