@@ -18,6 +18,7 @@ class AdminPropertyTypeEditPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Api Test'),
+            backgroundColor: AppColors.mainBlueColor,
             actions: [
               IconButton(
                 onPressed: () {
@@ -53,6 +54,7 @@ class AdminPropertyTypeEditPage extends StatelessWidget {
                   height: 20,
                 ),
                 CustomButton(
+                  backgroundColor: AppColors.mainNavyColor,
                   myButtonText: 'Save',
                   onPressed: () async {
                     await appCubit.savePropertyType();

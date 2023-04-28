@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/pages/admin_property_type_edit_page.dart';
+import 'package:property_in_homs/utils/colors.dart';
 
 class AdminPropertyTypeHomePage extends StatelessWidget {
   const AdminPropertyTypeHomePage({super.key});
@@ -16,6 +17,7 @@ class AdminPropertyTypeHomePage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text("Property Types List"),
+            backgroundColor: AppColors.mainBlueColor,
           ),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
