@@ -4,13 +4,31 @@ import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/auth_states.dart';
 import 'package:property_in_homs/components/custom_button.dart';
 import 'package:property_in_homs/components/custom_text_field.dart';
+import 'package:property_in_homs/pages/change_password_page.dart';
 import 'package:property_in_homs/pages/property_home_page.dart';
 import 'package:property_in_homs/pages/register_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
+import 'package:property_in_homs/utils/dio_helper.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
   final formKey = GlobalKey<FormState>();
+
+  // Future<int?> checkPassword(
+  //     TextEditingController x, TextEditingController y) async {
+  //   try {
+  //     var logData = {
+  //       'username': x,
+  //       'password': y.text,
+  //     };
+  //     var res = await DioHelper.dio!.get('login', queryParameters: logData);
+  //     if (res.statusCode == 101) {
+  //       return res.statusCode;
+  //     }
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +81,11 @@ class LoginPage extends StatelessWidget {
                     if (value == null || value.isEmpty) {
                       return "This field is requiered";
                     }
-                    // if (value != authCubit.registerPasswordController.text) {
-                    //   return "Passwors is not correct";
+                    // if (checkPassword(authCubit.loginUsernameController,
+                    //         authCubit.loginPasswordController) ==
+                    //     101) {
+                    //   return "wrong";
                     // }
-                    return null;
                   },
                   fillColor: Colors.white,
                 ),
@@ -113,6 +132,35 @@ class LoginPage extends StatelessWidget {
                       },
                       child: const Text(
                         "Register now",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 25, 100, 160),
+                            decoration: TextDecoration.underline,
+                            fontSize: 16),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "If you forgot the password ? ",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ChangePasswordPage(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "Click here",
                         style: TextStyle(
                             color: Color.fromARGB(255, 25, 100, 160),
                             decoration: TextDecoration.underline,
