@@ -140,8 +140,8 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  void propertyTypeChangedEvent(PropertyTypeModel? objectId) {
-    selectedType = objectId;
+  void propertyTypeChangedEvent(PropertyTypeModel? newType) {
+    selectedType = newType;
     // print(selectedType?.propertyTypeName);
     emit(
       AppRefreshUIState(),
@@ -261,10 +261,16 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppRefreshUIState());
   }
 
-  Future<void> approvalChangedEvent(
-      String id, PropertyApprovalEnum newState) async {
+  Future<void> approvalChangedEvent({
+    required String id,
+    required PropertyApprovalEnum newState,
+    required PropertyModel propertyModel,
+  }) async {
     propertyApprovalEnum = newState;
-
+    propertyModel.propertyPostApproval = propertyApprovalEnum;
+    fillPropertyDetailsPage(propertyModel);
+    // propertyTypeChangedEvent(propertyModel.propertyTypeId);
+    // selectedType?.objectId = propertyModel.propertyTypeId;
     await updateProperty(id);
 
     emit(AppRefreshUIState());
@@ -306,7 +312,9 @@ class AppCubit extends Cubit<AppStates> {
 
         filteredProperty.clear();
         for (var element in propertyList) {
-          filteredProperty.add(element);
+          if (element.propertyPostApproval == PropertyApprovalEnum.approved) {
+            filteredProperty.add(element);
+          }
         }
         // print(propertyList);
         emit(AppSuccessState());
@@ -356,14 +364,15 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.put(
         "classes/Property/$id".toString(),
         data: PropertyModel(
-          objectId: id ?? "",
+          objectId: id!,
           address: addressController.text.trim(),
           roomCount: int.parse(roomCountController.text.trim()),
           space: int.parse(spaceController.text.trim()),
           withFurniture: withFurniture,
           cost: int.parse(costController.text.trim()),
           propertyState: propertyStateEnum,
-          propertyTypeId: selectedType!.objectId, //propertyTypeId
+          propertyTypeId:
+              selectedType?.objectId ?? propertyTypeId!, //propertyTypeId
           // propertyTypeId: selectedPropertyTypeId ?? "", //propertyTypeId
           posterUserId: AuthCubit.currentUserId ??
               AuthCubit

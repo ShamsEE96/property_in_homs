@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/property_view_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
@@ -10,9 +11,16 @@ import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 
 class PropertyEditPage extends StatelessWidget {
-  PropertyEditPage({super.key});
+  PropertyEditPage({
+    super.key,
+    this.index,
+    this.propertyModel,
+  });
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  int? index;
+  PropertyModel? propertyModel;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -182,9 +190,9 @@ class PropertyEditPage extends StatelessWidget {
                         isExpanded: true,
                         value: appCubit.selectedType,
                         items: [
-                          const DropdownMenuItem(
+                          DropdownMenuItem(
                             value: null,
-                            child: Text("not selected yet!"),
+                            child: const Text("not selected yet!"),
                           ),
                           for (PropertyTypeModel type
                               in appCubit.propertyTypeList)

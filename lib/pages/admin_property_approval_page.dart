@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
-import 'package:property_in_homs/models/property_model.dart';
-import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/property_view_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 import 'package:property_in_homs/utils/enums/property_approval_enum.dart';
-import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 
 class AdminPropertyApprovalPage extends StatelessWidget {
   const AdminPropertyApprovalPage({super.key});
@@ -33,7 +30,7 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                   height: 20,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
                       children: [
@@ -108,12 +105,10 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                     //     .propertyTypeName),
                     trailing: IconButton(
                       onPressed: () {
-                      
                         appCubit.approvalChangedEvent(
-                            appCubit.filteredProperty[index].objectId,
-                            appCubit.filteredProperty[index]
-                                    .propertyPostApproval =
-                                PropertyApprovalEnum.approved);
+                            id: appCubit.filteredProperty[index].objectId,
+                            newState: PropertyApprovalEnum.approved,
+                            propertyModel: appCubit.filteredProperty[index]);
                       },
                       color: const Color.fromARGB(255, 27, 180, 32),
                       icon: const Icon(Icons.turn_left_outlined),
@@ -123,10 +118,9 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                     leading: IconButton(
                       onPressed: () {
                         appCubit.approvalChangedEvent(
-                            appCubit.filteredProperty[index].objectId,
-                            appCubit.filteredProperty[index]
-                                    .propertyPostApproval =
-                                PropertyApprovalEnum.rejected);
+                            id: appCubit.filteredProperty[index].objectId,
+                            newState: PropertyApprovalEnum.rejected,
+                            propertyModel: appCubit.filteredProperty[index]);
                       },
                       icon: const Icon(Icons.cancel_schedule_send_outlined),
                       color: Colors.red,

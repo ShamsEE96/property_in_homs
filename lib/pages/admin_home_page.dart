@@ -33,6 +33,9 @@ class AdminHomePage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       appCubit.getProperty();
+                      appCubit.filteredProperty.clear();
+                      appCubit.filteredProperty.addAll(appCubit.propertyList);
+
                       // appCubit.filteredProperty.clear();
                       Navigator.push(
                           context,

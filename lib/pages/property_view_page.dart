@@ -8,7 +8,9 @@ import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 
 class PropertyViewPage extends StatelessWidget {
-  const PropertyViewPage({super.key});
+  const PropertyViewPage({super.key, this.index});
+
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,10 @@ class PropertyViewPage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PropertyEditPage(),
+                              builder: (context) => PropertyEditPage(
+                                  index: index,
+                                  propertyModel:
+                                      appCubit.filteredProperty[index!]),
                             ));
                       },
                       icon: const Icon(Icons.edit_document),
