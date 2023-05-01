@@ -18,8 +18,6 @@ class AuthCubit extends Cubit<AuthStates> {
   TextEditingController registerMobileNoController = TextEditingController();
   TextEditingController registerPasswordController = TextEditingController();
   TextEditingController registerPassowrdConfirmation = TextEditingController();
-  TextEditingController changePasswordController = TextEditingController();
-  TextEditingController changePasswordConfirmationController = TextEditingController();
 
   static String adminUserId = "rOIkuoPLN2";
   static String? currentUserId;

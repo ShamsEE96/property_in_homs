@@ -4,7 +4,6 @@ import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/auth_states.dart';
 import 'package:property_in_homs/components/custom_button.dart';
 import 'package:property_in_homs/components/custom_text_field.dart';
-import 'package:property_in_homs/pages/change_password_page.dart';
 import 'package:property_in_homs/pages/property_home_page.dart';
 import 'package:property_in_homs/pages/register_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
@@ -143,32 +142,6 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "If you forgot the password ? ",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ChangePasswordPage(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        "Click here",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 25, 100, 160),
-                            decoration: TextDecoration.underline,
-                            fontSize: 16),
-                      ),
-                    )
-                  ],
-                )
               ]),
             ),
           ),
