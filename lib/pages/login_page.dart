@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
                     }
                     return null;
                   },
-                  fillColor: Colors.white,
+                  fillColor: AppColors.mainWhiteColor,
                   myLabelText: "Your Username",
                 ),
                 const SizedBox(height: 10),
@@ -80,13 +80,31 @@ class LoginPage extends StatelessWidget {
                     if (value == null || value.isEmpty) {
                       return "This field is requiered";
                     }
+                    return null;
                     // if (checkPassword(authCubit.loginUsernameController,
                     //         authCubit.loginPasswordController) ==
                     //     101) {
                     //   return "wrong";
                     // }
                   },
-                  fillColor: Colors.white,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      authCubit
+                          .hidePasswordChangedEvent(authCubit.passwordVisible);
+                    },
+                    icon: authCubit.passwordVisible
+                        ? Icon(
+                            Icons.visibility,
+                            color: AppColors.mainBlueColor,
+                          )
+                        : Icon(
+                            Icons.visibility_off,
+                            color: AppColors.mainBlueColor,
+                          ),
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                  obscureText: !authCubit.passwordVisible,
+                  fillColor: AppColors.mainWhiteColor,
                 ),
                 const SizedBox(
                   height: 20,

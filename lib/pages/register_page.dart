@@ -52,14 +52,14 @@ class RegisterPage extends StatelessWidget {
                       return null;
                     },
                     controller: authCubit.registerUsernameController,
-                    fillColor: Colors.white,
+                    fillColor: AppColors.mainWhiteColor,
                   ),
                   const SizedBox(height: 10),
                   //EMAIL CONTROLLER
                   CustomTextField(
                     controller: authCubit.registerEmailController,
                     myLabelText: "Email Address",
-                    fillColor: Colors.white,
+                    fillColor: AppColors.mainWhiteColor,
                     myValidator: (value) {
                       if (value == null || value.isEmpty) {
                         return "This field is required";
@@ -72,7 +72,7 @@ class RegisterPage extends StatelessWidget {
                   CustomTextField(
                     controller: authCubit.registerMobileNoController,
                     myLabelText: "Moblie Phone Number",
-                    fillColor: Colors.white,
+                    fillColor: AppColors.mainWhiteColor,
                     myValidator: (value) {
                       if (value == null || value.isEmpty) {
                         return "This field is required";
@@ -82,46 +82,11 @@ class RegisterPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   //PASSWORD CONTORLLER
-                  TextFormField(
-                    textAlign: TextAlign.start,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: double.minPositive * 0.06),
-                      constraints: const BoxConstraints(
-                          // maxHeight: double.maxFinite * 0.08,
-                          // maxWidth: double.maxFinite * 0.9,
-                          ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.transparentColor,
-                        ),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        // borderSide: BorderSide.none,
-                      ),
-                      filled: true,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          authCubit.hidePasswordChangedEvent(
-                              authCubit.passwordVisible);
-                        },
-                        icon: authCubit.passwordVisible
-                            ? Icon(
-                                Icons.visibility,
-                                color: AppColors.mainBlueColor,
-                              )
-                            : Icon(
-                                Icons.visibility_off,
-                                color: AppColors.mainBlueColor,
-                              ),
-                        color: Theme.of(context).primaryColorDark,
-                      ),
-                      label: const Text("Password"),
-                      fillColor: Colors.white,
-                    ),
-                    validator: (value) {
+                  CustomTextField(
+                    myLabelText: "Password",
+                    fillColor: AppColors.mainWhiteColor,
+                    controller: authCubit.registerPasswordController,
+                    myValidator: (value) {
                       if (value == null || value.isEmpty) {
                         return "This field is required";
                       }
@@ -130,50 +95,30 @@ class RegisterPage extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: authCubit.registerPasswordController,
                     obscureText: !authCubit.passwordVisible,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        authCubit.hidePasswordChangedEvent(
+                            authCubit.passwordVisible);
+                      },
+                      icon: authCubit.passwordVisible
+                          ? Icon(
+                              Icons.visibility,
+                              color: AppColors.mainBlueColor,
+                            )
+                          : Icon(
+                              Icons.visibility_off,
+                              color: AppColors.mainBlueColor,
+                            ),
+                      color: Theme.of(context).primaryColorDark,
+                    ),
                   ),
                   const SizedBox(height: 10),
-                  TextFormField(
-                    textAlign: TextAlign.start,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: double.minPositive * 0.06),
-                      constraints: const BoxConstraints(
-                          // maxHeight: double.maxFinite * 0.08,
-                          // maxWidth: double.maxFinite * 0.9,
-                          ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.transparentColor,
-                        ),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        // borderSide: BorderSide.none,
-                      ),
-                      filled: true,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          authCubit.hidePasswordConfirmationChangedEvent(
-                              authCubit.passwordConfirmationVisible);
-                        },
-                        icon: authCubit.passwordConfirmationVisible
-                            ? Icon(
-                                Icons.visibility,
-                                color: AppColors.mainBlueColor,
-                              )
-                            : Icon(
-                                Icons.visibility_off,
-                                color: AppColors.mainBlueColor,
-                              ),
-                        color: Theme.of(context).primaryColorDark,
-                      ),
-                      label: const Text("Password"),
-                      fillColor: Colors.white,
-                    ),
-                    validator: (value) {
+                  CustomTextField(
+                    myLabelText: "Confirm Password",
+                    fillColor: AppColors.mainWhiteColor,
+                    controller: authCubit.registerPassowrdConfirmation,
+                    myValidator: (value) {
                       if (value == null || value.isEmpty) {
                         return "This field is required";
                       }
@@ -182,9 +127,25 @@ class RegisterPage extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: authCubit.registerPassowrdConfirmation,
                     obscureText: !authCubit.passwordConfirmationVisible,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        authCubit.hidePasswordConfirmationChangedEvent(
+                            authCubit.passwordConfirmationVisible);
+                      },
+                      icon: authCubit.passwordConfirmationVisible
+                          ? Icon(
+                              Icons.visibility,
+                              color: AppColors.mainBlueColor,
+                            )
+                          : Icon(
+                              Icons.visibility_off,
+                              color: AppColors.mainBlueColor,
+                            ),
+                      color: Theme.of(context).primaryColorDark,
+                    ),
                   ),
+
                   const SizedBox(
                     height: 30,
                   ),
