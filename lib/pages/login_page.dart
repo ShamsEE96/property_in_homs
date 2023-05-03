@@ -73,20 +73,58 @@ class LoginPage extends StatelessWidget {
                   myLabelText: "Your Username",
                 ),
                 const SizedBox(height: 10),
-                CustomTextField(
-                  myLabelText: "Password",
+                TextFormField(
+                  textAlign: TextAlign.start,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: double.minPositive * 0.06),
+                    constraints: const BoxConstraints(
+                        // maxHeight: double.maxFinite * 0.08,
+                        // maxWidth: double.maxFinite * 0.9,
+                        ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColors.transparentColor,
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      // borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        authCubit.hideLoginPasswordChangedEvent(
+                            authCubit.loginPasswordVisible);
+                      },
+                      icon: authCubit.loginPasswordVisible
+                          ? Icon(
+                              Icons.visibility,
+                              color: AppColors.mainBlueColor,
+                            )
+                          : Icon(
+                              Icons.visibility_off,
+                              color: AppColors.mainBlueColor,
+                            ),
+                      color: Theme.of(context).primaryColorDark,
+                    ),
+                    label: const Text("Password"),
+                    fillColor: Colors.white,
+                  ),
+                  // myValidator: (value) {
+                  //   if (value == null || value.isEmpty) {
+                  //     return "This field is requiered";
+                  //   }
+                  //   // if (checkPassword(authCubit.loginUsernameController,
+                  //   //         authCubit.loginPasswordController) ==
+                  //   //     101) {
+                  //   //   return "wrong";
+                  //   // }
+                  // },
+
                   controller: authCubit.loginPasswordController,
-                  myValidator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "This field is requiered";
-                    }
-                    // if (checkPassword(authCubit.loginUsernameController,
-                    //         authCubit.loginPasswordController) ==
-                    //     101) {
-                    //   return "wrong";
-                    // }
-                  },
-                  fillColor: Colors.white,
+                  obscureText: !authCubit.loginPasswordVisible,
                 ),
                 const SizedBox(
                   height: 20,
