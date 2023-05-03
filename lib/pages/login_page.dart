@@ -7,10 +7,27 @@ import 'package:property_in_homs/components/custom_text_field.dart';
 import 'package:property_in_homs/pages/property_home_page.dart';
 import 'package:property_in_homs/pages/register_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
+import 'package:property_in_homs/utils/dio_helper.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
   final formKey = GlobalKey<FormState>();
+
+  // Future<int?> checkPassword(
+  //     TextEditingController x, TextEditingController y) async {
+  //   try {
+  //     var logData = {
+  //       'username': x,
+  //       'password': y.text,
+  //     };
+  //     var res = await DioHelper.dio!.get('login', queryParameters: logData);
+  //     if (res.statusCode == 101) {
+  //       return res.statusCode;
+  //     }
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +53,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 const Center(
                   child: Text(
-                    'WELLCOME BACK',
+                    "WELLCOME BACK",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
@@ -48,22 +65,26 @@ class LoginPage extends StatelessWidget {
                   controller: authCubit.loginUsernameController,
                   myValidator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'This field is requiered';
+                      return "This field is requiered";
                     }
                     return null;
                   },
                   fillColor: Colors.white,
-                  myLabelText: 'Your Username',
+                  myLabelText: "Your Username",
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  myLabelText: 'Password',
+                  myLabelText: "Password",
                   controller: authCubit.loginPasswordController,
                   myValidator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'This field is requiered';
+                      return "This field is requiered";
                     }
-                    return null;
+                    // if (checkPassword(authCubit.loginUsernameController,
+                    //         authCubit.loginPasswordController) ==
+                    //     101) {
+                    //   return "wrong";
+                    // }
                   },
                   fillColor: Colors.white,
                 ),
@@ -71,7 +92,7 @@ class LoginPage extends StatelessWidget {
                   height: 20,
                 ),
                 CustomButton(
-                    myButtonText: 'login',
+                    myButtonText: "login",
                     myTextColor: AppColors.mainWhiteColor,
                     backgroundColor: AppColors.darkNavyColor,
                     onPressed: () async {
@@ -95,7 +116,7 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'dont have an account ? ',
+                      "dont have an account ? ",
                       style: TextStyle(fontSize: 15),
                     ),
                     InkWell(
@@ -109,7 +130,7 @@ class LoginPage extends StatelessWidget {
                         );
                       },
                       child: const Text(
-                        'Register now',
+                        "Register now",
                         style: TextStyle(
                             color: Color.fromARGB(255, 25, 100, 160),
                             decoration: TextDecoration.underline,
@@ -117,7 +138,10 @@ class LoginPage extends StatelessWidget {
                       ),
                     )
                   ],
-                )
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
               ]),
             ),
           ),
