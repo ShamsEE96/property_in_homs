@@ -208,31 +208,31 @@ class PropertyEditPage extends StatelessWidget {
                         iconEnabledColor: AppColors.mainBlueColor,
                       ),
                     ),
-                    SizedBox(
-                      height: 60,
-                      child: ToggleButtons(
-                        isSelected: appCubit.selections,
-                        onPressed: (newState) {
-                          appCubit.propretyStateChangedEvent(newState == 0
-                              ? PropertyStateEnum.sale
-                              : PropertyStateEnum.rental);
-                        },
-                        color: Colors.black,
-                        selectedColor: Colors.white,
-                        fillColor: AppColors.mainBlueColor,
-                        renderBorder: true,
-                        borderWidth: 2,
-                        borderColor: AppColors.darkNavyColor,
-                        borderRadius: BorderRadius.circular(20),
-                        textStyle: const TextStyle(
-                          fontSize: 20,
-                        ),
-                        children: const [
-                          Text("   For Sale   "),
-                          Text(" For Rental "),
-                        ],
-                      ),
-                    ),
+                    // SizedBox(
+                    //   height: 60,
+                    //   child: ToggleButtons(
+                    //     isSelected: appCubit.selections,
+                    //     onPressed: (newState) {
+                    //       appCubit.propretyStateChangedEvent(newState == 0
+                    //           ? PropertyStateEnum.sale
+                    //           : PropertyStateEnum.rental);
+                    //     },
+                    //     color: Colors.black,
+                    //     selectedColor: Colors.white,
+                    //     fillColor: AppColors.mainBlueColor,
+                    //     renderBorder: true,
+                    //     borderWidth: 2,
+                    //     borderColor: AppColors.darkNavyColor,
+                    //     borderRadius: BorderRadius.circular(20),
+                    //     textStyle: const TextStyle(
+                    //       fontSize: 20,
+                    //     ),
+                    //     children: const [
+                    //       Text("   For Sale   "),
+                    //       Text(" For Rental "),
+                    //     ],
+                    //   ),
+                    // ),
                     const SizedBox(
                       height: 80,
                     ),

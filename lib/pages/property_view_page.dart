@@ -36,9 +36,10 @@ class PropertyViewPage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => PropertyEditPage(
-                                  index: index,
-                                  propertyModel:
-                                      appCubit.filteredProperty[index!]),
+                                index: index,
+                                // propertyModel:
+                                //     appCubit.filteredProperty[index!]
+                              ),
                             ));
                       },
                       icon: const Icon(Icons.edit_document),
