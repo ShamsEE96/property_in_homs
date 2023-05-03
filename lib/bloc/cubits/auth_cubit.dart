@@ -26,7 +26,8 @@ class AuthCubit extends Cubit<AuthStates> {
   String? currentUserName;
   String? currentUserEmail;
   String? currentUserNumber;
-
+  bool passwordVisible = false;
+  bool passwordConfirmationVisible = false;
 //Saving Token In Shared Prefrences
   Future<void> saveTokenInSP(
     String t,
@@ -148,5 +149,17 @@ class AuthCubit extends Cubit<AuthStates> {
       emit(AuthErrorState());
     }
     return false;
+  }
+
+  bool? hidePasswordChangedEvent(newState) {
+    passwordVisible = !newState;
+    emit(AuthRefreshUIState());
+    return null;
+  }
+
+  bool? hidePasswordConfirmationChangedEvent(newState) {
+    passwordConfirmationVisible = !newState;
+    emit(AuthRefreshUIState());
+    return null;
   }
 }
