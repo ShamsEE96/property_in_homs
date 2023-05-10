@@ -13,6 +13,10 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.myValidator,
     this.readOnly = false,
+    this.suffixIcon,
+    // this.showPasswordIconVisibility = false,
+    // this.suffixIconOnPress,
+    // this.passwordVisibleChange = false,
   });
 
   final String myLabelText;
@@ -24,6 +28,10 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final String? Function(String?)? myValidator;
   final bool readOnly;
+  // final void Function()? suffixIconOnPress;
+  // final bool? showPasswordIconVisibility;
+  // final bool passwordVisibleChange;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +68,24 @@ class CustomTextField extends StatelessWidget {
             : null,
         hintText: myHintText ?? "",
         fillColor: fillColor,
+        suffixIcon: suffixIcon,
+        // suffixIcon: showPasswordIconVisibility != null
+        //     ? IconButton(
+        //         onPressed: () {
+        //           suffixIconOnPress;
+        //         },
+        //         icon: passwordVisibleChange
+        //             ? Icon(
+        //                 Icons.visibility,
+        //                 color: AppColors.mainBlueColor,
+        //               )
+        //             : Icon(
+        //                 Icons.visibility_off,
+        //                 color: AppColors.mainBlueColor,
+        //               ),
+        //         color: Theme.of(context).primaryColorDark,
+        //       )
+        //     : null,
       ),
       keyboardType: keyboardType ?? TextInputType.text,
       readOnly: readOnly,

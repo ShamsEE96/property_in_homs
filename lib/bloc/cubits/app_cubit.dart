@@ -34,6 +34,8 @@ class AppCubit extends Cubit<AppStates> {
   String? selectedPropertyId = "";
   String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
+  dynamic propertyTypeNameForEachTile;
+
   // String? currentUserId = "rOIkuoPLN2";
   PropertyTypeModel? selectedType;
   late PropertyModel currentPropertyItem;
@@ -140,8 +142,8 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  void propertyTypeChangedEvent(PropertyTypeModel? objectId) {
-    selectedType = objectId;
+  void propertyTypeChangedEvent(PropertyTypeModel? newType) {
+    selectedType = newType;
     // print(selectedType?.propertyTypeName);
     emit(
       AppRefreshUIState(),
@@ -198,6 +200,19 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppRefreshUIState());
   }
 
+  String? propretyTypeNameforNavigation(int index) {
+    propertyTypeNameForEachTile = propertyTypeList
+        .firstWhere(
+          (element) =>
+              element.objectId == filteredProperty[index].propertyTypeId,
+          orElse: () => PropertyTypeModel(
+              objectId: "no Id Found", propertyTypeName: "no Id Found"),
+        )
+        .propertyTypeName;
+    emit(AppRefreshUIState());
+    return propertyTypeNameForEachTile;
+  }
+
   String? changePropertyTypeIdToNameEvent(String id) {
     PropertyTypeModel temp =
         propertyTypeList.firstWhere((element) => element.objectId == id);
@@ -240,19 +255,31 @@ class AppCubit extends Cubit<AppStates> {
   void filterChangedEvent(PropertyStateEnum? filter) {
     filteredProperty.clear();
     if (filter == null) {
-      filteredProperty.addAll(propertyList);
+      for (var element in propertyList) {
+        if (element.propertyPostApproval == PropertyApprovalEnum.approved) {
+          filteredProperty.add(element);
+        }
+      }
     } else {
-      filteredProperty.addAll(propertyList
-          .where((element) => element.propertyState == filter)
-          .toList());
+      for (var element in propertyList) {
+        if (element.propertyPostApproval == PropertyApprovalEnum.approved &&
+            element.propertyState == filter) {
+          filteredProperty.add(element);
+        }
+      }
     }
     emit(AppRefreshUIState());
   }
 
   void approvalFilterChangedEvent(PropertyApprovalEnum? filters) {
     filteredProperty.clear();
-    if (filters == null) {
-      filteredProperty.addAll(propertyList);
+    if (filters == PropertyApprovalEnum.pending) {
+      for (var element in propertyList) {
+        if (element.propertyPostApproval == PropertyApprovalEnum.pending) {
+          filteredProperty.add(element);
+        }
+      }
+      // filteredProperty.addAll(propertyList);
     } else {
       filteredProperty.addAll(propertyList
           .where((element) => element.propertyPostApproval == filters)
@@ -261,10 +288,16 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppRefreshUIState());
   }
 
-  Future<void> approvalChangedEvent(
-      String id, PropertyApprovalEnum newState) async {
+  Future<void> approvalChangedEvent({
+    required String id,
+    required PropertyApprovalEnum newState,
+    required PropertyModel propertyModel,
+  }) async {
     propertyApprovalEnum = newState;
-
+    propertyModel.propertyPostApproval = propertyApprovalEnum;
+    fillPropertyDetailsPage(propertyModel);
+    // propertyTypeChangedEvent(propertyModel.propertyTypeId);
+    // selectedType?.objectId = propertyModel.propertyTypeId;
     await updateProperty(id);
 
     emit(AppRefreshUIState());
@@ -306,7 +339,9 @@ class AppCubit extends Cubit<AppStates> {
 
         filteredProperty.clear();
         for (var element in propertyList) {
-          filteredProperty.add(element);
+          if (element.propertyPostApproval == PropertyApprovalEnum.approved) {
+            filteredProperty.add(element);
+          }
         }
         // print(propertyList);
         emit(AppSuccessState());
@@ -356,14 +391,15 @@ class AppCubit extends Cubit<AppStates> {
       var res = await DioHelper.dio!.put(
         "classes/Property/$id".toString(),
         data: PropertyModel(
-          objectId: id ?? "",
+          objectId: id!,
           address: addressController.text.trim(),
           roomCount: int.parse(roomCountController.text.trim()),
           space: int.parse(spaceController.text.trim()),
           withFurniture: withFurniture,
           cost: int.parse(costController.text.trim()),
           propertyState: propertyStateEnum,
-          propertyTypeId: selectedType!.objectId, //propertyTypeId
+          propertyTypeId:
+              selectedType?.objectId ?? propertyTypeId!, //propertyTypeId
           // propertyTypeId: selectedPropertyTypeId ?? "", //propertyTypeId
           posterUserId: AuthCubit.currentUserId ??
               AuthCubit

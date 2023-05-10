@@ -5,6 +5,7 @@ import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/pages/admin_property_approval_page.dart';
 import 'package:property_in_homs/pages/admin_property_type_home_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
+import 'package:property_in_homs/utils/enums/property_approval_enum.dart';
 
 class AdminHomePage extends StatelessWidget {
   const AdminHomePage({super.key});
@@ -33,7 +34,10 @@ class AdminHomePage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       appCubit.getProperty();
-                      // appCubit.filteredProperty.clear();
+                      appCubit.filteredProperty.clear();
+                      appCubit.approvalFilterChangedEvent(
+                          PropertyApprovalEnum.pending);
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(
