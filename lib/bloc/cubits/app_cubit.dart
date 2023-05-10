@@ -34,6 +34,8 @@ class AppCubit extends Cubit<AppStates> {
   String? selectedPropertyId = "";
   String? selectedPropertyTypeId = "";
   String? selectedPropertyBookingId = "";
+  dynamic propertyTypeNameForEachTile;
+
   // String? currentUserId = "rOIkuoPLN2";
   PropertyTypeModel? selectedType;
   late PropertyModel currentPropertyItem;
@@ -198,6 +200,19 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppRefreshUIState());
   }
 
+  String? propretyTypeNameforNavigation(int index) {
+    propertyTypeNameForEachTile = propertyTypeList
+        .firstWhere(
+          (element) =>
+              element.objectId == filteredProperty[index].propertyTypeId,
+          orElse: () => PropertyTypeModel(
+              objectId: "no Id Found", propertyTypeName: "no Id Found"),
+        )
+        .propertyTypeName;
+    emit(AppRefreshUIState());
+    return propertyTypeNameForEachTile;
+  }
+
   String? changePropertyTypeIdToNameEvent(String id) {
     PropertyTypeModel temp =
         propertyTypeList.firstWhere((element) => element.objectId == id);
@@ -240,19 +255,31 @@ class AppCubit extends Cubit<AppStates> {
   void filterChangedEvent(PropertyStateEnum? filter) {
     filteredProperty.clear();
     if (filter == null) {
-      filteredProperty.addAll(propertyList);
+      for (var element in propertyList) {
+        if (element.propertyPostApproval == PropertyApprovalEnum.approved) {
+          filteredProperty.add(element);
+        }
+      }
     } else {
-      filteredProperty.addAll(propertyList
-          .where((element) => element.propertyState == filter)
-          .toList());
+      for (var element in propertyList) {
+        if (element.propertyPostApproval == PropertyApprovalEnum.approved &&
+            element.propertyState == filter) {
+          filteredProperty.add(element);
+        }
+      }
     }
     emit(AppRefreshUIState());
   }
 
   void approvalFilterChangedEvent(PropertyApprovalEnum? filters) {
     filteredProperty.clear();
-    if (filters == null) {
-      filteredProperty.addAll(propertyList);
+    if (filters == PropertyApprovalEnum.pending) {
+      for (var element in propertyList) {
+        if (element.propertyPostApproval == PropertyApprovalEnum.pending) {
+          filteredProperty.add(element);
+        }
+      }
+      // filteredProperty.addAll(propertyList);
     } else {
       filteredProperty.addAll(propertyList
           .where((element) => element.propertyPostApproval == filters)

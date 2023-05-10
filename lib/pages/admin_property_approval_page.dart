@@ -132,12 +132,18 @@ class AdminPropertyApprovalPage extends StatelessWidget {
                     // hoverColor: AppColors.mainGreyColor,
                     // tileColor: AppColors.mainWhiteColor,
                     onTap: () {
+                      String? propertyTypeNameForEachTile =
+                          appCubit.propertyTypeNameForEachTile;
                       appCubit.fillPropertyDetailsPage(
                           appCubit.filteredProperty[index]);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const PropertyViewPage(),
+                            builder: (context) => PropertyViewPage(
+                              index: index,
+                              propertyTypeNameForEachTile:
+                                  propertyTypeNameForEachTile,
+                            ),
                           ));
                     },
                   ),

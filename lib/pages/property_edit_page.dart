@@ -15,11 +15,13 @@ class PropertyEditPage extends StatelessWidget {
     super.key,
     this.index,
     this.propertyModel,
+    this.propertyTypeNameForEachTile,
   });
 
   final _formKey = GlobalKey<FormState>();
-  int? index;
-  PropertyModel? propertyModel;
+  final int? index;
+  final PropertyModel? propertyModel;
+  final String? propertyTypeNameForEachTile;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class PropertyEditPage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit appCubit = AppCubit.get(context);
+
         return Scaffold(
           appBar: AppBar(
             title: const Text("Edit Page"),
@@ -67,51 +70,51 @@ class PropertyEditPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    NumberInputWithIncrementDecrement(
-                      // readOnly: false,
-                      controller: appCubit.roomCountController,
-                      numberFieldDecoration: const InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      widgetContainerDecoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
-                          border: Border.all(
-                            // color: Colors.amber,
-                            width: 1,
-                          )),
-                      incIconDecoration: const BoxDecoration(
-                        color: Color(0xFF576CBC),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
-                      ),
-                      separateIcons: true,
-                      decIconDecoration: const BoxDecoration(
-                        color: Color(0xFF576CBC),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                      ),
-                      incIconSize: 28,
-                      decIconSize: 28,
-                      incIcon: Icons.plus_one,
-                      decIcon: Icons.exposure_neg_1,
-                      incIconColor: Colors.white,
-                      decIconColor: Colors.white,
-                      validator: (currentText) {
-                        // if (currentText == null) {
-                        //   currentText == 0;
-                        // }
-                        if (currentText == null || currentText.isEmpty) {
-                          return "This field is required!";
-                        }
-                        return null;
-                      },
-                      enabled: true,
-                    ),
+                    // NumberInputWithIncrementDecrement(
+                    //   // readOnly: false,
+                    //   controller: appCubit.roomCountController,
+                    //   numberFieldDecoration: const InputDecoration(
+                    //     border: InputBorder.none,
+                    //   ),
+                    //   widgetContainerDecoration: BoxDecoration(
+                    //       borderRadius:
+                    //           const BorderRadius.all(Radius.circular(10)),
+                    //       border: Border.all(
+                    //         // color: Colors.amber,
+                    //         width: 1,
+                    //       )),
+                    //   incIconDecoration: const BoxDecoration(
+                    //     color: Color(0xFF576CBC),
+                    //     borderRadius: BorderRadius.only(
+                    //       bottomLeft: Radius.circular(10),
+                    //       topRight: Radius.circular(10),
+                    //     ),
+                    //   ),
+                    //   separateIcons: true,
+                    //   decIconDecoration: const BoxDecoration(
+                    //     color: Color(0xFF576CBC),
+                    //     borderRadius: BorderRadius.only(
+                    //       topLeft: Radius.circular(10),
+                    //       bottomRight: Radius.circular(10),
+                    //     ),
+                    //   ),
+                    //   incIconSize: 28,
+                    //   decIconSize: 28,
+                    //   incIcon: Icons.plus_one,
+                    //   decIcon: Icons.exposure_neg_1,
+                    //   incIconColor: AppColors.mainWhiteColor,
+                    //   decIconColor: AppColors.mainWhiteColor,
+                    //   validator: (currentText) {
+                    //     // if (currentText == null) {
+                    //     //   currentText == 0;
+                    //     // }
+                    //     if (currentText == null || currentText.isEmpty) {
+                    //       return "This field is required!";
+                    //     }
+                    //     return null;
+                    //   },
+                    //   enabled: true,
+                    // ),
                     const SizedBox(
                       height: 8,
                     ),
@@ -208,31 +211,31 @@ class PropertyEditPage extends StatelessWidget {
                         iconEnabledColor: AppColors.mainBlueColor,
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 60,
-                    //   child: ToggleButtons(
-                    //     isSelected: appCubit.selections,
-                    //     onPressed: (newState) {
-                    //       appCubit.propretyStateChangedEvent(newState == 0
-                    //           ? PropertyStateEnum.sale
-                    //           : PropertyStateEnum.rental);
-                    //     },
-                    //     color: Colors.black,
-                    //     selectedColor: Colors.white,
-                    //     fillColor: AppColors.mainBlueColor,
-                    //     renderBorder: true,
-                    //     borderWidth: 2,
-                    //     borderColor: AppColors.darkNavyColor,
-                    //     borderRadius: BorderRadius.circular(20),
-                    //     textStyle: const TextStyle(
-                    //       fontSize: 20,
-                    //     ),
-                    //     children: const [
-                    //       Text("   For Sale   "),
-                    //       Text(" For Rental "),
-                    //     ],
-                    //   ),
-                    // ),
+                    SizedBox(
+                      height: 60,
+                      child: ToggleButtons(
+                        isSelected: appCubit.selections,
+                        onPressed: (newState) {
+                          appCubit.propretyStateChangedEvent(newState == 0
+                              ? PropertyStateEnum.sale
+                              : PropertyStateEnum.rental);
+                        },
+                        color: Colors.black,
+                        selectedColor: AppColors.mainWhiteColor,
+                        fillColor: AppColors.mainBlueColor,
+                        renderBorder: true,
+                        borderWidth: 2,
+                        borderColor: AppColors.darkNavyColor,
+                        borderRadius: BorderRadius.circular(20),
+                        textStyle: const TextStyle(
+                          fontSize: 20,
+                        ),
+                        children: const [
+                          Text("   For Sale   "),
+                          Text(" For Rental "),
+                        ],
+                      ),
+                    ),
                     const SizedBox(
                       height: 80,
                     ),

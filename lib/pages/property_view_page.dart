@@ -8,9 +8,14 @@ import 'package:property_in_homs/pages/property_edit_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 
 class PropertyViewPage extends StatelessWidget {
-  const PropertyViewPage({super.key, this.index});
+  const PropertyViewPage({
+    super.key,
+    this.index,
+    this.propertyTypeNameForEachTile,
+  });
 
   final int? index;
+  final String? propertyTypeNameForEachTile;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +37,13 @@ class PropertyViewPage extends StatelessWidget {
                       tooltip: "Edit",
                       onPressed: () {
                         // appCubit.fillPropertyDetailsPage(context);
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => PropertyEditPage(
                                 index: index,
-                                // propertyModel:
-                                //     appCubit.filteredProperty[index!]
+                                propertyTypeNameForEachTile:
+                                    propertyTypeNameForEachTile,
                               ),
                             ));
                       },
@@ -205,7 +210,7 @@ class PropertyViewPage extends StatelessWidget {
                                 semanticLabel: "Type",
                                 size: 30),
                             Text(
-                              appCubit.propertyTypeId.toString(),
+                              "  ${propertyTypeNameForEachTile ?? 'failed '}",
                               style: const TextStyle(fontSize: 20),
                             ),
                           ],
