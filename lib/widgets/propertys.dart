@@ -4,14 +4,15 @@ import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/cubits/auth_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
 import 'package:property_in_homs/bloc/states/auth_states.dart';
-import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/property_view_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
 import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 
 class PropertyListWidget extends StatelessWidget {
-  const PropertyListWidget({super.key});
+  const PropertyListWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -103,17 +104,21 @@ class PropertyListWidget extends StatelessWidget {
                         title: Text(
                           appCubit.filteredProperty[index].address,
                         ),
-                        subtitle: Text(appCubit.propertyTypeList
-                            .firstWhere(
-                              (element) =>
-                                  element.objectId ==
-                                  appCubit
-                                      .filteredProperty[index].propertyTypeId,
-                              orElse: () => PropertyTypeModel(
-                                  objectId: "no Id Found",
-                                  propertyTypeName: "no Id Found"),
-                            )
-                            .propertyTypeName),
+                        subtitle: Text(
+                            appCubit.propretyTypeNameforNavigation(index) ??
+                                "no Id found"
+                            // appCubit.propertyTypeList
+                            //   .firstWhere(
+                            //     (element) =>
+                            //         element.objectId ==
+                            //         appCubit
+                            //             .filteredProperty[index].propertyTypeId,
+                            //     orElse: () => PropertyTypeModel(
+                            //         objectId: "no Id Found",
+                            //         propertyTypeName: "no Id Found"),
+                            //   )
+                            //   .propertyTypeName
+                            ),
                         trailing: Text(
                             appCubit.filteredProperty[index].cost.toString()),
                         leading: const Icon(Icons.location_on),
@@ -134,13 +139,20 @@ class PropertyListWidget extends StatelessWidget {
                           // appCubit.filteredProperty[index].propertyTypeId = res;
                           appCubit.fillPropertyDetailsPage(
                               appCubit.filteredProperty[index]);
+                          String? propertyTypeNameForEachTile =
+                              appCubit.propertyTypeNameForEachTile;
                           if (!context.mounted) {
                             return;
                           }
+
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const PropertyViewPage(),
+                                builder: (context) => PropertyViewPage(
+                                  index: index,
+                                  propertyTypeNameForEachTile:
+                                      propertyTypeNameForEachTile,
+                                ),
                               ));
                         },
                       ),

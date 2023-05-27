@@ -31,6 +31,8 @@ class HomeScreen extends StatelessWidget {
                   appCubit.changeBottomNavBar(index);
                 } else if (index == 2) {
                   appCubit.clearPropertyDetailsPage();
+                  // appCubit.selectedType?.objectId = "";
+                  // appCubit.selectedType?.propertyTypeName = "";
                   appCubit.changeBottomNavBar(index);
                 }
                 appCubit.changeBottomNavBar(index);

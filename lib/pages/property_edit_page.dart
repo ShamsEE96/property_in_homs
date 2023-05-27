@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:property_in_homs/bloc/cubits/app_cubit.dart';
 import 'package:property_in_homs/bloc/states/app_states.dart';
+import 'package:property_in_homs/models/property_model.dart';
 import 'package:property_in_homs/models/property_type_model.dart';
 import 'package:property_in_homs/pages/property_view_page.dart';
 import 'package:property_in_homs/utils/colors.dart';
@@ -10,15 +11,25 @@ import 'package:property_in_homs/utils/enums/property_state_enum.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 
 class PropertyEditPage extends StatelessWidget {
-  PropertyEditPage({super.key});
+  PropertyEditPage({
+    super.key,
+    this.index,
+    this.propertyModel,
+    this.propertyTypeNameForEachTile,
+  });
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  final int? index;
+  final PropertyModel? propertyModel;
+  final String? propertyTypeNameForEachTile;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit appCubit = AppCubit.get(context);
+
         return Scaffold(
           appBar: AppBar(
             title: const Text("Edit Page"),
@@ -59,51 +70,51 @@ class PropertyEditPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    NumberInputWithIncrementDecrement(
-                      // readOnly: false,
-                      controller: appCubit.roomCountController,
-                      numberFieldDecoration: const InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      widgetContainerDecoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
-                          border: Border.all(
-                            // color: Colors.amber,
-                            width: 1,
-                          )),
-                      incIconDecoration: const BoxDecoration(
-                        color: Color(0xFF576CBC),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
-                      ),
-                      separateIcons: true,
-                      decIconDecoration: const BoxDecoration(
-                        color: Color(0xFF576CBC),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                      ),
-                      incIconSize: 28,
-                      decIconSize: 28,
-                      incIcon: Icons.plus_one,
-                      decIcon: Icons.exposure_neg_1,
-                      incIconColor: Colors.white,
-                      decIconColor: Colors.white,
-                      validator: (currentText) {
-                        // if (currentText == null) {
-                        //   currentText == 0;
-                        // }
-                        if (currentText == null || currentText.isEmpty) {
-                          return "This field is required!";
-                        }
-                        return null;
-                      },
-                      enabled: true,
-                    ),
+                    // NumberInputWithIncrementDecrement(
+                    //   // readOnly: false,
+                    //   controller: appCubit.roomCountController,
+                    //   numberFieldDecoration: const InputDecoration(
+                    //     border: InputBorder.none,
+                    //   ),
+                    //   widgetContainerDecoration: BoxDecoration(
+                    //       borderRadius:
+                    //           const BorderRadius.all(Radius.circular(10)),
+                    //       border: Border.all(
+                    //         // color: Colors.amber,
+                    //         width: 1,
+                    //       )),
+                    //   incIconDecoration: const BoxDecoration(
+                    //     color: Color(0xFF576CBC),
+                    //     borderRadius: BorderRadius.only(
+                    //       bottomLeft: Radius.circular(10),
+                    //       topRight: Radius.circular(10),
+                    //     ),
+                    //   ),
+                    //   separateIcons: true,
+                    //   decIconDecoration: const BoxDecoration(
+                    //     color: Color(0xFF576CBC),
+                    //     borderRadius: BorderRadius.only(
+                    //       topLeft: Radius.circular(10),
+                    //       bottomRight: Radius.circular(10),
+                    //     ),
+                    //   ),
+                    //   incIconSize: 28,
+                    //   decIconSize: 28,
+                    //   incIcon: Icons.plus_one,
+                    //   decIcon: Icons.exposure_neg_1,
+                    //   incIconColor: AppColors.mainWhiteColor,
+                    //   decIconColor: AppColors.mainWhiteColor,
+                    //   validator: (currentText) {
+                    //     // if (currentText == null) {
+                    //     //   currentText == 0;
+                    //     // }
+                    //     if (currentText == null || currentText.isEmpty) {
+                    //       return "This field is required!";
+                    //     }
+                    //     return null;
+                    //   },
+                    //   enabled: true,
+                    // ),
                     const SizedBox(
                       height: 8,
                     ),
@@ -182,9 +193,9 @@ class PropertyEditPage extends StatelessWidget {
                         isExpanded: true,
                         value: appCubit.selectedType,
                         items: [
-                          const DropdownMenuItem(
+                          DropdownMenuItem(
                             value: null,
-                            child: Text("not selected yet!"),
+                            child: const Text("not selected yet!"),
                           ),
                           for (PropertyTypeModel type
                               in appCubit.propertyTypeList)
@@ -210,7 +221,7 @@ class PropertyEditPage extends StatelessWidget {
                               : PropertyStateEnum.rental);
                         },
                         color: Colors.black,
-                        selectedColor: Colors.white,
+                        selectedColor: AppColors.mainWhiteColor,
                         fillColor: AppColors.mainBlueColor,
                         renderBorder: true,
                         borderWidth: 2,
